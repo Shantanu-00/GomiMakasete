@@ -1,0 +1,37 @@
+{
+    "metadataAttributes": {
+        "country": "japan",
+        "prefecture": "kyoto",
+        "municipality_id": "kyoto_kyoto",
+        "municipality_name_en": "Kyoto City",
+        "municipality_name_ja": "京都府京都市",
+        "municipality_type": "designated_city",
+        "data_version": "2025-2026_reiwa8",
+        "bag_policy": "mandatory_paid_designated",
+        "bag_burnable_color": "yellow_translucent_red_text",
+        "bag_recyclable_color": "clear_transparent_green_text",
+        "bag_pricing_yen": {
+            "5L": 5,
+            "10L": 10,
+            "20L": 20,
+            "30L": 30,
+            "45L": 45
+        },
+        "requires_paid_bag": true,
+        "warning_sticker_enforced": true,
+        "morning_deadline": "08:00 AM",
+        "night_before_disposal_allowed": false,
+        "small_metal_cutoff_cm": 30,
+        "small_metal_requires_paid_bag": false,
+        "small_metal_label_required": "金属",
+        "sodai_cutoff_cm": 40,
+        "sodai_sticker_unit_yen": 400,
+        "spray_can_puncture_required": false,
+        "combustible_frequency": "twice_weekly",
+        "plastic_resources_frequency": "once_weekly",
+        "cans_bottles_pet_frequency": "once_weekly",
+        "small_metal_frequency": "once_monthly",
+        "miscellaneous_paper_frequency": "twice_monthly",
+        "source_url": "https://www.city.kyoto.lg.jp/kankyo/page/0000000179.html"
+    }
+}

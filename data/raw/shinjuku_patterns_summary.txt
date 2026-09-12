@@ -1,0 +1,146 @@
+Total Unique Patterns: 27
+Total Standard Towns: 166
+Total Star Towns: 5
+
+PATTERN_SHINJUKU_01 (17 areas):
+  Combustible: ['Monday', 'Thursday'] (raw: 月曜日・木曜日)
+  Resources:   ['Saturday'] (raw: 土曜日)
+  Metal/Glass: ['2nd Friday', '4th Friday'] (raw: 2・4番目の金曜日)
+
+PATTERN_SHINJUKU_02 (17 areas):
+  Combustible: ['Monday', 'Thursday'] (raw: 月曜日・木曜日)
+  Resources:   ['Tuesday'] (raw: 火曜日)
+  Metal/Glass: ['1st Friday', '3rd Friday'] (raw: 1・3番目の金曜日)
+
+PATTERN_SHINJUKU_03 (16 areas):
+  Combustible: ['Tuesday', 'Friday'] (raw: 火曜日・金曜日)
+  Resources:   ['Thursday'] (raw: 木曜日)
+  Metal/Glass: ['2nd Monday', '4th Monday'] (raw: 2・4番目の月曜日)
+
+PATTERN_SHINJUKU_04 (15 areas):
+  Combustible: ['Monday', 'Thursday'] (raw: 月曜日・木曜日)
+  Resources:   ['Saturday'] (raw: 土曜日)
+  Metal/Glass: ['2nd Wednesday', '4th Wednesday'] (raw: 2・4番目の水曜日)
+
+PATTERN_SHINJUKU_05 (14 areas):
+  Combustible: ['Monday', 'Thursday'] (raw: 月曜日・木曜日)
+  Resources:   ['Tuesday'] (raw: 火曜日)
+  Metal/Glass: ['1st Wednesday', '3rd Wednesday'] (raw: 1・3番目の水曜日)
+
+PATTERN_SHINJUKU_06 (13 areas):
+  Combustible: ['Wednesday', 'Saturday'] (raw: 水曜日・土曜日)
+  Resources:   ['Friday'] (raw: 金曜日)
+  Metal/Glass: ['2nd Tuesday', '4th Tuesday'] (raw: 2・4番目の火曜日)
+
+PATTERN_SHINJUKU_07 (10 areas):
+  Combustible: ['Wednesday', 'Saturday'] (raw: 水曜日・土曜日)
+  Resources:   ['Monday'] (raw: 月曜日)
+  Metal/Glass: ['1st Tuesday', '3rd Tuesday'] (raw: 1・3番目の火曜日)
+
+PATTERN_SHINJUKU_08 (10 areas):
+  Combustible: ['Wednesday', 'Saturday'] (raw: 水曜日・土曜日)
+  Resources:   ['Monday'] (raw: 月曜日)
+  Metal/Glass: ['1st Thursday', '3rd Thursday'] (raw: 1・3番目の木曜日)
+
+PATTERN_SHINJUKU_09 (10 areas):
+  Combustible: ['Tuesday', 'Friday'] (raw: 火曜日・金曜日)
+  Resources:   ['Wednesday'] (raw: 水曜日)
+  Metal/Glass: ['1st Monday', '3rd Monday'] (raw: 1・3番目の月曜日)
+
+PATTERN_SHINJUKU_10 (8 areas):
+  Combustible: ['Tuesday', 'Friday'] (raw: 火曜日・金曜日)
+  Resources:   ['Thursday'] (raw: 木曜日)
+  Metal/Glass: ['2nd Saturday', '4th Saturday'] (raw: 2・4番目の土曜日)
+
+PATTERN_SHINJUKU_11 (7 areas):
+  Combustible: ['Tuesday', 'Friday'] (raw: 火曜日・金曜日)
+  Resources:   ['Wednesday'] (raw: 水曜日)
+  Metal/Glass: ['1st Saturday', '3rd Saturday'] (raw: 1・3番目の土曜日)
+
+PATTERN_SHINJUKU_12 (4 areas):
+  Combustible: ['Wednesday', 'Saturday'] (raw: 水曜日・土曜日)
+  Resources:   ['Friday'] (raw: 金曜日)
+  Metal/Glass: ['2nd Thursday', '4th Thursday'] (raw: 2・4番目の木曜日)
+
+PATTERN_SHINJUKU_13 (4 areas):
+  Combustible: ['Wednesday', 'Saturday'] (raw: 水曜日・土曜日)
+  Resources:   ['Monday'] (raw: 月曜日)
+  Metal/Glass: ['2nd Thursday', '4th Thursday'] (raw: 2・4番目の木曜日)
+
+PATTERN_SHINJUKU_14 (4 areas):
+  Combustible: ['Tuesday', 'Friday'] (raw: 火曜日・金曜日)
+  Resources:   ['Wednesday'] (raw: 水曜日)
+  Metal/Glass: ['2nd Saturday', '4th Saturday'] (raw: 2・4番目の土曜日)
+
+PATTERN_SHINJUKU_15 (3 areas):
+  Combustible: ['Monday', 'Thursday'] (raw: 月曜日・木曜日)
+  Resources:   ['Saturday'] (raw: 土曜日)
+  Metal/Glass: ['1st Wednesday', '3rd Wednesday'] (raw: 1・3番目の水曜日)
+
+PATTERN_SHINJUKU_16 (2 areas):
+  Combustible: ['Wednesday', 'Saturday'] (raw: 水曜日・土曜日)
+  Resources:   ['Friday'] (raw: 金曜日)
+  Metal/Glass: ['1st Thursday', '3rd Thursday'] (raw: 1・3番目の木曜日)
+
+PATTERN_SHINJUKU_17 (2 areas):
+  Combustible: ['Monday', 'Thursday'] (raw: 月曜日・木曜日)
+  Resources:   ['Tuesday'] (raw: 火曜日)
+  Metal/Glass: ['2nd Wednesday', '4th Wednesday'] (raw: 2・4番目の水曜日)
+
+PATTERN_SHINJUKU_18 (1 areas):
+  Combustible: ['Tuesday', 'Friday'] (raw: 火曜日・金曜日)
+  Resources:   ['Saturday'] (raw: 土曜日)
+  Metal/Glass: ['1st Thursday', '3rd Thursday'] (raw: 1・3番目の木曜日)
+
+PATTERN_SHINJUKU_19 (1 areas):
+  Combustible: ['Tuesday', 'Friday'] (raw: 火曜日・金曜日)
+  Resources:   ['Thursday'] (raw: 木曜日)
+  Metal/Glass: ['1st Monday', '3rd Monday'] (raw: 1・3番目の月曜日)
+
+PATTERN_SHINJUKU_20 (1 areas):
+  Combustible: ['Monday', 'Thursday'] (raw: 月曜日・木曜日)
+  Resources:   ['Tuesday'] (raw: 火曜日)
+  Metal/Glass: ['2nd Saturday', '4th Saturday'] (raw: 2・4番目の土曜日)
+
+PATTERN_SHINJUKU_21 (1 areas):
+  Combustible: ['Wednesday', 'Saturday'] (raw: 水曜日・土曜日)
+  Resources:   ['Monday'] (raw: 月曜日)
+  Metal/Glass: ['2nd Friday', '4th Friday'] (raw: 2・4番目の金曜日)
+
+PATTERN_SHINJUKU_22 (1 areas):
+  Combustible: ['Tuesday', 'Friday'] (raw: 火曜日・金曜日)
+  Resources:   ['Wednesday'] (raw: 水曜日)
+  Metal/Glass: ['2nd Monday', '4th Monday'] (raw: 2・4番目の月曜日)
+
+PATTERN_SHINJUKU_23 (1 areas):
+  Combustible: ['Monday', 'Thursday'] (raw: 月曜日・木曜日)
+  Resources:   ['Saturday'] (raw: 土曜日)
+  Metal/Glass: ['1st Friday', '3rd Friday'] (raw: 1・3番目の金曜日)
+
+PATTERN_SHINJUKU_24 (1 areas):
+  Combustible: ['Wednesday', 'Saturday'] (raw: 水曜日・土曜日)
+  Resources:   ['Thursday'] (raw: 木曜日)
+  Metal/Glass: ['1st Monday', '3rd Monday'] (raw: 1・3番目の月曜日)
+
+PATTERN_SHINJUKU_25 (1 areas):
+  Combustible: ['Wednesday', 'Saturday'] (raw: 水曜日・土曜日)
+  Resources:   ['Thursday'] (raw: 木曜日)
+  Metal/Glass: ['1st Friday', '3rd Friday'] (raw: 1・3番目の金曜日)
+
+PATTERN_SHINJUKU_26 (1 areas):
+  Combustible: ['Monday', 'Thursday'] (raw: 月曜日・木曜日)
+  Resources:   ['Friday'] (raw: 金曜日)
+  Metal/Glass: ['1st Saturday', '3rd Saturday'] (raw: 1・3番目の土曜日)
+
+PATTERN_SHINJUKU_27 (1 areas):
+  Combustible: ['Tuesday', 'Friday'] (raw: 火曜日・金曜日)
+  Resources:   ['Saturday'] (raw: 土曜日)
+  Metal/Glass: ['1st Wednesday', '3rd Wednesday'] (raw: 1・3番目の水曜日)
+
+
+--- STAR ROWS (* MARK) ---
+Town: 歌舞伎町1・2丁目 | Resources: * | Combustible: * | Metal: * | Center: 歌
+Town: 新宿3丁目 | Resources: * | Combustible: * | Metal: * | Center: 歌
+Town: 新宿4丁目 | Resources: 金曜日 | Combustible: * | Metal: * | Center: 歌
+Town: 新宿5丁目（17番、18番） | Resources: * | Combustible: * | Metal: * | Center: 歌
+Town: 西新宿1丁目 | Resources: * | Combustible: * | Metal: * | Center: 歌

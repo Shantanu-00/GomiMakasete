@@ -1,0 +1,650 @@
+[
+  {
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Monday",
+        "Thursday"
+      ],
+      "resources": [
+        "Saturday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Friday",
+        "4th Friday"
+      ]
+    },
+    "_raw": {
+      "resources": "土曜日",
+      "combustible": "月曜日・木曜日",
+      "metal_ceramics_glass": "2・4番目の金曜日"
+    },
+    "_town_count": 17
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Monday",
+        "Thursday"
+      ],
+      "resources": [
+        "Tuesday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Friday",
+        "3rd Friday"
+      ]
+    },
+    "_raw": {
+      "resources": "火曜日",
+      "combustible": "月曜日・木曜日",
+      "metal_ceramics_glass": "1・3番目の金曜日"
+    },
+    "_town_count": 17
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Tuesday",
+        "Friday"
+      ],
+      "resources": [
+        "Thursday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Monday",
+        "4th Monday"
+      ]
+    },
+    "_raw": {
+      "resources": "木曜日",
+      "combustible": "火曜日・金曜日",
+      "metal_ceramics_glass": "2・4番目の月曜日"
+    },
+    "_town_count": 16
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Monday",
+        "Thursday"
+      ],
+      "resources": [
+        "Saturday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Wednesday",
+        "4th Wednesday"
+      ]
+    },
+    "_raw": {
+      "resources": "土曜日",
+      "combustible": "月曜日・木曜日",
+      "metal_ceramics_glass": "2・4番目の水曜日"
+    },
+    "_town_count": 15
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Monday",
+        "Thursday"
+      ],
+      "resources": [
+        "Tuesday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Wednesday",
+        "3rd Wednesday"
+      ]
+    },
+    "_raw": {
+      "resources": "火曜日",
+      "combustible": "月曜日・木曜日",
+      "metal_ceramics_glass": "1・3番目の水曜日"
+    },
+    "_town_count": 14
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Wednesday",
+        "Saturday"
+      ],
+      "resources": [
+        "Friday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Tuesday",
+        "4th Tuesday"
+      ]
+    },
+    "_raw": {
+      "resources": "金曜日",
+      "combustible": "水曜日・土曜日",
+      "metal_ceramics_glass": "2・4番目の火曜日"
+    },
+    "_town_count": 13
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_07",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Wednesday",
+        "Saturday"
+      ],
+      "resources": [
+        "Monday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Tuesday",
+        "3rd Tuesday"
+      ]
+    },
+    "_raw": {
+      "resources": "月曜日",
+      "combustible": "水曜日・土曜日",
+      "metal_ceramics_glass": "1・3番目の火曜日"
+    },
+    "_town_count": 10
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_08",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Wednesday",
+        "Saturday"
+      ],
+      "resources": [
+        "Monday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Thursday",
+        "3rd Thursday"
+      ]
+    },
+    "_raw": {
+      "resources": "月曜日",
+      "combustible": "水曜日・土曜日",
+      "metal_ceramics_glass": "1・3番目の木曜日"
+    },
+    "_town_count": 10
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_09",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Tuesday",
+        "Friday"
+      ],
+      "resources": [
+        "Wednesday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Monday",
+        "3rd Monday"
+      ]
+    },
+    "_raw": {
+      "resources": "水曜日",
+      "combustible": "火曜日・金曜日",
+      "metal_ceramics_glass": "1・3番目の月曜日"
+    },
+    "_town_count": 10
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_10",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Tuesday",
+        "Friday"
+      ],
+      "resources": [
+        "Thursday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Saturday",
+        "4th Saturday"
+      ]
+    },
+    "_raw": {
+      "resources": "木曜日",
+      "combustible": "火曜日・金曜日",
+      "metal_ceramics_glass": "2・4番目の土曜日"
+    },
+    "_town_count": 8
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_11",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Tuesday",
+        "Friday"
+      ],
+      "resources": [
+        "Wednesday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Saturday",
+        "3rd Saturday"
+      ]
+    },
+    "_raw": {
+      "resources": "水曜日",
+      "combustible": "火曜日・金曜日",
+      "metal_ceramics_glass": "1・3番目の土曜日"
+    },
+    "_town_count": 7
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_12",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Wednesday",
+        "Saturday"
+      ],
+      "resources": [
+        "Friday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Thursday",
+        "4th Thursday"
+      ]
+    },
+    "_raw": {
+      "resources": "金曜日",
+      "combustible": "水曜日・土曜日",
+      "metal_ceramics_glass": "2・4番目の木曜日"
+    },
+    "_town_count": 4
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_13",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Wednesday",
+        "Saturday"
+      ],
+      "resources": [
+        "Monday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Thursday",
+        "4th Thursday"
+      ]
+    },
+    "_raw": {
+      "resources": "月曜日",
+      "combustible": "水曜日・土曜日",
+      "metal_ceramics_glass": "2・4番目の木曜日"
+    },
+    "_town_count": 4
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_14",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Tuesday",
+        "Friday"
+      ],
+      "resources": [
+        "Wednesday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Saturday",
+        "4th Saturday"
+      ]
+    },
+    "_raw": {
+      "resources": "水曜日",
+      "combustible": "火曜日・金曜日",
+      "metal_ceramics_glass": "2・4番目の土曜日"
+    },
+    "_town_count": 4
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_15",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Monday",
+        "Thursday"
+      ],
+      "resources": [
+        "Saturday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Wednesday",
+        "3rd Wednesday"
+      ]
+    },
+    "_raw": {
+      "resources": "土曜日",
+      "combustible": "月曜日・木曜日",
+      "metal_ceramics_glass": "1・3番目の水曜日"
+    },
+    "_town_count": 3
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_16",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Wednesday",
+        "Saturday"
+      ],
+      "resources": [
+        "Friday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Thursday",
+        "3rd Thursday"
+      ]
+    },
+    "_raw": {
+      "resources": "金曜日",
+      "combustible": "水曜日・土曜日",
+      "metal_ceramics_glass": "1・3番目の木曜日"
+    },
+    "_town_count": 2
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_17",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Monday",
+        "Thursday"
+      ],
+      "resources": [
+        "Tuesday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Wednesday",
+        "4th Wednesday"
+      ]
+    },
+    "_raw": {
+      "resources": "火曜日",
+      "combustible": "月曜日・木曜日",
+      "metal_ceramics_glass": "2・4番目の水曜日"
+    },
+    "_town_count": 2
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_18",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Tuesday",
+        "Friday"
+      ],
+      "resources": [
+        "Saturday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Thursday",
+        "3rd Thursday"
+      ]
+    },
+    "_raw": {
+      "resources": "土曜日",
+      "combustible": "火曜日・金曜日",
+      "metal_ceramics_glass": "1・3番目の木曜日"
+    },
+    "_town_count": 1
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_19",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Tuesday",
+        "Friday"
+      ],
+      "resources": [
+        "Thursday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Monday",
+        "3rd Monday"
+      ]
+    },
+    "_raw": {
+      "resources": "木曜日",
+      "combustible": "火曜日・金曜日",
+      "metal_ceramics_glass": "1・3番目の月曜日"
+    },
+    "_town_count": 1
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_20",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Monday",
+        "Thursday"
+      ],
+      "resources": [
+        "Tuesday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Saturday",
+        "4th Saturday"
+      ]
+    },
+    "_raw": {
+      "resources": "火曜日",
+      "combustible": "月曜日・木曜日",
+      "metal_ceramics_glass": "2・4番目の土曜日"
+    },
+    "_town_count": 1
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_21",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Wednesday",
+        "Saturday"
+      ],
+      "resources": [
+        "Monday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Friday",
+        "4th Friday"
+      ]
+    },
+    "_raw": {
+      "resources": "月曜日",
+      "combustible": "水曜日・土曜日",
+      "metal_ceramics_glass": "2・4番目の金曜日"
+    },
+    "_town_count": 1
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_22",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Tuesday",
+        "Friday"
+      ],
+      "resources": [
+        "Wednesday"
+      ],
+      "metal_ceramics_glass": [
+        "2nd Monday",
+        "4th Monday"
+      ]
+    },
+    "_raw": {
+      "resources": "水曜日",
+      "combustible": "火曜日・金曜日",
+      "metal_ceramics_glass": "2・4番目の月曜日"
+    },
+    "_town_count": 1
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_23",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Monday",
+        "Thursday"
+      ],
+      "resources": [
+        "Saturday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Friday",
+        "3rd Friday"
+      ]
+    },
+    "_raw": {
+      "resources": "土曜日",
+      "combustible": "月曜日・木曜日",
+      "metal_ceramics_glass": "1・3番目の金曜日"
+    },
+    "_town_count": 1
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_24",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Wednesday",
+        "Saturday"
+      ],
+      "resources": [
+        "Thursday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Monday",
+        "3rd Monday"
+      ]
+    },
+    "_raw": {
+      "resources": "木曜日",
+      "combustible": "水曜日・土曜日",
+      "metal_ceramics_glass": "1・3番目の月曜日"
+    },
+    "_town_count": 1
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_25",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Wednesday",
+        "Saturday"
+      ],
+      "resources": [
+        "Thursday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Friday",
+        "3rd Friday"
+      ]
+    },
+    "_raw": {
+      "resources": "木曜日",
+      "combustible": "水曜日・土曜日",
+      "metal_ceramics_glass": "1・3番目の金曜日"
+    },
+    "_town_count": 1
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_26",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Monday",
+        "Thursday"
+      ],
+      "resources": [
+        "Friday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Saturday",
+        "3rd Saturday"
+      ]
+    },
+    "_raw": {
+      "resources": "金曜日",
+      "combustible": "月曜日・木曜日",
+      "metal_ceramics_glass": "1・3番目の土曜日"
+    },
+    "_town_count": 1
+  },
+  {
+    "pattern_id": "PATTERN_SHINJUKU_27",
+    "municipality_id": "tokyo_shinjuku",
+    "morning_deadline": "08:00 AM",
+    "schedules": {
+      "combustible": [
+        "Tuesday",
+        "Friday"
+      ],
+      "resources": [
+        "Saturday"
+      ],
+      "metal_ceramics_glass": [
+        "1st Wednesday",
+        "3rd Wednesday"
+      ]
+    },
+    "_raw": {
+      "resources": "土曜日",
+      "combustible": "火曜日・金曜日",
+      "metal_ceramics_glass": "1・3番目の水曜日"
+    },
+    "_town_count": 1
+  }
+]

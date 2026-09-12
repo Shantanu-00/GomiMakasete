@@ -1,0 +1,22 @@
+{
+    "metadataAttributes": {
+        "country": "japan",
+        "prefecture": "tokushima",
+        "municipality_id": "tokushima_kamikatsu",
+        "municipality_name_en": "Kamikatsu Town",
+        "municipality_name_ja": "徳島県上勝町",
+        "municipality_type": "town",
+        "data_version": "2025-2026_reiwa8",
+        "bag_policy": "no_curbside_bags_station_crates",
+        "requires_paid_bag": false,
+        "pickup_type": "central_station_dropoff",
+        "station_name": "Kamikatsu Zero Waste Center (Why? Station)",
+        "operating_hours": "07:30 AM - 02:00 PM daily",
+        "has_curbside_pickup": false,
+        "total_separation_categories": 45,
+        "total_streams": 13,
+        "kitchen_waste_policy": "strictly_home_composted",
+        "reuse_shop_name": "Kuru Kuru Shop",
+        "source_url": "https://zwtk.jp/separate/"
+    }
+}

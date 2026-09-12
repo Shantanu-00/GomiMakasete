@@ -1,0 +1,81 @@
+{
+  "total_patterns": 35,
+  "total_neighborhoods": 178,
+  "orphan_patterns": [],
+  "missing_patterns": [],
+  "municipalities": [
+    "kanagawa_yokohama",
+    "kyoto_kyoto",
+    "tokushima_kamikatsu",
+    "tokyo_shinjuku"
+  ],
+  "non_ascii_name_en_count": 0,
+  "fixed_records_count": 13,
+  "sample_fixed_records": [
+    {
+      "ja": "市谷長延寺町",
+      "id": "shinjuku_ichigaya_choenjimachi",
+      "en": "Ichigaya-Choenjimachi"
+    },
+    {
+      "ja": "市谷仲之町",
+      "id": "shinjuku_ichigaya_nakanomachi",
+      "en": "Ichigaya-Nakanomachi"
+    },
+    {
+      "ja": "西新宿1丁目",
+      "id": "shinjuku_nishi_shinjuku_1",
+      "en": "Nishi-Shinjuku 1-chome"
+    },
+    {
+      "ja": "西新宿2・3丁目",
+      "id": "shinjuku_nishi_shinjuku_2_3",
+      "en": "Nishi-Shinjuku 2-3-chome"
+    },
+    {
+      "ja": "西新宿4丁目",
+      "id": "shinjuku_nishi_shinjuku_4",
+      "en": "Nishi-Shinjuku 4-chome"
+    },
+    {
+      "ja": "西新宿5丁目",
+      "id": "shinjuku_nishi_shinjuku_5",
+      "en": "Nishi-Shinjuku 5-chome"
+    },
+    {
+      "ja": "西新宿6丁目",
+      "id": "shinjuku_nishi_shinjuku_6",
+      "en": "Nishi-Shinjuku 6-chome"
+    },
+    {
+      "ja": "西新宿7から8丁目",
+      "id": "shinjuku_nishi_shinjuku_7_to_8",
+      "en": "Nishi-Shinjuku 7-8-chome"
+    },
+    {
+      "ja": "東榎町",
+      "id": "shinjuku_higashi_enokicho",
+      "en": "Higashi-Enokicho"
+    },
+    {
+      "ja": "南榎町",
+      "id": "shinjuku_minami_enokicho",
+      "en": "Minami-Enokicho"
+    },
+    {
+      "ja": "四谷坂町",
+      "id": "shinjuku_yotsuya_sakamachi",
+      "en": "Yotsuya-Sakamachi"
+    },
+    {
+      "ja": "四谷三栄町",
+      "id": "shinjuku_yotsuya_saneicho",
+      "en": "Yotsuya-Saneicho"
+    },
+    {
+      "ja": "早稲田南町",
+      "id": "shinjuku_waseda_minamicho",
+      "en": "Waseda-Minamicho"
+    }
+  ]
+}

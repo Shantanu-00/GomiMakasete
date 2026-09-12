@@ -1,0 +1,28 @@
+{
+    "metadataAttributes": {
+        "country": "japan",
+        "prefecture": "kanagawa",
+        "municipality_id": "kanagawa_yokohama",
+        "municipality_name_en": "Yokohama City",
+        "municipality_name_ja": "神奈川県横浜市",
+        "municipality_type": "designated_city",
+        "data_version": "2025-2026_reiwa8",
+        "bag_policy": "generic_translucent",
+        "bag_max_volume_liters": 45,
+        "requires_paid_bag": false,
+        "morning_deadline": "08:00 AM",
+        "night_before_disposal_allowed": false,
+        "sodai_cutoff_cm_metal": 30,
+        "sodai_cutoff_cm_other": 50,
+        "sodai_booking_url": "https://yokohama-sodai.jp",
+        "spray_can_puncture_required": false,
+        "spray_can_separate_bag": true,
+        "textiles_rain_rule": "cancelled_on_rainy_days",
+        "combustible_frequency": "twice_weekly",
+        "plastic_resources_frequency": "once_weekly",
+        "cans_bottles_pet_frequency": "once_weekly",
+        "small_metal_frequency": "twice_monthly",
+        "non_combustible_frequency": "twice_monthly",
+        "source_url": "https://www.city.yokohama.lg.jp/lang/residents/en/garbage/"
+    }
+}
