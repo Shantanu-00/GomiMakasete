@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" width="1000" height="620">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080c14" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="620" rx="16" fill="url(#bgGrad)" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Title Header -->
+  <text x="50" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800" fill="#f8fafc">
+    GomiMakasete (ゴミ任せて) — Cloud Architecture Flow
+  </text>
+  <text x="50" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#94a3b8">
+    Autonomous Multi-Modal Waste Intelligence on Amazon Bedrock AgentCore &amp; Strands Agents SDK
+  </text>
+
+  <!-- LAYER 1: CLIENT & INGESTION -->
+  <g transform="translate(50, 105)" filter="url(#shadow)">
+    <rect width="260" height="470" rx="12" fill="#131b2e" stroke="#1e293b" stroke-width="1.5"/>
+    <rect width="260" height="38" rx="12" fill="#1e293b"/>
+    <text x="20" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#38bdf8">1. RESIDENT INGESTION</text>
+
+    <!-- Sub-box: Next.js 15 UI -->
+    <rect x="20" y="55" width="220" height="110" rx="8" fill="#1a243b" stroke="#334155"/>
+    <text x="35" y="80" font-family="sans-serif" font-size="14" font-weight="700" fill="#fff">Next.js 15 App Router</text>
+    <text x="35" y="100" font-family="sans-serif" font-size="11" fill="#94a3b8">• AWS Amplify Hosting (SSR)</text>
+    <text x="35" y="118" font-family="sans-serif" font-size="11" fill="#94a3b8">• Camera Dropzone &amp; Mobile Web</text>
+    <text x="35" y="136" font-family="sans-serif" font-size="11" fill="#94a3b8">• Dual-Stream 1-Glance Triage</text>
+
+    <!-- Sub-box: Ambient Voice -->
+    <rect x="20" y="180" width="220" height="85" rx="8" fill="#1a243b" stroke="#334155"/>
+    <text x="35" y="205" font-family="sans-serif" font-size="13" font-weight="700" fill="#a78bfa">Ambient Voice Agent</text>
+    <text x="35" y="225" font-family="sans-serif" font-size="11" fill="#94a3b8">• Hands-Free Dirty Hands Support</text>
+    <text x="35" y="243" font-family="sans-serif" font-size="11" fill="#94a3b8">• Amazon Nova 2 Sonic / WebAudio</text>
+
+    <!-- Sub-box: Safeguard Filter -->
+    <rect x="20" y="280" width="220" height="170" rx="8" fill="#1a243b" stroke="#6366f1" stroke-dasharray="4"/>
+    <text x="35" y="305" font-family="sans-serif" font-size="13" font-weight="700" fill="#818cf8">🛡️ Accidental Non-Waste</text>
+    <text x="35" y="325" font-family="sans-serif" font-size="11" fill="#cbd5e1">Smartphones, Keys, Wallets</text>
+    <text x="35" y="350" font-family="sans-serif" font-size="11" fill="#94a3b8">Automatically sequestered away</text>
+    <text x="35" y="368" font-family="sans-serif" font-size="11" fill="#94a3b8">from waste collection list to</text>
+    <text x="35" y="386" font-family="sans-serif" font-size="11" fill="#94a3b8">prevent false disposal.</text>
+    <rect x="35" y="405" width="120" height="24" rx="12" fill="#6366f1" opacity="0.3"/>
+    <text x="48" y="421" font-family="sans-serif" font-size="10" font-weight="700" fill="#a5b4fc">1-Click Override</text>
+  </g>
+
+  <!-- ARROW 1 -> 2 -->
+  <path d="M 310 240 L 370 240" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrowhead)" stroke-dasharray="6,4"/>
+
+  <!-- LAYER 2: VISION TRIAGE & ESCALATION -->
+  <g transform="translate(370, 105)" filter="url(#shadow)">
+    <rect width="260" height="470" rx="12" fill="#131b2e" stroke="#1e293b" stroke-width="1.5"/>
+    <rect width="260" height="38" rx="12" fill="#1e293b"/>
+    <text x="20" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#34d399">2. TIERED MULTI-MODAL VISION</text>
+
+    <!-- Tier 1: Fast Triage -->
+    <rect x="20" y="55" width="220" height="120" rx="8" fill="#1a243b" stroke="#10b981"/>
+    <text x="35" y="80" font-family="sans-serif" font-size="13" font-weight="700" fill="#34d399">Tier-1: Fast Triage</text>
+    <text x="35" y="100" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Amazon Nova 2 Lite</text>
+    <text x="35" y="118" font-family="sans-serif" font-size="11" fill="#94a3b8">• Latency: ~350ms (Ultra-Low Cost)</text>
+    <text x="35" y="136" font-family="sans-serif" font-size="11" fill="#94a3b8">• Resolves 80% clear scenes</text>
+    <text x="35" y="154" font-family="sans-serif" font-size="11" fill="#94a3b8">• Computes confidence score</text>
+
+    <!-- Confidence Gate -->
+    <path d="M 130 175 L 130 205" stroke="#f59e0b" stroke-width="2"/>
+    <rect x="55" y="205" width="150" height="30" rx="15" fill="#f59e0b" opacity="0.2" stroke="#f59e0b"/>
+    <text x="70" y="224" font-family="sans-serif" font-size="11" font-weight="700" fill="#fbbf24">Confidence &lt; 0.85?</text>
+
+    <!-- Tier 2: SOTA Escalation -->
+    <rect x="20" y="255" width="220" height="110" rx="8" fill="#1a243b" stroke="#8b5cf6"/>
+    <text x="35" y="280" font-family="sans-serif" font-size="13" font-weight="700" fill="#c084fc">Tier-2: SOTA Reasoning</text>
+    <text x="35" y="300" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Claude 3.7 Sonnet / Nova Pro</text>
+    <text x="35" y="318" font-family="sans-serif" font-size="11" fill="#94a3b8">• Chain-of-Thought Spatial Bounding</text>
+    <text x="35" y="336" font-family="sans-serif" font-size="11" fill="#94a3b8">• Triggered on occlusion or user edit</text>
+
+    <!-- Action Taxonomy -->
+    <rect x="20" y="380" width="220" height="75" rx="8" fill="#1a243b" stroke="#334155"/>
+    <text x="35" y="402" font-family="sans-serif" font-size="12" font-weight="700" fill="#38bdf8">Action Prescription</text>
+    <text x="35" y="420" font-family="sans-serif" font-size="10" fill="#94a3b8">Separate • Rinse • Wrap • Degas • Bundle</text>
+    <text x="35" y="438" font-family="sans-serif" font-size="10" fill="#34d399">Replaces naive "Dumb Split" button</text>
+  </g>
+
+  <!-- ARROW 2 -> 3 -->
+  <path d="M 630 240 L 690 240" stroke="#34d399" stroke-width="2.5" marker-end="url(#arrowhead)" stroke-dasharray="6,4"/>
+
+  <!-- LAYER 3: AGENTCORE RUNTIME & TOOLS -->
+  <g transform="translate(690, 105)" filter="url(#shadow)">
+    <rect width="260" height="470" rx="12" fill="#131b2e" stroke="#1e293b" stroke-width="1.5"/>
+    <rect width="260" height="38" rx="12" fill="#1e293b"/>
+    <text x="20" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#c084fc">3. BEDROCK AGENTCORE &amp; STRANDS</text>
+
+    <!-- Strands Supervisor Loop -->
+    <rect x="20" y="55" width="220" height="105" rx="8" fill="#1a243b" stroke="#8b5cf6"/>
+    <text x="35" y="80" font-family="sans-serif" font-size="13" font-weight="700" fill="#c084fc">Strands Supervisor</text>
+    <text x="35" y="100" font-family="sans-serif" font-size="11" fill="#cbd5e1">• BedrockAgentCoreApp / ARM64</text>
+    <text x="35" y="118" font-family="sans-serif" font-size="11" fill="#94a3b8">• HTTP Contract: /ping, /invocations</text>
+    <text x="35" y="136" font-family="sans-serif" font-size="11" fill="#94a3b8">• Autonomous ReAct Reasoning Loop</text>
+
+    <!-- Tools -->
+    <rect x="20" y="175" width="220" height="155" rx="8" fill="#1a243b" stroke="#334155"/>
+    <text x="35" y="198" font-family="sans-serif" font-size="12" font-weight="700" fill="#f59e0b">Strands Verified Tools</text>
+    
+    <text x="35" y="222" font-family="sans-serif" font-size="11" font-weight="600" fill="#fff">1. Bedrock Knowledge Base</text>
+    <text x="50" y="238" font-family="sans-serif" font-size="10" fill="#94a3b8">Metadata Filtered by Municipality</text>
+    
+    <text x="35" y="260" font-family="sans-serif" font-size="11" font-weight="600" fill="#fff">2. DynamoDB Schedule Engine</text>
+    <text x="50" y="276" font-family="sans-serif" font-size="10" fill="#94a3b8">Hyper-local chome/banchi calendar</text>
+
+    <text x="35" y="298" font-family="sans-serif" font-size="11" font-weight="600" fill="#fff">3. Sodai Gomi Fee Calculator</text>
+    <text x="50" y="314" font-family="sans-serif" font-size="10" fill="#94a3b8">Sticker A/B breakdown &amp; bookings</text>
+
+    <!-- AgentCore Memory -->
+    <rect x="20" y="345" width="220" height="100" rx="8" fill="#1a243b" stroke="#6366f1"/>
+    <text x="35" y="370" font-family="sans-serif" font-size="12" font-weight="700" fill="#818cf8">AgentCore Managed Memory</text>
+    <text x="35" y="390" font-family="sans-serif" font-size="10" fill="#cbd5e1">• Short-Term: Session Transcript History</text>
+    <text x="35" y="408" font-family="sans-serif" font-size="10" fill="#cbd5e1">• Long-Term: Semantic Resident Prefs</text>
+    <text x="35" y="426" font-family="sans-serif" font-size="10" fill="#94a3b8">Remembers ward/banchi &amp; language</text>
+  </g>
+</svg>
