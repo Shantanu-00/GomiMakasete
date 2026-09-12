@@ -151,16 +151,35 @@ python data/scripts/seed_dynamodb_schedules.py
 
 ---
 
-### 2. Frontend: AWS Amplify Hosting (Next.js 15)
-The repository includes [`amplify.yml`](amplify.yml) pre-configured for continuous Next.js 15 Server-Side Rendering (SSR):
+### 2. Frontend: AWS Amplify Hosting (Next.js 15 SSR)
 
-1. Go to the [AWS Amplify Console](https://console.aws.amazon.com/amplify/).
-2. Click **"Deploy an app"** > Select **GitHub** > Authorize and select your `GomiMakasete` repository.
-3. Select branch: `main`.
-4. Under **App settings > Environment variables**, add your live AgentCore endpoints:
-   * `AGENTCORE_ENDPOINT_URL`: `https://<your-api-id>.execute-api.us-east-1.amazonaws.com/prod/invocations`
-   * `NEXT_PUBLIC_API_GATEWAY_URL`: `https://<your-api-id>.execute-api.us-east-1.amazonaws.com/prod`
-5. Click **Save and Deploy**. AWS Amplify will automatically build and publish your Next.js application to a global CloudFront CDN URL with free SSL.
+The repository root includes an automated [`amplify.yml`](amplify.yml) build specification configured for Next.js 15 SSR, package caching, and continuous deployment.
+
+#### Step-by-Step Amplify Hosting Guide:
+1. **Push your code to GitHub:**
+   Ensure the `main` branch is pushed to your remote repository (e.g. `https://github.com/Shantanu-00/GomiMakasete`).
+2. **Open AWS Amplify Console:**
+   Navigate to the [AWS Amplify Hosting Console](https://console.aws.amazon.com/amplify/home?region=us-east-1).
+3. **Connect Repository:**
+   - Click **"Create new app"** (or **"Deploy an app"**).
+   - Select **GitHub** as the source code provider and click **Next**.
+   - Authenticate with GitHub and select repository **`GomiMakasete`**.
+   - Select the branch: **`main`**.
+4. **Configure Build Settings:**
+   - Amplify will automatically detect the root [`amplify.yml`](amplify.yml) which runs `npm ci` and `npm run build` inside the `frontend/` directory.
+   - Leave the build settings as detected.
+5. **Set Environment Variables:**
+   Under **Advanced settings** (or **App settings > Environment variables**), add the following keys pointing to your deployed API Gateway backend:
+   | Key | Value | Description |
+   | :--- | :--- | :--- |
+   | `AGENTCORE_ENDPOINT_URL` | `https://r2wfl02fba.execute-api.us-east-1.amazonaws.com/prod/invocations` | Bedrock AgentCore execution endpoint |
+   | `AGENTCORE_PING_URL` | `https://r2wfl02fba.execute-api.us-east-1.amazonaws.com/prod/ping` | MicroVM health check endpoint |
+   | `AGENTCORE_BUDGET_URL` | `https://r2wfl02fba.execute-api.us-east-1.amazonaws.com/prod/budget` | $5.00/day circuit breaker status |
+   | `NEXT_PUBLIC_API_GATEWAY_URL` | `https://r2wfl02fba.execute-api.us-east-1.amazonaws.com/prod` | Public REST base endpoint |
+6. **Save and Deploy:**
+   - Click **Save and Deploy**.
+   - AWS Amplify provisions compute, builds the Next.js 15 SSR artifacts, deploys CloudFront edge CDN distribution, and issues an SSL certificate automatically.
+   - Your live public URL will be generated (e.g., `https://main.<unique-id>.amplifyapp.com`).
 
 ---
 
