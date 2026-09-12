@@ -1,0 +1,71 @@
+# ==============================================================================
+# GomiMakasete Production Git Ignore
+# Excludes local caches, environments, credentials, build artifacts, and binaries
+# ==============================================================================
+
+# Python & Testing Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Node.js & Next.js Build Artifacts
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+frontend/out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# AWS Serverless Application Model (SAM) & CDK Build Trees
+.aws-sam/
+samconfig.toml.bak
+cdk.out/
+.cdk.staging/
+
+# Environment Variables & API Secrets (Strictly Blocked from Git)
+.env
+.env.*
+*.env
+!*.env.example
+*.pem
+*.key
+data/budget_tracker.json
+
+# Operating System & IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

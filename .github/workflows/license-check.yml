@@ -1,0 +1,29 @@
+name: License & Header Compliance
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  license-check:
+    name: Verify Apache-2.0 License
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Check License File Exists
+        run: |
+          if [ ! -f LICENSE ]; then
+            echo "ERROR: LICENSE file is missing in repository root!"
+            exit 1
+          fi
+          echo "PASS: LICENSE file verified."
+
+      - name: Verify Apache-2.0 License Text
+        run: |
+          grep -q "Apache License" LICENSE || (echo "ERROR: LICENSE does not contain Apache License text" && exit 1)
+          grep -q "Version 2.0, January 2004" LICENSE || (echo "ERROR: LICENSE is not Apache 2.0" && exit 1)
+          echo "PASS: Apache-2.0 License valid."
