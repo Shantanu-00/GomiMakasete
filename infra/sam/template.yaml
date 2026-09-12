@@ -1,0 +1,265 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  GomiMakasete - Hardened Production Serverless Infrastructure for Amazon Bedrock AgentCore Runtime,
+  Strands Agents SDK, Multi-Modal Vision Triage, DynamoDB Schedule Stores, and S3 Intake Bucket.
+  Architected for Zero Idle Cost ($0.00/mo standby), 1-shot rollback-safe deployment, and strict $5/day budget capping.
+
+Parameters:
+  Environment:
+    Type: String
+    Default: prod
+    AllowedValues: [dev, staging, prod]
+    Description: Deployment target environment name
+
+  BedrockTier1ModelId:
+    Type: String
+    Default: us.amazon.nova-lite-v1:0
+    Description: Amazon Bedrock Cross-Region Inference Profile ID for Tier-1 Vision Triage (Amazon Nova 2 Lite)
+
+  BedrockTier2ModelId:
+    Type: String
+    Default: us.anthropic.claude-3-7-sonnet-20250219-v1:0
+    Description: Amazon Bedrock Cross-Region Inference Profile ID for Tier-2 Deep Reasoning (Claude Sonnet series / Sonnet 5)
+
+  DailyBedrockBudgetUsd:
+    Type: Number
+    Default: 5.00
+    Description: Hard daily spending limit in USD across all Bedrock model invocations before tripping circuit breaker
+
+Globals:
+  Function:
+    Timeout: 60
+    MemorySize: 1024
+    Runtime: python3.11
+    Architectures:
+      - arm64
+    Tracing: Active
+    Environment:
+      Variables:
+        ENV: !Ref Environment
+        BEDROCK_TIER1_MODEL_ID: !Ref BedrockTier1ModelId
+        BEDROCK_TIER2_MODEL_ID: !Ref BedrockTier2ModelId
+        DAILY_BEDROCK_BUDGET_USD: !Ref DailyBedrockBudgetUsd
+        DYNAMODB_SCHEDULE_TABLE: !Ref GomiSchedulesTable
+        DYNAMODB_SESSION_TABLE: !Ref GomiSessionTable
+        S3_INGESTION_BUCKET: !Ref GomiUploadsBucket
+        POWERTOOLS_SERVICE_NAME: gomimakasete-agentcore
+        PYTHONPATH: /var/task
+
+Resources:
+  # ============================================================================
+  # 1. API GATEWAY: Managed REST API with Access Logs & Edge Rate Throttling
+  # ============================================================================
+  GomiAgentCoreApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Environment
+      TracingEnabled: true
+      Cors:
+        AllowMethods: "'GET,POST,OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-AgentCore-Secret'"
+        AllowOrigin: "'*'"
+        MaxAge: "'600'"
+      MethodSettings:
+        - ResourcePath: '/*'
+          HttpMethod: '*'
+          ThrottlingBurstLimit: 50
+          ThrottlingRateLimit: 20
+
+  # ============================================================================
+  # 2. LOGGING: CloudWatch Log Group with 7-Day Auto-Retention (Prevents cost creep)
+  # ============================================================================
+  AgentCoreLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/gomimakasete-agentcore-runtime-${Environment}'
+      RetentionInDays: 7
+
+  # ============================================================================
+  # 3. STORAGE: S3 Bucket for Uploads (Encrypted, Private, 7-Day Auto-Purge)
+  # ============================================================================
+  GomiUploadsBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      BucketName: !Sub 'gomimakasete-uploads-${AWS::AccountId}-${AWS::Region}-${Environment}'
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: AutoPurgeOldUploads
+            Status: Enabled
+            ExpirationInDays: 7
+
+  # ============================================================================
+  # 4. DATABASE: DynamoDB Schedules & State Tables (Pay-per-request $0.00 idle)
+  # ============================================================================
+  GomiSchedulesTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      TableName: !Sub 'GomiSchedules-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: PK
+          AttributeType: S
+        - AttributeName: SK
+          AttributeType: S
+      KeySchema:
+        - AttributeName: PK
+          KeyType: HASH
+        - AttributeName: SK
+          KeyType: RANGE
+      SSESpecification:
+        SSEEnabled: true
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+
+  GomiSessionTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      TableName: !Sub 'GomiAgentSessions-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: SessionId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: SessionId
+          KeyType: HASH
+      TimeToLiveSpecification:
+        AttributeName: TTL
+        Enabled: true
+      SSESpecification:
+        SSEEnabled: true
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+
+  # ============================================================================
+  # 5. IAM: Least-Privilege Execution Role for Bedrock, DynamoDB & S3
+  # ============================================================================
+  AgentCoreExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub 'GomiMakaseteAgentRole-${Environment}-${AWS::Region}'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+                - bedrock.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: BedrockInferencePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:InvokeModelWithResponseStream
+                  - bedrock-agent-runtime:Retrieve
+                Resource: '*'
+        - PolicyName: DynamoDBScopedAccessPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:DeleteItem
+                  - dynamodb:Query
+                  - dynamodb:BatchWriteItem
+                Resource:
+                  - !GetAtt GomiSchedulesTable.Arn
+                  - !GetAtt GomiSessionTable.Arn
+        - PolicyName: S3UploadBucketScopedPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:DeleteObject
+                Resource: !Sub '${GomiUploadsBucket.Arn}/*'
+
+  # ============================================================================
+  # 6. COMPUTE: Bedrock AgentCore Runtime Service (ARM64 MicroVM, Port 8080 Contract)
+  # ============================================================================
+  AgentCoreRuntimeFunction:
+    Type: AWS::Serverless::Function
+    DependsOn: AgentCoreLogGroup
+    Properties:
+      FunctionName: !Sub 'gomimakasete-agentcore-runtime-${Environment}'
+      CodeUri: ../../src/
+      Handler: backend.app.handler
+      Role: !GetAtt AgentCoreExecutionRole.Arn
+      Events:
+        PingApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref GomiAgentCoreApi
+            Path: /ping
+            Method: get
+        InvocationsApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref GomiAgentCoreApi
+            Path: /invocations
+            Method: post
+        BudgetApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref GomiAgentCoreApi
+            Path: /budget
+            Method: get
+
+Outputs:
+  AgentCoreEndpoint:
+    Description: Full HTTPS URL for Bedrock AgentCore /invocations contract
+    Value: !Sub 'https://${GomiAgentCoreApi}.execute-api.${AWS::Region}.amazonaws.com/${Environment}/invocations'
+
+  PingEndpoint:
+    Description: Lifecycle Health Check URL
+    Value: !Sub 'https://${GomiAgentCoreApi}.execute-api.${AWS::Region}.amazonaws.com/${Environment}/ping'
+
+  BudgetEndpoint:
+    Description: Live Daily Budget & Circuit Breaker Health Check URL
+    Value: !Sub 'https://${GomiAgentCoreApi}.execute-api.${AWS::Region}.amazonaws.com/${Environment}/budget'
+
+  SchedulesTableName:
+    Description: DynamoDB Schedule Table Name
+    Value: !Ref GomiSchedulesTable
+
+  SessionsTableName:
+    Description: DynamoDB Session History Table Name
+    Value: !Ref GomiSessionTable
+
+  UploadsBucketName:
+    Description: S3 Uploads Bucket Name (Encrypted, 7-day auto-purge)
+    Value: !Ref GomiUploadsBucket
+
+  AgentRoleArn:
+    Description: IAM Role ARN for AgentCore Execution
+    Value: !GetAtt AgentCoreExecutionRole.Arn
