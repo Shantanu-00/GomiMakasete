@@ -1,0 +1,1604 @@
+[
+  {
+    "neighborhood_id": "shinjuku_aizumicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Aizumicho",
+    "name_ja": "愛住町",
+    "postal_code": "160-0005",
+    "pattern_id": "PATTERN_SHINJUKU_10",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_akagishitamachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Akagishitamachi",
+    "name_ja": "赤城下町",
+    "postal_code": "162-0803",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_akagimotomachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Akagimotomachi",
+    "name_ja": "赤城元町",
+    "postal_code": "162-0817",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_agebacho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Agebacho",
+    "name_ja": "揚場町",
+    "postal_code": "162-0824",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_arakicho_banchi_21_to_23",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Arakicho (Banchi: 21-23)",
+    "name_ja": "荒木町（21から23番地）",
+    "postal_code": "160-0007",
+    "pattern_id": "PATTERN_SHINJUKU_10",
+    "address_range": "21から23番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_arakicho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Arakicho (All except designated banchi)",
+    "name_ja": "荒木町（上記を除く）",
+    "postal_code": "160-0007",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_kagacho_1_2",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Kagacho 1-2-chome",
+    "name_ja": "市谷加賀町1・2丁目",
+    "postal_code": "162-0844",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_koracho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Koracho",
+    "name_ja": "市谷甲良町",
+    "postal_code": "162-0832",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_sadoharacho_1_to_3",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Sadoharacho 1-3-chome",
+    "name_ja": "市谷砂土原町1から3丁目",
+    "postal_code": "162-0842",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_sanaicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Sanaicho",
+    "name_ja": "市谷左内町",
+    "postal_code": "162-0846",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_takajocho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Takajocho",
+    "name_ja": "市谷鷹匠町",
+    "postal_code": "162-0848",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_tamachi_1",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Tamachi 1-chome",
+    "name_ja": "市谷田町1丁目",
+    "postal_code": "162-0843",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_tamachi_2_3",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Tamachi 2-3-chome",
+    "name_ja": "市谷田町2・3丁目",
+    "postal_code": "162-0843",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_daimachi_banchi_1_3_5_7_9_11_13",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Daimachi (Banchi: 1, 3, 5, 7, 9, 11, 13)",
+    "name_ja": "市谷台町（1、3、5、7、9、11、13番）",
+    "postal_code": "162-0066",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": "1、3、5、7、9、11、13番"
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_daimachi_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Daimachi (All except designated banchi)",
+    "name_ja": "市谷台町（上記を除く）",
+    "postal_code": "162-0066",
+    "pattern_id": "PATTERN_SHINJUKU_12",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_choenjimachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Choenjimachi",
+    "name_ja": "市谷長延寺町",
+    "postal_code": "162-0847",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_nakanomachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Nakanomachi",
+    "name_ja": "市谷仲之町",
+    "postal_code": "162-0064",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_hachimancho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Hachimancho",
+    "name_ja": "市谷八幡町",
+    "postal_code": "162-0844",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_funagawaramachi_banchi_1_3_to_8_12_14",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Funagawaramachi (Banchi: 1, 3-8, 12, 14)",
+    "name_ja": "市谷船河原町（1、3から8、12、14番地）",
+    "postal_code": "162-0826",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": "1、3から8、12、14番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_funagawaramachi_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Funagawaramachi (All except designated banchi)",
+    "name_ja": "市谷船河原町（上記を除く）",
+    "postal_code": "162-0826",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_honmuracho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Honmuracho",
+    "name_ja": "市谷本村町",
+    "postal_code": "162-0845",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_yakuojicho_banchi_1_to_15",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Yakuojicho (Banchi: 1-15)",
+    "name_ja": "市谷薬王寺町（1から15番）",
+    "postal_code": "162-0063",
+    "pattern_id": "PATTERN_SHINJUKU_07",
+    "address_range": "1から15番"
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_yakuojicho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Yakuojicho (All except designated banchi)",
+    "name_ja": "市谷薬王寺町（上記を除く）",
+    "postal_code": "162-0063",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_yanagicho_banchi_1_to_7_45_46_48_to_50_47_part",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Yanagicho (Banchi: 1-7, 45, 46, 48-50, 47 (part))",
+    "name_ja": "市谷柳町（1から7、45、46、48から50番地、47番地の一部）",
+    "postal_code": "162-0061",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": "1から7、45、46、48から50番地、47番地の一部"
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_yanagicho_banchi_8_to_11_23_to_35",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Yanagicho (Banchi: 8-11, 23-35)",
+    "name_ja": "市谷柳町（8から11、23から35番地）",
+    "postal_code": "162-0061",
+    "pattern_id": "PATTERN_SHINJUKU_07",
+    "address_range": "8から11、23から35番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_yanagicho_banchi_15_to_22_37_to_43",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Yanagicho (Banchi: 15-22, 37-43)",
+    "name_ja": "市谷柳町（15から22、37から43番地）",
+    "postal_code": "162-0061",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": "15から22、37から43番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_yanagicho_banchi_47_part",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Yanagicho (Banchi: 47 (part))",
+    "name_ja": "市谷柳町（47番地の一部）",
+    "postal_code": "162-0061",
+    "pattern_id": "PATTERN_SHINJUKU_08",
+    "address_range": "47番地の一部"
+  },
+  {
+    "neighborhood_id": "shinjuku_ichigaya_yamabushicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Ichigaya-Yamabushicho",
+    "name_ja": "市谷山伏町",
+    "postal_code": "162-0852",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_iwatocho_banchi_1_to_8_25_to_27",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Iwatocho (Banchi: 1-8, 25-27)",
+    "name_ja": "岩戸町（1から8番地、25から27番地）",
+    "postal_code": "162-0831",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": "1から8番地、25から27番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_iwatocho_banchi_9_11_to_23_10_part",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Iwatocho (Banchi: 9, 11-23, 10 (part))",
+    "name_ja": "岩戸町（9、11から23番地、10番地の一部）",
+    "postal_code": "162-0831",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": "9、11から23番地、10番地の一部"
+  },
+  {
+    "neighborhood_id": "shinjuku_iwatocho_banchi_10_part",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Iwatocho (Banchi: 10 (part))",
+    "name_ja": "岩戸町（10番地の一部）",
+    "postal_code": "162-0831",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": "10番地の一部"
+  },
+  {
+    "neighborhood_id": "shinjuku_enokicho_banchi_79",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Enokicho (Banchi: 79)",
+    "name_ja": "榎町（79番地）",
+    "postal_code": "162-0806",
+    "pattern_id": "PATTERN_SHINJUKU_07",
+    "address_range": "79番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_enokicho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Enokicho (All except designated banchi)",
+    "name_ja": "榎町（上記を除く）",
+    "postal_code": "162-0806",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_okubo_1",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Okubo 1-chome",
+    "name_ja": "大久保1丁目",
+    "postal_code": "169-0072",
+    "pattern_id": "PATTERN_SHINJUKU_18",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_okubo_2_3",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Okubo 2-3-chome",
+    "name_ja": "大久保2・3丁目",
+    "postal_code": "169-0072",
+    "pattern_id": "PATTERN_SHINJUKU_19",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kaitacho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kaitacho",
+    "name_ja": "改代町",
+    "postal_code": "162-0802",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kaguragashi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kaguragashi",
+    "name_ja": "神楽河岸",
+    "postal_code": "162-0823",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kagurazaka_1_to_4",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kagurazaka 1-4-chome",
+    "name_ja": "神楽坂1から4丁目",
+    "postal_code": "162-0825",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kagurazaka_5_banchi_21_to_24",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kagurazaka 5-chome (Banchi: 21-24)",
+    "name_ja": "神楽坂5丁目（21から24番地）",
+    "postal_code": "162-0825",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": "21から24番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_kagurazaka_5_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kagurazaka 5-chome (All except designated banchi)",
+    "name_ja": "神楽坂5丁目（上記を除く）",
+    "postal_code": "162-0825",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_kagurazaka_6_banchi_2_to_39",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kagurazaka 6-chome (Banchi: 2-39)",
+    "name_ja": "神楽坂6丁目（2から39番地）",
+    "postal_code": "162-0825",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": "2から39番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_kagurazaka_6_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kagurazaka 6-chome (All except designated banchi)",
+    "name_ja": "神楽坂6丁目（上記を除く）",
+    "postal_code": "162-0825",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_kasumigaokamachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kasumigaokamachi",
+    "name_ja": "霞ヶ丘町",
+    "postal_code": "160-0013",
+    "pattern_id": "PATTERN_SHINJUKU_09",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_katamachi_banchi_5_8",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Katamachi (Banchi: 5, 8)",
+    "name_ja": "片町（5番、8番）",
+    "postal_code": "160-0001",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": "5番、8番"
+  },
+  {
+    "neighborhood_id": "shinjuku_katamachi_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Katamachi (All except designated banchi)",
+    "name_ja": "片町（上記を除く）",
+    "postal_code": "160-0001",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_kabukicho_1_2",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kabukicho 1-2-chome",
+    "name_ja": "歌舞伎町1・2丁目",
+    "postal_code": "160-0021",
+    "pattern_id": "PATTERN_SHINJUKU_SPECIAL",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kamiochiai_1",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kamiochiai 1-chome",
+    "name_ja": "上落合1丁目",
+    "postal_code": "161-0034",
+    "pattern_id": "PATTERN_SHINJUKU_13",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kamiochiai_2_3",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kamiochiai 2-3-chome",
+    "name_ja": "上落合2・3丁目",
+    "postal_code": "161-0034",
+    "pattern_id": "PATTERN_SHINJUKU_07",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kawadacho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kawadacho",
+    "name_ja": "河田町",
+    "postal_code": "162-0054",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kikuicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kikuicho",
+    "name_ja": "喜久井町",
+    "postal_code": "162-0044",
+    "pattern_id": "PATTERN_SHINJUKU_08",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kita_shinjuku_1",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kita-Shinjuku 1-chome",
+    "name_ja": "北新宿1丁目",
+    "postal_code": "169-0074",
+    "pattern_id": "PATTERN_SHINJUKU_20",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kita_shinjuku_2",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kita-Shinjuku 2-chome",
+    "name_ja": "北新宿2丁目",
+    "postal_code": "169-0074",
+    "pattern_id": "PATTERN_SHINJUKU_13",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kita_shinjuku_3",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kita-Shinjuku 3-chome",
+    "name_ja": "北新宿3丁目",
+    "postal_code": "169-0074",
+    "pattern_id": "PATTERN_SHINJUKU_21",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kita_shinjuku_4",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kita-Shinjuku 4-chome",
+    "name_ja": "北新宿4丁目",
+    "postal_code": "169-0074",
+    "pattern_id": "PATTERN_SHINJUKU_13",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_kitamachi_banchi_1_to_40_41_part",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kitamachi (Banchi: 1-40, 41 (part))",
+    "name_ja": "北町（1から40番地、41番地の一部）",
+    "postal_code": "162-0834",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": "1から40番地、41番地の一部"
+  },
+  {
+    "neighborhood_id": "shinjuku_kitamachi_banchi_41_part",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kitamachi (Banchi: 41 (part))",
+    "name_ja": "北町（41番地の一部）",
+    "postal_code": "162-0834",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": "41番地の一部"
+  },
+  {
+    "neighborhood_id": "shinjuku_kitayamabushicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Kitayamabushicho",
+    "name_ja": "北山伏町",
+    "postal_code": "162-0853",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_saikucho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Saikucho",
+    "name_ja": "細工町",
+    "postal_code": "162-0838",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_samoncho_banchi_1_2_6_to_12_16_to_20",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Samoncho (Banchi: 1, 2, 6-12, 16-20)",
+    "name_ja": "左門町（1・2番地、6から12番地、16から20番地）",
+    "postal_code": "160-0017",
+    "pattern_id": "PATTERN_SHINJUKU_09",
+    "address_range": "1・2番地、6から12番地、16から20番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_samoncho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Samoncho (All except designated banchi)",
+    "name_ja": "左門町（上記を除く）",
+    "postal_code": "160-0017",
+    "pattern_id": "PATTERN_SHINJUKU_11",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_shinanomachi_banchi_12_to_34",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shinanomachi (Banchi: 12-34)",
+    "name_ja": "信濃町（12から34番地）",
+    "postal_code": "160-0016",
+    "pattern_id": "PATTERN_SHINJUKU_09",
+    "address_range": "12から34番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_shinanomachi_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shinanomachi (All except designated banchi)",
+    "name_ja": "信濃町（上記を除く）",
+    "postal_code": "160-0016",
+    "pattern_id": "PATTERN_SHINJUKU_11",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_shimoochiai_1",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shimoochiai 1-chome",
+    "name_ja": "下落合1丁目",
+    "postal_code": "161-0033",
+    "pattern_id": "PATTERN_SHINJUKU_16",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_shimoochiai_2_to_4",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shimoochiai 2-4-chome",
+    "name_ja": "下落合2から4丁目",
+    "postal_code": "161-0033",
+    "pattern_id": "PATTERN_SHINJUKU_17",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_shimomiyabicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shimomiyabicho",
+    "name_ja": "下宮比町",
+    "postal_code": "162-0814",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_shiroganecho_banchi_12_to_18",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shiroganecho (Banchi: 12-18)",
+    "name_ja": "白銀町（12から18番地）",
+    "postal_code": "162-0816",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": "12から18番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_shiroganecho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shiroganecho (All except designated banchi)",
+    "name_ja": "白銀町（上記を除く）",
+    "postal_code": "162-0816",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_shin_ogawamachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shin-Ogawamachi",
+    "name_ja": "新小川町",
+    "postal_code": "162-0814",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_shinjuku_1",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shinjuku 1-chome",
+    "name_ja": "新宿1丁目",
+    "postal_code": "160-0022",
+    "pattern_id": "PATTERN_SHINJUKU_11",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_shinjuku_2",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shinjuku 2-chome",
+    "name_ja": "新宿2丁目",
+    "postal_code": "160-0022",
+    "pattern_id": "PATTERN_SHINJUKU_14",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_shinjuku_3",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shinjuku 3-chome",
+    "name_ja": "新宿3丁目",
+    "postal_code": "160-0022",
+    "pattern_id": "PATTERN_SHINJUKU_SPECIAL",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_shinjuku_4",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shinjuku 4-chome",
+    "name_ja": "新宿4丁目",
+    "postal_code": "160-0022",
+    "pattern_id": "PATTERN_SHINJUKU_SPECIAL",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_shinjuku_5_banchi_1_to_16",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shinjuku 5-chome (Banchi: 1-16)",
+    "name_ja": "新宿5丁目（1から16番）",
+    "postal_code": "160-0022",
+    "pattern_id": "PATTERN_SHINJUKU_09",
+    "address_range": "1から16番"
+  },
+  {
+    "neighborhood_id": "shinjuku_shinjuku_5_banchi_17_18",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shinjuku 5-chome (Banchi: 17, 18)",
+    "name_ja": "新宿5丁目（17番、18番）",
+    "postal_code": "160-0022",
+    "pattern_id": "PATTERN_SHINJUKU_SPECIAL",
+    "address_range": "17番、18番"
+  },
+  {
+    "neighborhood_id": "shinjuku_shinjuku_6_to_7",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Shinjuku 6-7-chome",
+    "name_ja": "新宿6から7丁目",
+    "postal_code": "160-0022",
+    "pattern_id": "PATTERN_SHINJUKU_22",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_suidocho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Suidocho",
+    "name_ja": "水道町",
+    "postal_code": "162-0811",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_sugacho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Sugacho",
+    "name_ja": "須賀町",
+    "postal_code": "160-0018",
+    "pattern_id": "PATTERN_SHINJUKU_09",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_sumiyoshicho_banchi_1_2",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Sumiyoshicho (Banchi: 1, 2)",
+    "name_ja": "住吉町（1、2番）",
+    "postal_code": "162-0065",
+    "pattern_id": "PATTERN_SHINJUKU_10",
+    "address_range": "1、2番"
+  },
+  {
+    "neighborhood_id": "shinjuku_sumiyoshicho_banchi_3_4",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Sumiyoshicho (Banchi: 3, 4)",
+    "name_ja": "住吉町（3・4番）",
+    "postal_code": "162-0065",
+    "pattern_id": "PATTERN_SHINJUKU_12",
+    "address_range": "3・4番"
+  },
+  {
+    "neighborhood_id": "shinjuku_sumiyoshicho_banchi_5_to_15",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Sumiyoshicho (Banchi: 5-15)",
+    "name_ja": "住吉町（5から15番）",
+    "postal_code": "162-0065",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": "5から15番"
+  },
+  {
+    "neighborhood_id": "shinjuku_daikyocho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Daikyocho",
+    "name_ja": "大京町",
+    "postal_code": "160-0015",
+    "pattern_id": "PATTERN_SHINJUKU_11",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_takadanobaba_1_2",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Takadanobaba 1-2-chome",
+    "name_ja": "高田馬場1・2丁目",
+    "postal_code": "169-0075",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_takadanobaba_3_4",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Takadanobaba 3-4-chome",
+    "name_ja": "高田馬場3・4丁目",
+    "postal_code": "169-0075",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_tansumachi_banchi_1_to_32",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Tansumachi (Banchi: 1-32)",
+    "name_ja": "箪笥町（1から32番地）",
+    "postal_code": "162-0833",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": "1から32番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_tansumachi_banchi_33_to_43_44_part",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Tansumachi (Banchi: 33-43, 44 (part))",
+    "name_ja": "箪笥町（33から43番地、44番地の一部）",
+    "postal_code": "162-0833",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": "33から43番地、44番地の一部"
+  },
+  {
+    "neighborhood_id": "shinjuku_tansumachi_banchi_44_part",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Tansumachi (Banchi: 44 (part))",
+    "name_ja": "箪笥町（44番地の一部）",
+    "postal_code": "162-0833",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": "44番地の一部"
+  },
+  {
+    "neighborhood_id": "shinjuku_tsukijimachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Tsukijimachi",
+    "name_ja": "築地町",
+    "postal_code": "162-0818",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_tsukudocho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Tsukudocho",
+    "name_ja": "津久戸町",
+    "postal_code": "162-0821",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_tsukudo_hachimancho_banchi_1",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Tsukudo-Hachimancho (Banchi: 1)",
+    "name_ja": "筑土八幡町（1番）",
+    "postal_code": "162-0815",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": "1番"
+  },
+  {
+    "neighborhood_id": "shinjuku_tsukudo_hachimancho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Tsukudo-Hachimancho (All except designated banchi)",
+    "name_ja": "筑土八幡町（上記を除く）",
+    "postal_code": "162-0815",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_tenjincho_banchi_63_to_85",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Tenjincho (Banchi: 63-85)",
+    "name_ja": "天神町（63から85番地）",
+    "postal_code": "162-0808",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": "63から85番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_tenjincho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Tenjincho (All except designated banchi)",
+    "name_ja": "天神町（上記を除く）",
+    "postal_code": "162-0808",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_totsukacho_1",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Totsukacho 1-chome",
+    "name_ja": "戸塚町1丁目",
+    "postal_code": "169-0071",
+    "pattern_id": "PATTERN_SHINJUKU_14",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_tomihisacho_banchi_8_9",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Tomihisacho (Banchi: 8, 9)",
+    "name_ja": "富久町（8、9番）",
+    "postal_code": "162-0067",
+    "pattern_id": "PATTERN_SHINJUKU_10",
+    "address_range": "8、9番"
+  },
+  {
+    "neighborhood_id": "shinjuku_tomihisacho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Tomihisacho (All except designated banchi)",
+    "name_ja": "富久町（上記を除く）",
+    "postal_code": "162-0067",
+    "pattern_id": "PATTERN_SHINJUKU_12",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_toyama_1_3",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Toyama 1-3-chome",
+    "name_ja": "戸山1・3丁目",
+    "postal_code": "162-0052",
+    "pattern_id": "PATTERN_SHINJUKU_14",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_toyama_2",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Toyama 2-chome",
+    "name_ja": "戸山2丁目",
+    "postal_code": "162-0052",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_naitomachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Naitomachi",
+    "name_ja": "内藤町",
+    "postal_code": "160-0014",
+    "pattern_id": "PATTERN_SHINJUKU_10",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nakai_1_2",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nakai 1-2-chome",
+    "name_ja": "中井1・2丁目",
+    "postal_code": "161-0035",
+    "pattern_id": "PATTERN_SHINJUKU_07",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nakaochiai_1_to_2",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nakaochiai 1-2-chome",
+    "name_ja": "中落合1から2丁目",
+    "postal_code": "161-0032",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nakaochiai_3",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nakaochiai 3-chome",
+    "name_ja": "中落合3丁目",
+    "postal_code": "161-0032",
+    "pattern_id": "PATTERN_SHINJUKU_23",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nakaochiai_4",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nakaochiai 4-chome",
+    "name_ja": "中落合4丁目",
+    "postal_code": "161-0032",
+    "pattern_id": "PATTERN_SHINJUKU_15",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nakazatocho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nakazatocho",
+    "name_ja": "中里町",
+    "postal_code": "162-0804",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nakamachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nakamachi",
+    "name_ja": "中町",
+    "postal_code": "162-0835",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nandocho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nandocho",
+    "name_ja": "納戸町",
+    "postal_code": "162-0837",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nishiochiai_1",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nishiochiai 1-chome",
+    "name_ja": "西落合1丁目",
+    "postal_code": "161-0031",
+    "pattern_id": "PATTERN_SHINJUKU_15",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nishiochiai_2_to_4",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nishiochiai 2-4-chome",
+    "name_ja": "西落合2から4丁目",
+    "postal_code": "161-0031",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nishi_gokencho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nishi-Gokencho",
+    "name_ja": "西五軒町",
+    "postal_code": "162-0812",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nishi_shinjuku_1",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nishi-Shinjuku 1-chome",
+    "name_ja": "西新宿1丁目",
+    "postal_code": "160-0023",
+    "pattern_id": "PATTERN_SHINJUKU_SPECIAL",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nishi_shinjuku_2_3",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nishi-Shinjuku 2-3-chome",
+    "name_ja": "西新宿2・3丁目",
+    "postal_code": "160-0023",
+    "pattern_id": "PATTERN_SHINJUKU_24",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nishi_shinjuku_4",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nishi-Shinjuku 4-chome",
+    "name_ja": "西新宿4丁目",
+    "postal_code": "160-0023",
+    "pattern_id": "PATTERN_SHINJUKU_25",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nishi_shinjuku_5",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nishi-Shinjuku 5-chome",
+    "name_ja": "西新宿5丁目",
+    "postal_code": "160-0023",
+    "pattern_id": "PATTERN_SHINJUKU_13",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nishi_shinjuku_6",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nishi-Shinjuku 6-chome",
+    "name_ja": "西新宿6丁目",
+    "postal_code": "160-0023",
+    "pattern_id": "PATTERN_SHINJUKU_15",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nishi_shinjuku_7_to_8",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nishi-Shinjuku 7-8-chome",
+    "name_ja": "西新宿7から8丁目",
+    "postal_code": "160-0023",
+    "pattern_id": "PATTERN_SHINJUKU_17",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nishi_waseda_1_3",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nishi-Waseda 1-3-chome",
+    "name_ja": "西早稲田1・3丁目",
+    "postal_code": "169-0051",
+    "pattern_id": "PATTERN_SHINJUKU_11",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nishi_waseda_2",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nishi-Waseda 2-chome",
+    "name_ja": "西早稲田2丁目",
+    "postal_code": "169-0051",
+    "pattern_id": "PATTERN_SHINJUKU_14",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_nijikkicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Nijikkicho",
+    "name_ja": "二十騎町",
+    "postal_code": "162-0836",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_harakatamachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Harakatamachi",
+    "name_ja": "払方町",
+    "postal_code": "162-0841",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_haramachi_1_banchi_14_to_17",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Haramachi 1-chome (Banchi: 14-17)",
+    "name_ja": "原町1丁目（14から17番地）",
+    "postal_code": "162-0053",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": "14から17番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_haramachi_1_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Haramachi 1-chome (All except designated banchi)",
+    "name_ja": "原町1丁目（上記を除く）",
+    "postal_code": "162-0053",
+    "pattern_id": "PATTERN_SHINJUKU_08",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_haramachi_2_banchi_1_to_8_part_9_to_12_30_to_43",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Haramachi 2-chome (Banchi: 1-8 (part), 9-12, 30-43)",
+    "name_ja": "原町2丁目（1から8番地の一部、9から12、30から43番地）",
+    "postal_code": "162-0053",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": "1から8番地の一部、9から12、30から43番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_haramachi_2_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Haramachi 2-chome (All except designated banchi)",
+    "name_ja": "原町2丁目（上記を除く）",
+    "postal_code": "162-0053",
+    "pattern_id": "PATTERN_SHINJUKU_08",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_haramachi_3_banchi_1_to_9_84_to_89",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Haramachi 3-chome (Banchi: 1-9, 84-89)",
+    "name_ja": "原町3丁目（1から9、84から89番地）",
+    "postal_code": "162-0053",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": "1から9、84から89番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_haramachi_3_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Haramachi 3-chome (All except designated banchi)",
+    "name_ja": "原町3丁目（上記を除く）",
+    "postal_code": "162-0053",
+    "pattern_id": "PATTERN_SHINJUKU_08",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_babashitacho_banchi_60_to_63",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Babashitacho (Banchi: 60-63)",
+    "name_ja": "馬場下町（60から63番地）",
+    "postal_code": "162-0045",
+    "pattern_id": "PATTERN_SHINJUKU_07",
+    "address_range": "60から63番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_babashitacho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Babashitacho (All except designated banchi)",
+    "name_ja": "馬場下町（上記を除く）",
+    "postal_code": "162-0045",
+    "pattern_id": "PATTERN_SHINJUKU_08",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_higashi_enokicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Higashi-Enokicho",
+    "name_ja": "東榎町",
+    "postal_code": "162-0807",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_higashi_gokencho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Higashi-Gokencho",
+    "name_ja": "東五軒町",
+    "postal_code": "162-0813",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_hyakunincho_1",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Hyakunincho 1-chome",
+    "name_ja": "百人町1丁目",
+    "postal_code": "169-0073",
+    "pattern_id": "PATTERN_SHINJUKU_26",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_hyakunincho_2",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Hyakunincho 2-chome",
+    "name_ja": "百人町2丁目",
+    "postal_code": "169-0073",
+    "pattern_id": "PATTERN_SHINJUKU_27",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_hyakunincho_3_4",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Hyakunincho 3-4-chome",
+    "name_ja": "百人町3・4丁目",
+    "postal_code": "169-0073",
+    "pattern_id": "PATTERN_SHINJUKU_16",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_fukurocho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Fukurocho",
+    "name_ja": "袋町",
+    "postal_code": "162-0828",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_funamachi_banchi_1_to_6",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Funamachi (Banchi: 1-6)",
+    "name_ja": "舟町（1から6番地）",
+    "postal_code": "160-0006",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": "1から6番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_funamachi_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Funamachi (All except designated banchi)",
+    "name_ja": "舟町（上記を除く）",
+    "postal_code": "160-0006",
+    "pattern_id": "PATTERN_SHINJUKU_10",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_bentencho_banchi_1_to_30_106_to_176",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Bentencho (Banchi: 1-30, 106-176)",
+    "name_ja": "弁天町（1から30番地、106から176番地）",
+    "postal_code": "162-0851",
+    "pattern_id": "PATTERN_SHINJUKU_08",
+    "address_range": "1から30番地、106から176番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_bentencho_banchi_32_to_105",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Bentencho (Banchi: 32-105)",
+    "name_ja": "弁天町（32から105番地）",
+    "postal_code": "162-0851",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": "32から105番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_bentencho_banchi_177_178",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Bentencho (Banchi: 177, 178)",
+    "name_ja": "弁天町（177・178番地）",
+    "postal_code": "162-0851",
+    "pattern_id": "PATTERN_SHINJUKU_07",
+    "address_range": "177・178番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_minamicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Minamicho",
+    "name_ja": "南町",
+    "postal_code": "162-0836",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_minami_enokicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Minami-Enokicho",
+    "name_ja": "南榎町",
+    "postal_code": "162-0852",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_minamimotomachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Minamimotomachi",
+    "name_ja": "南元町",
+    "postal_code": "160-0012",
+    "pattern_id": "PATTERN_SHINJUKU_09",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_minamiyamabushicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Minamiyamabushicho",
+    "name_ja": "南山伏町",
+    "postal_code": "162-0854",
+    "pattern_id": "PATTERN_SHINJUKU_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_yamabukicho_banchi_1_11_to_21_81_to_131_291_331",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yamabukicho (Banchi: 1, 11-21, 81-131, 291, 331)",
+    "name_ja": "山吹町（1、11から21、81から131、291、331番地）",
+    "postal_code": "162-0801",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": "1、11から21、81から131、291、331番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_yamabukicho_banchi_4_to_7_258_to_270_293_to_318",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yamabukicho (Banchi: 4-7, 258-270, 293-318)",
+    "name_ja": "山吹町（4から7、258から270、293から318番地）",
+    "postal_code": "162-0801",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": "4から7、258から270、293から318番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_yamabukicho_banchi_332_to_366",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yamabukicho (Banchi: 332-366)",
+    "name_ja": "山吹町（332から366番地）",
+    "postal_code": "162-0801",
+    "pattern_id": "PATTERN_SHINJUKU_07",
+    "address_range": "332から366番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_yaraicho_banchi_1_to_111",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yaraicho (Banchi: 1-111)",
+    "name_ja": "矢来町（1から111番地）",
+    "postal_code": "162-0805",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": "1から111番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_yaraicho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yaraicho (All except designated banchi)",
+    "name_ja": "矢来町（上記を除く）",
+    "postal_code": "162-0805",
+    "pattern_id": "PATTERN_SHINJUKU_05",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_yokoderacho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yokoderacho",
+    "name_ja": "横寺町",
+    "postal_code": "162-0831",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_yochocho_banchi_1_to_6",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yochocho (Banchi: 1-6)",
+    "name_ja": "余丁町（1から6番）",
+    "postal_code": "162-0055",
+    "pattern_id": "PATTERN_SHINJUKU_12",
+    "address_range": "1から6番"
+  },
+  {
+    "neighborhood_id": "shinjuku_yochocho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yochocho (All except designated banchi)",
+    "name_ja": "余丁町（上記を除く）",
+    "postal_code": "162-0055",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_1_banchi_1_2_6_9_to_18",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya 1-chome (Banchi: 1, 2, 6, 9-18)",
+    "name_ja": "四谷1丁目（1、2番地、6番、9から18番地）",
+    "postal_code": "160-0004",
+    "pattern_id": "PATTERN_SHINJUKU_09",
+    "address_range": "1、2番地、6番、9から18番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_1_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya 1-chome (All except designated banchi)",
+    "name_ja": "四谷1丁目（上記を除く）",
+    "postal_code": "160-0004",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_2_banchi_1_4_to_8_11_14",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya 2-chome (Banchi: 1, 4-8, 11, 14)",
+    "name_ja": "四谷2丁目（1、4から8、11、14番地）",
+    "postal_code": "160-0004",
+    "pattern_id": "PATTERN_SHINJUKU_09",
+    "address_range": "1、4から8、11、14番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_2_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya 2-chome (All except designated banchi)",
+    "name_ja": "四谷2丁目（上記を除く）",
+    "postal_code": "160-0004",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_3_banchi_1_4_5_8",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya 3-chome (Banchi: 1, 4, 5, 8)",
+    "name_ja": "四谷3丁目（1、4、5、8番地）",
+    "postal_code": "160-0004",
+    "pattern_id": "PATTERN_SHINJUKU_09",
+    "address_range": "1、4、5、8番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_3_banchi_2_3_6_7",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya 3-chome (Banchi: 2, 3, 6, 7)",
+    "name_ja": "四谷3丁目（2、3、6、7番地）",
+    "postal_code": "160-0004",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": "2、3、6、7番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_3_banchi_9_12_13",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya 3-chome (Banchi: 9, 12, 13)",
+    "name_ja": "四谷3丁目（9、12、13番地）",
+    "postal_code": "160-0004",
+    "pattern_id": "PATTERN_SHINJUKU_11",
+    "address_range": "9、12、13番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_3_banchi_10_11_14",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya 3-chome (Banchi: 10, 11, 14)",
+    "name_ja": "四谷3丁目（10、11、14番地）",
+    "postal_code": "160-0004",
+    "pattern_id": "PATTERN_SHINJUKU_10",
+    "address_range": "10、11、14番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_4_banchi_1_4_to_7_25_to_32_33_34_part",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya 4-chome (Banchi: 1, 4-7, 25-32, 33, 34 (part))",
+    "name_ja": "四谷4丁目（1、4から7番地、25から32番地、33、34番地の一部）",
+    "postal_code": "160-0004",
+    "pattern_id": "PATTERN_SHINJUKU_11",
+    "address_range": "1、4から7番地、25から32番地、33、34番地の一部"
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_4_banchi_2_3_8_to_24_33_34_part",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya 4-chome (Banchi: 2, 3, 8-24, 33, 34 (part))",
+    "name_ja": "四谷4丁目（2、3、8から24番地、33、34番地の一部）",
+    "postal_code": "160-0004",
+    "pattern_id": "PATTERN_SHINJUKU_10",
+    "address_range": "2、3、8から24番地、33、34番地の一部"
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_sakamachi",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya-Sakamachi",
+    "name_ja": "四谷坂町",
+    "postal_code": "160-0002",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya_saneicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya-Saneicho",
+    "name_ja": "四谷三栄町",
+    "postal_code": "160-0008",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_yotsuya",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Yotsuya",
+    "name_ja": "四谷本塩町",
+    "postal_code": "160-0004",
+    "pattern_id": "PATTERN_SHINJUKU_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_wakaba_1_to_3",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Wakaba 1-3-chome",
+    "name_ja": "若葉1から3丁目",
+    "postal_code": "160-0011",
+    "pattern_id": "PATTERN_SHINJUKU_09",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_wakamatsucho_banchi_1_to_9",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Wakamatsucho (Banchi: 1-9)",
+    "name_ja": "若松町（1から9番）",
+    "postal_code": "162-0056",
+    "pattern_id": "PATTERN_SHINJUKU_06",
+    "address_range": "1から9番"
+  },
+  {
+    "neighborhood_id": "shinjuku_wakamatsucho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Wakamatsucho (All except designated banchi)",
+    "name_ja": "若松町（上記を除く）",
+    "postal_code": "162-0056",
+    "pattern_id": "PATTERN_SHINJUKU_08",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_wakamiyacho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Wakamiyacho",
+    "name_ja": "若宮町",
+    "postal_code": "162-0827",
+    "pattern_id": "PATTERN_SHINJUKU_04",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "shinjuku_wasedamachi_banchi_5_9_to_12_27",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Wasedamachi (Banchi: 5, 9-12, 27)",
+    "name_ja": "早稲田町（5、9から12、27番地）",
+    "postal_code": "162-0042",
+    "pattern_id": "PATTERN_SHINJUKU_08",
+    "address_range": "5、9から12、27番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_wasedamachi_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Wasedamachi (All except designated banchi)",
+    "name_ja": "早稲田町（上記を除く）",
+    "postal_code": "162-0042",
+    "pattern_id": "PATTERN_SHINJUKU_07",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_waseda_tsurumakicho_banchi_545_546",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Waseda-Tsurumakicho (Banchi: 545, 546)",
+    "name_ja": "早稲田鶴巻町（545、546番地）",
+    "postal_code": "162-0041",
+    "pattern_id": "PATTERN_SHINJUKU_02",
+    "address_range": "545、546番地"
+  },
+  {
+    "neighborhood_id": "shinjuku_waseda_tsurumakicho_other",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Waseda-Tsurumakicho (All except designated banchi)",
+    "name_ja": "早稲田鶴巻町（上記を除く）",
+    "postal_code": "162-0041",
+    "pattern_id": "PATTERN_SHINJUKU_07",
+    "address_range": "上記を除く"
+  },
+  {
+    "neighborhood_id": "shinjuku_waseda_minamicho",
+    "municipality_id": "tokyo_shinjuku",
+    "name_en": "Waseda-Minamicho",
+    "name_ja": "早稲田南町",
+    "postal_code": "162-0043",
+    "pattern_id": "PATTERN_SHINJUKU_08",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "yokohama_nishi_minatomirai_2",
+    "municipality_id": "kanagawa_yokohama",
+    "name_en": "Minato Mirai 2-chome, Nishi Ward",
+    "name_ja": "西区みなとみらい2丁目",
+    "postal_code": "220-0012",
+    "pattern_id": "PATTERN_YOKOHAMA_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "yokohama_naka_yamashitacho",
+    "municipality_id": "kanagawa_yokohama",
+    "name_en": "Yamashitacho, Naka Ward",
+    "name_ja": "中区山下町",
+    "postal_code": "231-0023",
+    "pattern_id": "PATTERN_YOKOHAMA_02",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "yokohama_kohoku_shinyokohama_2",
+    "municipality_id": "kanagawa_yokohama",
+    "name_en": "Shin-Yokohama 2-chome, Kohoku Ward",
+    "name_ja": "港北区新横浜2丁目",
+    "postal_code": "222-0033",
+    "pattern_id": "PATTERN_YOKOHAMA_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "kyoto_higashiyama_gionmachi_minamigawa",
+    "municipality_id": "kyoto_kyoto",
+    "name_en": "Gionmachi Minamigawa, Higashiyama Ward",
+    "name_ja": "東山区祇園町南側",
+    "postal_code": "605-0074",
+    "pattern_id": "PATTERN_KYOTO_01",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "kyoto_nakagyo_daikokucho",
+    "municipality_id": "kyoto_kyoto",
+    "name_en": "Daikokucho (Kawaramachi-Sanjo), Nakagyo Ward",
+    "name_ja": "中京区大黒町（河原町通三条下る）",
+    "postal_code": "604-8031",
+    "pattern_id": "PATTERN_KYOTO_02",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "kyoto_shimogyo_shijo_karasuma",
+    "municipality_id": "kyoto_kyoto",
+    "name_en": "Shijo-Karasuma Area (Naginatabokocho), Shimogyo Ward",
+    "name_ja": "下京区烏丸通周辺（四条烏丸・長刀鉾町）",
+    "postal_code": "600-8008",
+    "pattern_id": "PATTERN_KYOTO_03",
+    "address_range": null
+  },
+  {
+    "neighborhood_id": "tokushima_kamikatsu_all",
+    "municipality_id": "tokushima_kamikatsu",
+    "name_en": "Kamikatsu Town (All Districts)",
+    "name_ja": "勝浦郡上勝町全域",
+    "postal_code": "771-4501",
+    "pattern_id": "PATTERN_KAMIKATSU_STATION",
+    "address_range": null
+  }
+]
