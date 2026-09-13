@@ -143,7 +143,10 @@ export function classifyWasteItem(itemName: string, material: string = '') {
       category: 'unburnable',
       category_jp: '金属・陶器・ガラスごみ (不燃ごみ - スプレー缶)',
       disposal_rules: 'MUST be completely used up until empty in a well-ventilated outdoor space. In Shinjuku, do NOT puncture hole. Place in transparent bag labeled "スプレー缶".',
-      requires_disassembly: false
+      requires_disassembly: false,
+      schedule_key: 'metal_ceramics_glass',
+      bag_rule: 'Separate transparent bag labeled "スプレー缶"',
+      special_warning: 'DO NOT PUNCTURE: Puncturing cans indoors causes garbage truck fires.'
     };
   }
 
@@ -154,7 +157,9 @@ export function classifyWasteItem(itemName: string, material: string = '') {
       category_jp: '資源ごみ (ペットボトル)',
       disposal_rules: 'Step 1: Remove plastic cap. Step 2: Peel off plastic film label. Step 3: Rinse inside. Step 4: Flatten bottle.',
       requires_disassembly: true,
-      disassembly_notes: 'Cap and label go into Plastic Resource (プラマーク), bottle body goes into PET collection.'
+      disassembly_notes: 'Cap and label go into Plastic Resource (プラマーク), bottle body goes into PET collection.',
+      schedule_key: 'resources',
+      bag_rule: 'Green station net or clear bag'
     };
   }
 
@@ -164,7 +169,9 @@ export function classifyWasteItem(itemName: string, material: string = '') {
       category: 'recyclable_can',
       category_jp: '資源ごみ (缶)',
       disposal_rules: 'Rinse thoroughly. Do not crush cans in Shinjuku. Place in designated collection bin.',
-      requires_disassembly: false
+      requires_disassembly: false,
+      schedule_key: 'resources',
+      bag_rule: 'Blue station basket (loose)'
     };
   }
 
@@ -174,7 +181,9 @@ export function classifyWasteItem(itemName: string, material: string = '') {
       category: 'recyclable_glass',
       category_jp: '資源ごみ (びん)',
       disposal_rules: 'Rinse bottle. Remove metal/plastic caps. Place glass bottle upright in collection bin.',
-      requires_disassembly: false
+      requires_disassembly: false,
+      schedule_key: 'resources',
+      bag_rule: 'Yellow/Orange station bottle crate'
     };
   }
 
@@ -184,7 +193,9 @@ export function classifyWasteItem(itemName: string, material: string = '') {
       category: 'unburnable',
       category_jp: '金属・陶器・ガラスごみ (不燃ごみ)',
       disposal_rules: 'Place in transparent bag. If sharp, wrap safely in thick paper and write "キケン" (DANGER).',
-      requires_disassembly: false
+      requires_disassembly: false,
+      schedule_key: 'metal_ceramics_glass',
+      bag_rule: 'Generic transparent bag (Wrap blades/shards in paper marked "キケン")'
     };
   }
 
@@ -194,7 +205,9 @@ export function classifyWasteItem(itemName: string, material: string = '') {
       category: 'recyclable_paper',
       category_jp: '資源ごみ (古紙)',
       disposal_rules: 'Flatten cardboard boxes and tie securely with paper string. Avoid putting out on rainy days.',
-      requires_disassembly: false
+      requires_disassembly: false,
+      schedule_key: 'resources',
+      bag_rule: 'Bundled flat with paper twine'
     };
   }
 
@@ -203,7 +216,9 @@ export function classifyWasteItem(itemName: string, material: string = '') {
     category: 'burnable',
     category_jp: '燃やすごみ (可燃ごみ)',
     disposal_rules: 'Put in transparent or semitransparent bags. Tie securely. Place out before 8:00 AM.',
-    requires_disassembly: false
+    requires_disassembly: false,
+    schedule_key: 'combustible',
+    bag_rule: 'Generic transparent/translucent bag (≤45L)'
   };
 }
 
@@ -309,6 +324,17 @@ export function evaluateScheduleAndItems(
     const sodai = evaluateSodaiGomi(item.name, item.estimated_dim_cm);
     const classification = classifyWasteItem(item.name, item.material);
 
+    let pickupDay = chosenRow.burnable_raw;
+    let nextPickupDate = computeNextDate(chosenRow.burnable_days).next_date;
+
+    if (['resources', 'recyclable_pet', 'recyclable_can', 'recyclable_glass', 'recyclable_paper'].includes(classification.schedule_key || classification.category)) {
+      pickupDay = chosenRow.recyclable_raw;
+      nextPickupDate = computeNextDate(chosenRow.recyclable_days).next_date;
+    } else if (['metal_ceramics_glass', 'unburnable'].includes(classification.schedule_key || classification.category)) {
+      pickupDay = chosenRow.unburnable_raw;
+      nextPickupDate = computeNextDate(chosenRow.unburnable_days).next_date;
+    }
+
     return {
       id: item.id,
       name: item.name,
@@ -320,7 +346,12 @@ export function evaluateScheduleAndItems(
       classification_jp: classification.category_jp,
       disposal_rules: classification.disposal_rules,
       requires_disassembly: classification.requires_disassembly || !!item.requires_disassembly,
-      disassembly_notes: classification.disassembly_notes
+      disassembly_notes: classification.disassembly_notes,
+      schedule_key: classification.schedule_key,
+      pickup_day: pickupDay,
+      next_pickup_date: nextPickupDate,
+      bag_rule: classification.bag_rule,
+      special_warning: classification.special_warning
     };
   });
 

@@ -32,6 +32,13 @@
         "cans_bottles_pet_frequency": "once_weekly",
         "small_metal_frequency": "once_monthly",
         "miscellaneous_paper_frequency": "twice_monthly",
+        "schedule_keys": [
+            "combustible",
+            "plastic_packaging",
+            "cans_bottles_pet",
+            "small_metal_sprays",
+            "miscellaneous_paper"
+        ],
         "source_url": "https://www.city.kyoto.lg.jp/kankyo/page/0000000179.html"
     }
 }

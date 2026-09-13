@@ -25,6 +25,20 @@ export interface PreparationPrescription {
   components?: SeparableComponent[];
 }
 
+export interface ClarificationOption {
+  label: string;
+  chosen_answer: string;
+  target_classification: string;
+  target_schedule_key: string;
+  description?: string;
+}
+
+export interface ClarificationQuestion {
+  id: string;
+  question: string;
+  options: ClarificationOption[];
+}
+
 export interface DetectedItem {
   id: string;
   name: string;
@@ -39,6 +53,10 @@ export interface DetectedItem {
   requires_disassembly?: boolean;
   user_edited?: boolean;
   preparation: PreparationPrescription;
+  clarification_question?: ClarificationQuestion;
+  resolved_answer?: string;
+  needs_size_confirmation?: boolean;
+  size_threshold_cm?: number;
 }
 
 export interface VisionScanResult {
@@ -85,6 +103,15 @@ export interface EvaluatedItem {
   disposal_rules: string;
   requires_disassembly: boolean;
   disassembly_notes?: string;
+  schedule_key?: string;
+  pickup_day?: string;
+  next_pickup_date?: string;
+  bag_rule?: string;
+  special_warning?: string;
+  clarification_question?: ClarificationQuestion;
+  resolved_answer?: string;
+  needs_size_confirmation?: boolean;
+  size_threshold_cm?: number;
 }
 
 export interface NextPickupInfo {
@@ -125,6 +152,8 @@ export interface MunicipalityOption {
   morning_deadline: string;
   badge_color: string;
   description: string;
+  threshold_dim_cm: number;
+  metal_threshold_dim_cm?: number;
 }
 
 export interface NeighborhoodOption {
@@ -170,6 +199,15 @@ export interface ScanHistoryRecord {
   safeguard_count: number;
   image_preview?: string;
   scenario_name?: string;
+}
+
+export interface UploadedImage {
+  id: string;
+  url: string;
+  name: string;
+  sizeBytes?: number;
+  timestamp: string;
+  source: 'preset' | 'upload' | 'camera';
 }
 
 

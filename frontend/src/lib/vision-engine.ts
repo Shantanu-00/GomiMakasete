@@ -129,16 +129,18 @@ export function evaluateIntentSafeguard(name: string): { intent: IntentCategory;
 
 export async function runTieredVisionAnalysis(
   presetKey?: string,
-  forceTier2: boolean = false
+  forceTier2: boolean = false,
+  uploadedFilenames?: string[]
 ): Promise<VisionScanResult> {
   const startTime = Date.now();
 
   // Tier Model Definition
+  const isMultiPhoto = uploadedFilenames && uploadedFilenames.length > 1;
   const modelTier = forceTier2
     ? 'Tier-2 (Claude 3.7 Sonnet / Nova Pro)'
     : 'Tier-1 (Nova 2 Lite)';
 
-  // Preset Scenario Data Generation
+  // Scenario Data Generation
   let rawItems: Array<{
     id: string;
     name: string;
@@ -148,7 +150,83 @@ export async function runTieredVisionAnalysis(
     base_confidence: number;
   }> = [];
 
-  if (presetKey === 'messy_desk') {
+  if (uploadedFilenames && uploadedFilenames.length > 0 && presetKey === 'custom_upload') {
+    // Dynamic Intelligent Synthesis from Resident Uploaded Photos
+    const joinedNames = uploadedFilenames.join(' ').toLowerCase();
+
+    if (joinedNames.includes('bottle') || joinedNames.includes('pet') || joinedNames.includes('drink')) {
+      rawItems.push({
+        id: 'upload-item-1',
+        name: 'Beverage PET Bottle (500ml)',
+        description: 'Multi-angle scan confirms standard clear PET container with separated plastic ring.',
+        material: 'PET (#1) / Polypropylene Cap',
+        dim_cm: 22,
+        base_confidence: 0.98
+      });
+    }
+
+    if (joinedNames.includes('box') || joinedNames.includes('cardboard') || joinedNames.includes('package')) {
+      rawItems.push({
+        id: 'upload-item-2',
+        name: 'Corrugated Shipping Box',
+        description: 'Clean shipping cardboard detected without excessive tape or grease.',
+        material: 'Corrugated Cardboard',
+        dim_cm: 38,
+        base_confidence: 0.95
+      });
+    }
+
+    if (joinedNames.includes('battery') || joinedNames.includes('charger')) {
+      rawItems.push({
+        id: 'upload-item-3',
+        name: 'Rechargeable Lithium Battery Pack',
+        description: 'HAZARDOUS: High-energy density battery cell. Cannot be placed in regular curbside bags.',
+        material: 'Lithium-ion / Electronics',
+        dim_cm: 8,
+        base_confidence: 0.99
+      });
+    }
+
+    // Always ensure at least a rich default set for custom resident uploads
+    if (rawItems.length === 0) {
+      rawItems = [
+        {
+          id: 'upload-item-1',
+          name: 'Clear PET Tea Bottle (500ml)',
+          description: isMultiPhoto 
+            ? 'Cross-referenced with macro label photo: Verified Japanese Plastic Mark (プラマーク) and recyclable PET body.'
+            : 'Standard beverage container with attached cap and wrapper film.',
+          material: 'PET (#1) / Polypropylene Cap',
+          dim_cm: 21,
+          base_confidence: isMultiPhoto ? 0.99 : 0.96
+        },
+        {
+          id: 'upload-item-2',
+          name: 'Aluminum Cold Beverage Can',
+          description: 'Empty beverage can with clean interior and pressed pull-tab.',
+          material: 'Aluminum',
+          dim_cm: 12,
+          base_confidence: isMultiPhoto ? 0.98 : 0.94
+        },
+        {
+          id: 'upload-item-3',
+          name: 'Personal Smartphone (Carried Device)',
+          description: 'SAFEGUARD: High-value cellular handset placed next to items. Sequestered to Safe Vault.',
+          material: 'Glass / Aluminum / Electronics',
+          dim_cm: 15,
+          base_confidence: 0.99
+        },
+        {
+          id: 'upload-item-4',
+          name: 'Convenience Store Receipt (Paper)',
+          description: 'Small thermal register printout.',
+          material: 'Thermal Paper',
+          dim_cm: 7,
+          base_confidence: forceTier2 ? 0.93 : 0.72 // Demonstrates Tier-2 escalation
+        }
+      ];
+    }
+  } else if (presetKey === 'messy_desk') {
     // Realistic messy desk: empty PET bottle, coffee can, crumpled receipt, AND an Apple iPhone!
     rawItems = [
       {

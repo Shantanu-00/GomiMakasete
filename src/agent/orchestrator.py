@@ -16,7 +16,7 @@ from src.agent.tools.safeguard_tool import evaluate_safeguard_intent
 from src.agent.tools.action_decomposition_tool import prescribe_preparation_action
 from src.agent.tools.sodai_gomi_tool import evaluate_bulky_waste
 from src.agent.tools.knowledge_base_tool import query_municipal_rules
-from src.agent.tools.schedule_tool import lookup_neighborhood_schedule
+from src.agent.tools.schedule_tool import lookup_neighborhood_schedule, resolve_item_schedule
 from src.agent.memory.session_memory import memory_store
 
 logger = get_logger("orchestrator")
@@ -98,6 +98,10 @@ class GomiSupervisorOrchestrator:
             # 2. Municipal Knowledge Base Rules
             rules_res = query_municipal_rules(name, material, municipality)
 
+            # 3. Resolve item-specific pickup schedule from the neighborhood schedule
+            item_sched_key = rules_res.get("schedule_key", "combustible")
+            pickup_res = resolve_item_schedule(item_sched_key, schedule.get("schedules", {}))
+
             evaluated_items.append(EvaluatedItem(
                 id=raw.get("id", name),
                 name=name,
@@ -109,7 +113,12 @@ class GomiSupervisorOrchestrator:
                 classification_jp=rules_res["category_jp"],
                 disposal_rules=rules_res["disposal_rules"],
                 requires_disassembly=rules_res["requires_disassembly"],
-                disassembly_notes=rules_res["disassembly_notes"]
+                disassembly_notes=rules_res["disassembly_notes"],
+                schedule_key=item_sched_key,
+                pickup_day=pickup_res.get("pickup_day"),
+                next_pickup_date=pickup_res.get("next_pickup_date"),
+                bag_rule=rules_res.get("bag_rule"),
+                special_warning=rules_res.get("special_warning")
             ))
 
         return {

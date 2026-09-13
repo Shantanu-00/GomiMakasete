@@ -135,3 +135,16 @@ Items that cannot be chemically recycled, repurposed, or processed under current
 2. **Dismantling Rule:** Multi-material objects must be disassembled at home. For example, strip the vinyl cloth from an umbrella frame:
    - Steel skeleton $\rightarrow$ Category 14 (Mixed Scrap Metals)
    - Vinyl fabric $\rightarrow$ Category 16 (Waste Plastics)
+
+---
+
+## 4. System Schedule Mapping Dictionary (System Routing Contract)
+
+When querying or matching items to the neighborhood schedule database (DynamoDB), system agents must map items to these exact canonical schedule keys:
+
+| Material / Item Category | Canonical Schedule Key | Presentation / Crate Requirement | Edge-Case Special Handling |
+| :--- | :--- | :--- | :--- |
+| **All 45 Separation Categories** | `station_dropoff` | Emptied by hand into crates 1–45 | Transported in reusable boxes/buckets to Why? Station |
+| **Raw Food Scraps (*Namagomi*)** | `home_compost` | **STRICTLY PROHIBITED AT STATION** | **100% Home Composting Mandate:** Use electric dehydrators or *Kieero* |
+| **Intact Functional Items** | `kuru_kuru_shop` | Delivered to Kuru Kuru Shop at station | Free circular economy reuse; anyone may take for ¥0 |
+| **Town Drop-Off Operating Hours**| `station_dropoff` | Open 365 Days: **07:30 AM - 02:00 PM** | Facility: Kamikatsu Zero Waste Center "WHY?" (日比ヶ谷ごみステーション) |

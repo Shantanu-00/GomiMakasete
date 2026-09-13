@@ -304,61 +304,160 @@ body {
   50% { height: 14px; }
 }
 
-/* Responsive Breakpoints & Mobile Polish */
-@media (max-width: 640px) {
-  .main-wrapper {
-    padding: 16px 12px 100px 12px;
-  }
+/* Japanese Typography Utilities */
+.jp-nowrap {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  display: inline-block;
+}
 
+/* HUD Laser Scan Animations */
+@keyframes laserSweep {
+  0% {
+    top: 2%;
+    opacity: 0.7;
+  }
+  50% {
+    top: 96%;
+    opacity: 1;
+  }
+  100% {
+    top: 2%;
+    opacity: 0.7;
+  }
+}
+
+.laser-scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 5%, #00A86B 30%, #34D399 50%, #00A86B 70%, transparent 95%);
+  box-shadow: 0 0 12px #00A86B, 0 0 24px rgba(52, 211, 153, 0.9);
+  animation: laserSweep 2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.hud-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 168, 107, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 168, 107, 0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hud-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: #00A86B;
+  border-style: solid;
+  pointer-events: none;
+  z-index: 10;
+}
+.hud-corner-tl { top: 8px; left: 8px; border-width: 2.5px 0 0 2.5px; }
+.hud-corner-tr { top: 8px; right: 8px; border-width: 2.5px 2.5px 0 0; }
+.hud-corner-bl { bottom: 8px; left: 8px; border-width: 0 0 2.5px 2.5px; }
+.hud-corner-br { bottom: 8px; right: 8px; border-width: 0 2.5px 2.5px 0; }
+
+/* Responsive Breakpoints & Mobile Polish */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+@media (max-width: 768px) {
   .header-container {
     padding: 10px 14px;
-    gap: 10px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
   }
 
-  .logo-mascot-thumb {
-    width: 36px;
-    height: 36px;
+  .header-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
   }
 
-  .brand-title {
-    font-size: 1.05rem;
+  .header-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
   }
 
-  .brand-sub {
+  .header-controls-row::-webkit-scrollbar {
     display: none;
   }
 
+  .main-wrapper {
+    padding: 14px 10px 100px 10px;
+  }
+
+  .logo-mascot-thumb {
+    width: 34px;
+    height: 34px;
+  }
+
+  .brand-title {
+    font-size: 1rem !important;
+  }
+
+  .brand-sub {
+    display: none !important;
+  }
+
   .utility-card {
-    padding: 16px !important;
+    padding: 14px !important;
   }
 
   .modal-content {
-    padding: 18px;
+    padding: 16px;
     max-height: 92vh;
   }
 
   .chatbox-window {
-    width: calc(100vw - 20px) !important;
-    right: 10px !important;
-    bottom: 10px !important;
-    height: 75vh !important;
+    width: calc(100vw - 16px) !important;
+    right: 8px !important;
+    bottom: 8px !important;
+    height: 70vh !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand-title {
+    font-size: 0.92rem !important;
+  }
+  .brand-title span:nth-child(2) {
+    font-size: 0.78rem !important;
   }
 }
 
 .chatbox-window {
   width: 380px;
-  max-width: calc(100vw - 32px);
+  max-width: calc(100vw - 24px);
   height: 520px;
   max-height: calc(100vh - 90px);
 }
 
-@media (min-width: 641px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1024px) {
   .main-wrapper {
-    padding: 20px 18px 90px 18px;
+    padding: 20px 16px 90px 16px;
   }
 
   .header-container {
-    padding: 12px 20px;
+    padding: 12px 18px;
   }
 }
 

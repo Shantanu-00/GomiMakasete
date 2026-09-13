@@ -181,3 +181,27 @@ Under Japanese statutory laws, the following items will not be collected under c
 - **Specified Home Appliances (家電4品目):** Air Conditioners, Televisions, Refrigerators/Freezers, Washing Machines/Clothes Dryers. (Recycle via retail store trade-in or Japan Post recycling ticket).
 - **Personal Computers:** Desktop units, laptops, LCD screens. (Recycle via manufacturer or postal e-waste service Renet Japan).
 - **Hazardous / Industrial Items:** Motorcycle parts, car tires, car batteries, fire extinguishers, concrete blocks, gas propane tanks, medical sharps/syringes.
+
+---
+
+## 4. System Schedule Mapping Dictionary (System Routing Contract)
+
+When querying or matching items to the neighborhood schedule database (DynamoDB), system agents must map items to these exact canonical schedule keys:
+
+| Material / Item Category | Canonical Schedule Key | Bag / Presentation Requirement | Edge-Case Special Handling |
+| :--- | :--- | :--- | :--- |
+| **Kitchen & Food Scraps** | `combustible` | Generic transparent/translucent bag $\le$ 45L | Drain water thoroughly; place under crow net |
+| **Soiled Paper & Facial Tissues** | `combustible` | Generic transparent/translucent bag | Oily food paper, paper cups |
+| **Clean Plastic Packaging (`プラマーク`)** | `plastic_packaging` | Generic transparent/translucent bag | Rinsed and dried; collected weekly on Plastic Day |
+| **100% Plastic Goods (<50 cm)** | `plastic_packaging` | Generic transparent/translucent bag | Basins, buckets, hangers, colanders under 50 cm |
+| **Beverage & Food Cans (Alum/Steel)** | `cans_bottles_pet` | Separate transparent bag or crate | Empty and rinse; do not crush flat |
+| **Glass Drink & Food Jars/Bottles** | `cans_bottles_pet` | Separate transparent bag or crate | Caps removed, rinsed clean |
+| **PET Beverage Bottles (`PET 1`)** | `cans_bottles_pet` | Separate transparent bag or net | Cap/label removed (to plastic), rinsed, stepped flat |
+| **Small Metal Items & Cookware (<30cm)** | `small_metal` | Direct without bag or clear bag | Pots measured across rim (excluding handle) |
+| **Ceramics, Tableware & Glassware** | `non_combustible` | Generic transparent bag | Wrap broken shards in newspaper labeled **「キケン」** |
+| **Aerosol Spray Cans & Gas Cylinders** | `cans_bottles_pet` | **Separate isolated transparent bag** | **DO NOT PUNCTURE**; exhaust outdoors; write **「スプレー缶」** |
+| **Used Clothing & Wearable Textiles** | `clothing` | Clear transparent plastic bag | **STRICT RAIN CANCELLATION:** Never put out if raining! |
+| **Cardboard / Newspapers / Books** | `used_paper` | Bundled flat with string | Collected weekly by local recycling groups |
+| **Metal Objects $\ge$ 30cm or Others $\ge$ 50cm**| `sodai_gomi` | Yokohama bulky sticker required | Book pickup at `yokohama-sodai.jp` (¥200–¥1,500) |
+
+> **Statutory Notice:** Yokohama enforces a **¥2,000 fine** for repeated sorting non-compliance under municipal ordinance.

@@ -175,3 +175,25 @@ Under the *PC Recycling Act*, desktop towers, laptops, and LCD monitors cannot b
 
 ### Hazardous & Industrial Materials
 Car/motorcycle tires, automotive batteries, pianos, concrete blocks, soil/sand, fire extinguishers, paint cans with chemical residue, propane cylinders. Contact specialized private disposal contractors or vendor trade-ins.
+
+---
+
+## 5. System Schedule Mapping Dictionary (System Routing Contract)
+
+When querying or matching items to the neighborhood schedule database (DynamoDB), system agents must map items to these exact canonical schedule keys:
+
+| Material / Item Category | Canonical Schedule Key | Bag / Presentation Requirement | Edge-Case Special Handling |
+| :--- | :--- | :--- | :--- |
+| **Kitchen & Food Waste** | `combustible` | Generic transparent/translucent bag $\le$ 45L | Drain all liquids thoroughly; place under yellow crow net |
+| **Soiled Paper & Facial Tissues** | `combustible` | Generic transparent/translucent bag | Oily food containers/pizza boxes that cannot be cleaned |
+| **Contaminated / Oily Plastics** | `combustible` | Generic transparent/translucent bag | Food residue that cannot be washed away with a cold rinse |
+| **Worn Apparel & Textiles** | `combustible` | Generic transparent/translucent bag | Non-wearable clothing, rags, undergarments |
+| **Clean Plastic Packaging (`プラマーク`)** | `resources` | Generic transparent/translucent bag | Rinsed and dried; collected weekly on Resources Day |
+| **PET Beverage Bottles (`PET 1`)** | `resources` | Green station net or clear bag | Cap and label removed (to plastics), rinsed, stepped flat |
+| **Beverage & Food Cans (Alum/Steel)** | `resources` | Loose into blue station basket | Rinsed clean; do NOT crush completely flat |
+| **Glass Drink & Food Bottles** | `resources` | Yellow/Orange station bottle crate | Caps removed, rinsed clean; cosmetic/broken glass excluded |
+| **Cardboard / Newspapers / Books** | `resources` | Bundled flat with paper twine | Flattened; DO NOT use vinyl packing tape |
+| **Small Metal Cookware & Cutlery (<30cm)** | `metal_ceramics_glass` | Generic transparent bag | Sharp blades wrapped in paper labeled **「キケン」** |
+| **Ceramics, Pottery & Glassware (<30cm)** | `metal_ceramics_glass` | Generic transparent bag | Broken shards wrapped in thick paper labeled **「キケン」** |
+| **Aerosol Spray Cans & Butane Canisters** | `metal_ceramics_glass` | **Separate isolated transparent bag** | **DO NOT PUNCTURE**; exhaust outdoors; write **「スプレー缶」** |
+| **Household Items $\ge$ 30 cm** | `sodai_gomi` | Must affix Ticket A/B stickers | Book pickup at `sodai.tokyokankyo.or.jp` (Off-curbside) |

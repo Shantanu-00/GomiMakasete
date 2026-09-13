@@ -21,6 +21,11 @@
         "combustible_frequency": "twice_weekly",
         "resources_frequency": "once_weekly",
         "metal_glass_frequency": "twice_monthly",
+        "schedule_keys": [
+            "combustible",
+            "resources",
+            "metal_ceramics_glass"
+        ],
         "source_url": "https://www.city.shinjuku.lg.jp/seikatsu/file09_01_00001.html"
     }
 }

@@ -71,11 +71,13 @@ export default function SplashBuffer({
         position: 'relative',
         maxWidth: '720px',
         width: '100%',
+        maxHeight: '94vh',
+        overflowY: 'auto',
         background: '#FFFFFF',
         border: '3px solid #0F172A',
-        borderRadius: '28px',
+        borderRadius: '24px',
         boxShadow: '6px 6px 0 #0F172A, 0 20px 40px -15px rgba(15, 23, 42, 0.12)',
-        padding: 'clamp(20px, 4vw, 36px)',
+        padding: 'clamp(16px, 3.5vw, 32px)',
         textAlign: 'center',
         margin: 'auto'
       }}>
@@ -88,15 +90,19 @@ export default function SplashBuffer({
           color: '#FFFFFF',
           border: '2px solid #0F172A',
           borderRadius: '9999px',
-          padding: '5px 16px',
-          fontSize: '0.78rem',
+          padding: '4px 14px',
+          fontSize: 'clamp(0.7rem, 2vw, 0.78rem)',
           fontWeight: 800,
           letterSpacing: '0.03em',
           boxShadow: '2px 2px 0 #0F172A',
-          marginBottom: '16px'
+          marginBottom: '14px',
+          maxWidth: '100%',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap'
         }}>
-          <MapPin className="w-3.5 h-3.5" />
-          <span>{municipalityName} RULES LOADED</span>
+          <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+          <span className="jp-nowrap">{municipalityName} RULES LOADED</span>
         </div>
 
         {/* Mascot & Welcome Pill */}
@@ -104,16 +110,16 @@ export default function SplashBuffer({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '16px',
-          marginBottom: '18px',
+          gap: '14px',
+          marginBottom: '16px',
           flexWrap: 'wrap'
         }}>
           <div style={{
             position: 'relative',
-            width: '105px',
-            height: '105px',
-            borderRadius: '22px',
-            border: '3px solid #0F172A',
+            width: 'clamp(70px, 15vw, 95px)',
+            height: 'clamp(70px, 15vw, 95px)',
+            borderRadius: '18px',
+            border: '2.5px solid #0F172A',
             boxShadow: '3px 3px 0 #0F172A',
             overflow: 'hidden',
             background: '#F0FDF4',
@@ -134,15 +140,15 @@ export default function SplashBuffer({
               border: '1.5px solid #F59E0B',
               borderRadius: '8px',
               padding: '2px 8px',
-              fontSize: '0.7rem',
+              fontSize: '0.68rem',
               fontWeight: 800,
               color: '#92400E',
               marginBottom: '4px'
             }}>
-              MEET GOMI-CHAN (ゴミちゃん) 🐾
+              <span className="jp-nowrap">MEET GOMI-CHAN (ゴミちゃん) 🐾</span>
             </div>
             <p style={{
-              fontSize: '0.88rem',
+              fontSize: 'clamp(0.8rem, 2.5vw, 0.88rem)',
               color: '#334155',
               fontWeight: 600,
               lineHeight: 1.35
@@ -154,48 +160,48 @@ export default function SplashBuffer({
 
         {/* --- CORE EDUCATIONAL HIGHLIGHT: THE MEANING OF "GOMI MAKASETE" --- */}
         <div style={{
-          margin: '20px 0',
+          margin: '16px 0',
           background: '#F8FAFC',
           border: '2px solid #0F172A',
-          borderRadius: '20px',
-          padding: '18px 20px',
+          borderRadius: '18px',
+          padding: 'clamp(12px, 2.5vw, 18px)',
           boxShadow: '3px 3px 0 #0F172A'
         }}>
           <div style={{
             fontSize: '0.72rem',
             fontWeight: 800,
             textTransform: 'uppercase',
-            letterSpacing: '0.06em',
+            letterSpacing: '0.04em',
             color: '#64748B',
-            marginBottom: '12px'
+            marginBottom: '10px'
           }}>
-            📖 What does &ldquo;Gomi Makasete&rdquo; mean? (ゴミの意味と由来)
+            <span className="jp-nowrap">📖 What does &ldquo;Gomi Makasete&rdquo; mean? (ゴミの意味と由来)</span>
           </div>
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: '12px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 210px), 1fr))',
+            gap: '10px'
           }}>
             {/* Left Card: GOMI */}
             <div style={{
               background: '#FFFFFF',
               border: '2px solid #E2E8F0',
-              borderRadius: '16px',
-              padding: '14px 16px',
+              borderRadius: '14px',
+              padding: '12px 14px',
               textAlign: 'left',
               position: 'relative'
             }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '2px' }}>
-                <span style={{ fontSize: '1.75rem', fontWeight: 900, color: '#DC2626' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '2px', flexWrap: 'nowrap' }}>
+                <span className="jp-nowrap" style={{ fontSize: 'clamp(1.4rem, 4vw, 1.75rem)', fontWeight: 900, color: '#DC2626' }}>
                   ゴミ？
                 </span>
-                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748B' }}>
+                <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#64748B', whiteSpace: 'nowrap' }}>
                   [ Go-mi ]
                 </span>
               </div>
               <div style={{
-                fontSize: '1.25rem',
+                fontSize: '1.15rem',
                 fontWeight: 900,
                 color: '#0F172A',
                 letterSpacing: '-0.02em',
@@ -203,7 +209,7 @@ export default function SplashBuffer({
               }}>
                 Trash? / Waste?
               </div>
-              <p style={{ fontSize: '0.76rem', color: '#64748B', lineHeight: 1.3 }}>
+              <p style={{ fontSize: '0.75rem', color: '#64748B', lineHeight: 1.3 }}>
                 Refers to household refuse, burnables, plastics, bottles, cans, and bulky items.
               </p>
             </div>
@@ -212,21 +218,21 @@ export default function SplashBuffer({
             <div style={{
               background: '#FFFFFF',
               border: '2px solid #E2E8F0',
-              borderRadius: '16px',
-              padding: '14px 16px',
+              borderRadius: '14px',
+              padding: '12px 14px',
               textAlign: 'left',
               position: 'relative'
             }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '2px' }}>
-                <span style={{ fontSize: '1.75rem', fontWeight: 900, color: '#00A86B' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '2px', flexWrap: 'nowrap' }}>
+                <span className="jp-nowrap" style={{ fontSize: 'clamp(1.4rem, 4vw, 1.75rem)', fontWeight: 900, color: '#00A86B' }}>
                   まかせて！
                 </span>
-                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748B' }}>
+                <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#64748B', whiteSpace: 'nowrap' }}>
                   [ Ma-ka-se-te ]
                 </span>
               </div>
               <div style={{
-                fontSize: '1.25rem',
+                fontSize: '1.15rem',
                 fontWeight: 900,
                 color: '#0F172A',
                 letterSpacing: '-0.02em',
@@ -234,7 +240,7 @@ export default function SplashBuffer({
               }}>
                 Leave it to us!
               </div>
-              <p style={{ fontSize: '0.76rem', color: '#64748B', lineHeight: 1.3 }}>
+              <p style={{ fontSize: '0.75rem', color: '#64748B', lineHeight: 1.3 }}>
                 A reassuring Japanese phrase meaning &ldquo;Relax, we&apos;ll take full care of it!&rdquo;
               </p>
             </div>
@@ -245,9 +251,9 @@ export default function SplashBuffer({
         <div style={{
           display: 'flex',
           justifyContent: 'center',
-          gap: '10px',
+          gap: '8px',
           flexWrap: 'wrap',
-          marginBottom: '20px'
+          marginBottom: '16px'
         }}>
           <span style={{
             display: 'inline-flex',

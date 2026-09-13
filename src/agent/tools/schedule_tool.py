@@ -101,13 +101,31 @@ def compute_next_collection_date(day_patterns: List[str], current_dt: Optional[d
         "cutoff_time": "08:00 AM"
     }
 
+_PATTERNS_MAP = None
+
+def get_patterns_map() -> Dict[str, Any]:
+    global _PATTERNS_MAP
+    if _PATTERNS_MAP is None:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        pat_path = os.path.abspath(os.path.join(script_dir, "../../../data/patterns.json"))
+        if os.path.exists(pat_path):
+            try:
+                with open(pat_path, "r", encoding="utf-8") as f:
+                    patterns = json.load(f)
+                    _PATTERNS_MAP = {p["pattern_id"]: p for p in patterns}
+            except Exception:
+                _PATTERNS_MAP = {}
+        else:
+            _PATTERNS_MAP = {}
+    return _PATTERNS_MAP
+
 def lookup_neighborhood_schedule(neighborhood: str, banchi: Optional[str] = None, municipality: str = "tokyo_shinjuku") -> Dict[str, Any]:
-    # Locate data cache
+    # Locate data cache (Prioritizing data/neighborhoods.json which contains all 4 municipalities)
     script_dir = os.path.dirname(os.path.abspath(__file__))
     possible_paths = [
+        os.path.abspath(os.path.join(script_dir, "../../../data/neighborhoods.json")),
         os.path.abspath(os.path.join(script_dir, "../../../backend-agent/data/shinjuku_normalized.json")),
-        os.path.abspath(os.path.join(script_dir, "../../../frontend/src/lib/shinjuku_data.json")),
-        os.path.abspath(os.path.join(script_dir, "../../../data/neighborhoods.json"))
+        os.path.abspath(os.path.join(script_dir, "../../../frontend/src/lib/shinjuku_data.json"))
     ]
 
     records = []
@@ -123,11 +141,35 @@ def lookup_neighborhood_schedule(neighborhood: str, banchi: Optional[str] = None
     if not records:
         return {"error": "Schedule data records unavailable"}
 
-    clean_query = neighborhood.strip()
-    matching_rows = [r for r in records if clean_query in r.get("town_full", "") or r.get("town_clean", "") in clean_query]
+    clean_query = neighborhood.strip().lower()
+    matching_rows = []
 
-    if not matching_rows:
-        matching_rows = [r for r in records if clean_query in r.get("kana", "")]
+    # Canonicalize municipality filter if provided
+    canon_muni = None
+    if municipality:
+        canon_muni = municipality.lower()
+        if "shinjuku" in canon_muni:
+            canon_muni = "tokyo_shinjuku"
+        elif "yokohama" in canon_muni:
+            canon_muni = "kanagawa_yokohama"
+        elif "kyoto" in canon_muni:
+            canon_muni = "kyoto_kyoto"
+        elif "kamikatsu" in canon_muni:
+            canon_muni = "tokushima_kamikatsu"
+
+    for r in records:
+        r_muni = r.get("municipality_id") or r.get("municipality", "")
+        if canon_muni and r_muni and r_muni != canon_muni:
+            continue
+
+        tj = (r.get("town_full") or r.get("name_ja") or "").lower()
+        tc = (r.get("town_clean") or "").lower()
+        te = (r.get("name_en") or "").lower()
+        nid = (r.get("neighborhood_id") or "").lower()
+        kana = (r.get("kana") or "").lower()
+
+        if clean_query in tj or (tc and tc in clean_query) or clean_query in te or clean_query in nid or clean_query in kana:
+            matching_rows.append(r)
 
     chosen_row = None
 
@@ -139,7 +181,7 @@ def lookup_neighborhood_schedule(neighborhood: str, banchi: Optional[str] = None
             if banchi_num:
                 num = int(banchi_num)
                 for r in matching_rows:
-                    spec = r.get("banchi_spec", "all")
+                    spec = r.get("banchi_spec") or r.get("address_range") or "all"
                     if spec != "all" and "除く" not in spec:
                         range_match = re.search(r"(\d+)から(\d+)", spec)
                         if range_match:
@@ -149,7 +191,7 @@ def lookup_neighborhood_schedule(neighborhood: str, banchi: Optional[str] = None
                                 break
 
         if not chosen_row:
-            default_row = next((r for r in matching_rows if "上記を除く" in r.get("town_full", "")), None)
+            default_row = next((r for r in matching_rows if "上記を除く" in (r.get("town_full") or r.get("name_ja") or r.get("address_range") or "") or "Except" in r.get("name_en", "")), None)
             if default_row:
                 chosen_row = default_row
             else:
@@ -159,13 +201,34 @@ def lookup_neighborhood_schedule(neighborhood: str, banchi: Optional[str] = None
         chosen_row = records[0]
 
     now = datetime.now()
-    return {
-        "municipality": chosen_row.get("municipality", "shinjuku"),
-        "municipality_display": chosen_row.get("municipality_display", "Shinjuku City (新宿区)"),
-        "town": chosen_row.get("town_full", neighborhood),
-        "sanitation_office": chosen_row.get("sanitation_office", "East Shinjuku"),
-        "is_special_commercial_zone": chosen_row.get("is_special_zone", False),
-        "schedules": {
+    schedules_out: Dict[str, Any] = {}
+
+    # Check if pattern_id exists to resolve all dynamic keys
+    pat_id = chosen_row.get("pattern_id")
+    pat_data = get_patterns_map().get(pat_id) if pat_id else None
+
+    if pat_data and "schedules" in pat_data:
+        for sk, days_val in pat_data["schedules"].items():
+            days_list = days_val if isinstance(days_val, list) else [str(days_val)]
+            schedules_out[sk] = {
+                "days": ", ".join(days_list) if isinstance(days_val, list) else str(days_val),
+                "next": compute_next_collection_date(days_list, now)
+            }
+
+        # Provide backward-compatibility aliases for existing frontend/agent contracts
+        if "combustible" in schedules_out:
+            schedules_out["burnable"] = schedules_out["combustible"]
+        if "resources" in schedules_out:
+            schedules_out["recyclable"] = schedules_out["resources"]
+        elif "cans_bottles_pet" in schedules_out:
+            schedules_out["recyclable"] = schedules_out["cans_bottles_pet"]
+        if "metal_ceramics_glass" in schedules_out:
+            schedules_out["unburnable"] = schedules_out["metal_ceramics_glass"]
+        elif "small_metal" in schedules_out:
+            schedules_out["unburnable"] = schedules_out["small_metal"]
+    else:
+        # Fallback to legacy structure
+        schedules_out = {
             "burnable": {
                 "days": chosen_row.get("burnable_raw", "火曜日・金曜日"),
                 "next": compute_next_collection_date(chosen_row.get("burnable_days", ["火曜日", "金曜日"]), now)
@@ -179,4 +242,79 @@ def lookup_neighborhood_schedule(neighborhood: str, banchi: Optional[str] = None
                 "next": compute_next_collection_date(chosen_row.get("unburnable_days", ["2・4番目の土曜日"]), now)
             }
         }
+
+    muni_name = chosen_row.get("municipality_id") or chosen_row.get("municipality", municipality)
+    town_name = chosen_row.get("name_ja") or chosen_row.get("town_full", neighborhood)
+
+    return {
+        "municipality": muni_name,
+        "municipality_display": chosen_row.get("municipality_display", f"{muni_name.replace('_', ' ').title()}"),
+        "town": town_name,
+        "sanitation_office": chosen_row.get("sanitation_office", "Municipal Clean Center"),
+        "is_special_commercial_zone": chosen_row.get("is_special_zone", False),
+        "schedules": schedules_out
     }
+
+def resolve_item_schedule(schedule_key: str, neighborhood_schedules: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Resolves pickup info for a specific canonical schedule key from the neighborhood's schedule map.
+    """
+    if not neighborhood_schedules:
+        return {
+            "pickup_day": "Unknown",
+            "next_pickup_date": "Consult Ward Guide"
+        }
+
+    # Direct key match
+    target = neighborhood_schedules.get(schedule_key)
+    if not target:
+        # Fallback alias resolution
+        alias_map = {
+            "resources": ["recyclable", "cans_bottles_pet", "plastic_packaging"],
+            "combustible": ["burnable"],
+            "metal_ceramics_glass": ["unburnable", "small_metal", "non_combustible"],
+            "plastic_packaging": ["resources", "recyclable"],
+            "cans_bottles_pet": ["resources", "recyclable"],
+            "small_metal": ["unburnable", "metal_ceramics_glass"],
+            "non_combustible": ["unburnable", "metal_ceramics_glass"],
+            "clothing": ["resources", "recyclable"],
+            "small_metal_sprays": ["small_metal", "unburnable"],
+            "miscellaneous_paper": ["resources", "recyclable"]
+        }
+        for alt in alias_map.get(schedule_key, []):
+            if alt in neighborhood_schedules:
+                target = neighborhood_schedules[alt]
+                break
+
+    if schedule_key == "station_dropoff" or "station_dropoff" in neighborhood_schedules:
+        station = neighborhood_schedules.get("station_dropoff", {})
+        return {
+            "pickup_day": "Daily (07:30 AM - 02:00 PM)",
+            "next_pickup_date": "Daily",
+            "cutoff_time": "02:00 PM",
+            "relative_label": "Today before 02:00 PM (Why? Station Drop-Off)"
+        }
+
+    if schedule_key == "home_compost":
+        return {
+            "pickup_day": "Home Composting",
+            "next_pickup_date": "On-Site Composting",
+            "cutoff_time": "N/A",
+            "relative_label": "Compost at home (Banned at station)"
+        }
+
+    if target:
+        nxt = target.get("next", {})
+        return {
+            "pickup_day": target.get("days", "Weekly"),
+            "next_pickup_date": nxt.get("next_date", "Weekly"),
+            "cutoff_time": nxt.get("cutoff_time", "08:00 AM"),
+            "relative_label": nxt.get("relative_label", "")
+        }
+
+    return {
+        "pickup_day": "Twice Monthly / Consult Guide",
+        "next_pickup_date": "Consult Ward Guide",
+        "cutoff_time": "08:00 AM"
+    }
+

@@ -19,7 +19,8 @@ export const HARDCODED_MUNICIPALITIES: MunicipalityOption[] = [
     icon: '🏙️',
     morning_deadline: '08:00 AM',
     badge_color: '#00A86B',
-    description: '171 neighborhoods with designated banchi address ranges.'
+    description: '171 neighborhoods with designated banchi address ranges.',
+    threshold_dim_cm: 30
   },
   {
     id: 'kanagawa_yokohama',
@@ -30,7 +31,9 @@ export const HARDCODED_MUNICIPALITIES: MunicipalityOption[] = [
     icon: '🌊',
     morning_deadline: '08:00 AM',
     badge_color: '#0284C7',
-    description: 'Minato Mirai, Yamashitacho, Shin-Yokohama.'
+    description: 'Minato Mirai, Yamashitacho, Shin-Yokohama.',
+    threshold_dim_cm: 50,
+    metal_threshold_dim_cm: 30
   },
   {
     id: 'kyoto_kyoto',
@@ -41,7 +44,8 @@ export const HARDCODED_MUNICIPALITIES: MunicipalityOption[] = [
     icon: '⛩️',
     morning_deadline: '08:00 AM',
     badge_color: '#D97706',
-    description: 'Gionmachi, Kawaramachi-Sanjo, Shijo-Karasuma.'
+    description: 'Gionmachi, Kawaramachi-Sanjo, Shijo-Karasuma.',
+    threshold_dim_cm: 30
   },
   {
     id: 'tokushima_kamikatsu',
@@ -52,7 +56,8 @@ export const HARDCODED_MUNICIPALITIES: MunicipalityOption[] = [
     icon: '🍃',
     morning_deadline: '07:30 AM - 02:00 PM Station',
     badge_color: '#059669',
-    description: '45 Separation Streams Zero-Waste Station.'
+    description: '45 Separation Streams Zero-Waste Station.',
+    threshold_dim_cm: 50
   }
 ];
 

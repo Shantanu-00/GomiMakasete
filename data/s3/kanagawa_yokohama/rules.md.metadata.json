@@ -23,6 +23,15 @@
         "cans_bottles_pet_frequency": "once_weekly",
         "small_metal_frequency": "twice_monthly",
         "non_combustible_frequency": "twice_monthly",
+        "clothing_frequency": "once_weekly",
+        "schedule_keys": [
+            "combustible",
+            "plastic_packaging",
+            "cans_bottles_pet",
+            "small_metal",
+            "non_combustible",
+            "clothing"
+        ],
         "source_url": "https://www.city.yokohama.lg.jp/lang/residents/en/garbage/"
     }
 }

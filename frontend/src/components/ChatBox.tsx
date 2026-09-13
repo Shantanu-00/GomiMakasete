@@ -115,22 +115,23 @@ export default function ChatBox({ activeProfile }: ChatBoxProps) {
           onClick={() => setIsOpen(true)}
           style={{
             position: 'fixed',
-            bottom: '24px',
-            right: '24px',
+            bottom: '18px',
+            right: '16px',
             background: '#00A86B',
             color: '#FFFFFF',
             border: '2px solid #0F172A',
             borderRadius: '9999px',
-            padding: '12px 20px',
+            padding: '10px 16px',
             display: 'flex',
             alignItems: 'center',
-            gap: '10px',
+            gap: '8px',
             fontWeight: 800,
-            fontSize: '0.9rem',
+            fontSize: '0.84rem',
             cursor: 'pointer',
-            boxShadow: '4px 4px 0 #0F172A',
+            boxShadow: '3px 3px 0 #0F172A',
             zIndex: 90,
-            transition: 'all 0.15s ease'
+            transition: 'all 0.15s ease',
+            maxWidth: 'calc(100vw - 32px)'
           }}
           className="bounce-subtle"
         >
@@ -138,9 +139,9 @@ export default function ChatBox({ activeProfile }: ChatBoxProps) {
           <img
             src="/mascot.jpg"
             alt="Mascot"
-            style={{ width: '28px', height: '28px', borderRadius: '50%', border: '1.5px solid #0F172A' }}
+            style={{ width: '26px', height: '26px', borderRadius: '50%', border: '1.5px solid #0F172A', flexShrink: 0 }}
           />
-          <span>Ask Gomi-chan (ゴミ質問)</span>
+          <span className="jp-nowrap">Ask Gomi-chan (ゴミ質問)</span>
         </button>
       )}
 
@@ -150,12 +151,12 @@ export default function ChatBox({ activeProfile }: ChatBoxProps) {
           className="chatbox-window"
           style={{
             position: 'fixed',
-            bottom: '24px',
-            right: '24px',
+            bottom: '18px',
+            right: '16px',
             background: '#FFFFFF',
-            border: '3px solid #0F172A',
-            borderRadius: '20px',
-            boxShadow: '6px 6px 0 #0F172A',
+            border: '2.5px solid #0F172A',
+            borderRadius: '18px',
+            boxShadow: '5px 5px 0 #0F172A',
             display: 'flex',
             flexDirection: 'column',
             zIndex: 95,

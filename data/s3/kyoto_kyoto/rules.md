@@ -153,3 +153,24 @@ Household furniture, bedding, and large appliances exceeding standard curbside b
 - **Personal Computers & Laptops:** Recycle via certified postal partner Renet Japan (`renet.jp`) or the computer maker.
 - **Rechargeable Batteries (Lithium-ion / Power Banks):** STRICTLY BANNED from trash bags due to extreme fire danger. Drop off at yellow JBRC battery collection bins in electronics stores or ward office eco-stations (*Eco-Machi Stations*).
 - **Industrial & Hazardous Waste:** Automotive tires, car batteries, motorcycles, propane tanks, pianos, concrete/soil, medical needles.
+
+---
+
+## 4. System Schedule Mapping Dictionary (System Routing Contract)
+
+When querying or matching items to the neighborhood schedule database (DynamoDB), system agents must map items to these exact canonical schedule keys:
+
+| Material / Item Category | Canonical Schedule Key | Bag / Presentation Requirement | Edge-Case Special Handling |
+| :--- | :--- | :--- | :--- |
+| **Kitchen Food Waste & Scraps** | `combustible` | **MANDATORY YELLOW BAG (Red Text)** | Squeeze excess water (*Mō Hitoshibori* rule) |
+| **Soiled Paper & Used Tissues** | `combustible` | **MANDATORY YELLOW BAG (Red Text)** | Oily food containers, non-recyclable paper |
+| **Ceramics, Tableware & Glassware** | `combustible` | **MANDATORY YELLOW BAG (Red Text)** | **Kyoto Unique Rule:** Wrap shards in paper marked **「キケン」**; melted into slag |
+| **Clean Plastic Packaging (`プラマーク`)** | `plastic_packaging` | **MANDATORY CLEAR BAG (Green Text)** | Food trays, snack bags rinsed and dried |
+| **100% Plastic Goods (<40cm)** | `plastic_packaging` | **MANDATORY CLEAR BAG (Green Text)** | Plastic Tupperware, buckets, colanders |
+| **Beverage & Food Cans (Alum/Steel)** | `cans_bottles_pet` | **MANDATORY CLEAR BAG (Green Text)** or cage | Empty completely and rinse with water |
+| **Glass Drink & Food Jars/Bottles** | `cans_bottles_pet` | **MANDATORY CLEAR BAG (Green Text)** or cage | Caps removed, rinsed clean |
+| **PET Beverage Bottles (`PET 1`)** | `cans_bottles_pet` | **MANDATORY CLEAR BAG (Green Text)** or cage | Cap and label to plastics, rinsed, crushed flat |
+| **Small Metals & Degassed Spray Cans** | `small_metal_sprays`| **FREE CLEAR BAG (No paid bag!)** | **Must write 「金属」 in bold black marker**; do NOT puncture gas cans |
+| **Miscellaneous Paper (*Zatsugami*)** | `miscellaneous_paper` | Paper bag or tied with paper twine | Clean food cartons, envelopes, toilet cores |
+| **Cardboard / Newspapers / Books** | `miscellaneous_paper` | Stacked and tied with paper string | Collected bi-weekly or by local community groups |
+| **Items Exceeding 30cm (Metal) or 40cm** | `sodai_gomi` | **Flat ¥400 stickers (400円券)** | Book pickup at `sodai-kyoto.jp` or 0120-100-530 |

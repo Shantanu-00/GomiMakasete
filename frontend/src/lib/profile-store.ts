@@ -11,8 +11,8 @@ export const DEFAULT_PROFILES: UserProfile[] = [
     name: 'Jane (Home)',
     avatar_color: '#00A86B', // Yamanote green
     municipality_id: 'tokyo_shinjuku',
-    municipality_name: 'Shinjuku City (新宿区)',
-    neighborhood: 'Arakicho (Banchi: 21-23)',
+    municipality_name: 'Tokyo - Shinjuku City',
+    neighborhood: 'Arakicho',
     neighborhood_id: 'shinjuku_arakicho_banchi_21_to_23',
     banchi: '22',
     created_at: '2026-09-01T08:00:00Z'
@@ -22,8 +22,8 @@ export const DEFAULT_PROFILES: UserProfile[] = [
     name: 'John (Office)',
     avatar_color: '#0284C7', // Transit Blue
     municipality_id: 'kanagawa_yokohama',
-    municipality_name: 'Yokohama City (横浜市)',
-    neighborhood: 'Minato Mirai 2-chome, Nishi Ward',
+    municipality_name: 'Kanagawa - Yokohama City',
+    neighborhood: 'Minato Mirai 2-chome',
     neighborhood_id: 'yokohama_minato_mirai_2',
     banchi: '4',
     created_at: '2026-09-05T10:30:00Z'
@@ -33,8 +33,8 @@ export const DEFAULT_PROFILES: UserProfile[] = [
     name: 'Kenji (Studio)',
     avatar_color: '#D97706', // Kyoto Amber
     municipality_id: 'kyoto_kyoto',
-    municipality_name: 'Kyoto City (京都市)',
-    neighborhood: 'Gionmachi Minamigawa, Higashiyama Ward',
+    municipality_name: 'Kyoto - Kyoto City',
+    neighborhood: 'Gionmachi Minamigawa',
     neighborhood_id: 'kyoto_gionmachi_minamigawa',
     banchi: '12',
     created_at: '2026-09-08T14:15:00Z'
@@ -44,7 +44,7 @@ export const DEFAULT_PROFILES: UserProfile[] = [
     name: 'Yuki (ZeroWaste)',
     avatar_color: '#059669', // Eco Forest Green
     municipality_id: 'tokushima_kamikatsu',
-    municipality_name: 'Kamikatsu Town (上勝町)',
+    municipality_name: 'Tokushima - Kamikatsu Town',
     neighborhood: 'Kamikatsu Town (All Districts)',
     neighborhood_id: 'kamikatsu_all',
     banchi: '1',

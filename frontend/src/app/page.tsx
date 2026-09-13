@@ -1,21 +1,22 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from '@/components/Header';
-import ScannerSection from '@/components/ScannerSection';
+import UnifiedStudio from '@/components/UnifiedStudio';
+import TelemetryBar from '@/components/TelemetryBar';
 import TriageDashboard from '@/components/TriageDashboard';
 import SplashBuffer from '@/components/SplashBuffer';
 import ProfileModal from '@/components/ProfileModal';
 import HistoryDrawer from '@/components/HistoryDrawer';
 import ChatBox from '@/components/ChatBox';
-import AnalysisStepper from '@/components/AnalysisStepper';
 import { 
   VisionScanResult, 
   DetectedItem, 
   UserProfile, 
   ScanHistoryRecord,
   MunicipalityOption,
-  NeighborhoodOption
+  NeighborhoodOption,
+  UploadedImage
 } from '@/lib/types';
 import { AppLanguage, TRANSLATIONS } from '@/lib/translations';
 import { 
@@ -30,13 +31,39 @@ import {
   setActiveProfileId, 
   saveProfile, 
   getScanHistory, 
-  addScanHistoryRecord 
+  addScanHistoryRecord,
+  DEFAULT_PROFILES 
 } from '@/lib/profile-store';
 import { CheckCircle2, RefreshCw } from 'lucide-react';
 
+// Preset realistic scene photos matching each demo scenario
+const PRESET_SCENE_IMAGES: Record<string, UploadedImage> = {
+  messy_desk: {
+    id: 'preset_desk',
+    url: '/presets/messy_desk.jpg',
+    name: 'Desk: PET Bottle & Phone',
+    source: 'preset',
+    timestamp: 'Scenario 1'
+  },
+  appliance_box: {
+    id: 'preset_appliance',
+    url: '/presets/appliance_box.jpg',
+    name: 'Appliance: Cooker & Box',
+    source: 'preset',
+    timestamp: 'Scenario 2'
+  },
+  hazardous_kitchen: {
+    id: 'preset_hazardous',
+    url: '/presets/hazardous_kitchen.jpg',
+    name: 'Hazardous: Gas Can & Bowl',
+    source: 'preset',
+    timestamp: 'Scenario 3'
+  }
+};
+
 export default function Home() {
-  const [showSplash, setShowSplash] = useState<boolean>(true);
-  const [activePreset, setActivePreset] = useState<string>('messy_desk');
+  const [showSplash, setShowSplash] = useState<boolean>(false);
+  const [activePreset, setActivePreset] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEscalating, setIsEscalating] = useState<boolean>(false);
   const [voiceEnabled, setVoiceEnabled] = useState<boolean>(false);
@@ -44,23 +71,31 @@ export default function Home() {
 
   const [dailySpend, setDailySpend] = useState<number>(0.042);
 
-  // Language state (mix, pure Japanese, pure English)
-  const [language, setLanguage] = useState<AppLanguage>('mix');
+  // Language state (defaults to pure English as requested)
+  const [language, setLanguage] = useState<AppLanguage>('en');
 
   // DB Sync state & toast notification
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Profile & History States
-  const [profiles, setProfiles] = useState<UserProfile[]>([]);
-  const [activeProfile, setActiveProfile] = useState<UserProfile | null>(null);
+  // Profile & History States - initialized with defaults for instant SSR render
+  const [profiles, setProfiles] = useState<UserProfile[]>(DEFAULT_PROFILES);
+  const [activeProfile, setActiveProfile] = useState<UserProfile>(DEFAULT_PROFILES[0]);
   const [showProfileModal, setShowProfileModal] = useState<boolean>(false);
   const [showHistoryDrawer, setShowHistoryDrawer] = useState<boolean>(false);
   const [scanHistory, setScanHistory] = useState<ScanHistoryRecord[]>([]);
 
   // 4 Municipalities & Hardcoded 178 Neighborhoods
   const [municipalities] = useState<MunicipalityOption[]>(HARDCODED_MUNICIPALITIES);
-  const [neighborhoods, setNeighborhoods] = useState<NeighborhoodOption[]>([]);
+  const [neighborhoods, setNeighborhoods] = useState<NeighborhoodOption[]>(
+    getHardcodedNeighborhoodsFor('tokyo_shinjuku')
+  );
+
+  // Start state: EMPTY (no preloaded images)
+  const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>([]);
+  const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const triageResultsRef = useRef<HTMLDivElement | null>(null);
 
   // Initialize Profiles & Hardcoded Data
   useEffect(() => {
@@ -74,17 +109,19 @@ export default function Home() {
     const initialNeighs = getHardcodedNeighborhoodsFor(current.municipality_id);
     setNeighborhoods(initialNeighs);
 
-    // Load saved language if any
+    // Default to pure English unless user explicitly chose Japanese
     const savedLang = localStorage.getItem('gomi_language') as AppLanguage;
-    if (savedLang && (savedLang === 'mix' || savedLang === 'ja' || savedLang === 'en')) {
-      setLanguage(savedLang);
+    if (savedLang === 'ja') {
+      setLanguage('ja');
+    } else {
+      setLanguage('en');
     }
   }, []);
 
   const handleChangeLanguage = (newLang: AppLanguage) => {
     setLanguage(newLang);
     localStorage.setItem('gomi_language', newLang);
-    speakText(newLang === 'ja' ? '言語を日本語に切り替えました。' : newLang === 'en' ? 'Language switched to English.' : 'Switched to Japanese and English mix.');
+    speakText(newLang === 'ja' ? '言語を日本語に切り替えました。' : 'Language switched to English.');
   };
 
   // Helper for Ambient Voice announcements
@@ -97,12 +134,20 @@ export default function Home() {
     window.speechSynthesis.speak(utterance);
   };
 
-  // Initial Scan on Mount
-  useEffect(() => {
-    loadScan('messy_desk', false);
-  }, []);
+  // Auto-scroll so resident doesn't have to search when results appear
+  const scrollToResults = () => {
+    setTimeout(() => {
+      if (triageResultsRef.current) {
+        triageResultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 200);
+  };
 
-  const loadScan = async (presetKey: string, forceTier2: boolean = false) => {
+  const loadScan = async (
+    presetKey: string, 
+    forceTier2: boolean = false,
+    filenames?: string[]
+  ) => {
     if (forceTier2) setIsEscalating(true);
     else setIsLoading(true);
 
@@ -110,7 +155,11 @@ export default function Home() {
       const resp = await fetch('/api/detect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ preset: presetKey, forceTier2 })
+        body: JSON.stringify({ 
+          preset: presetKey, 
+          forceTier2,
+          filenames
+        })
       });
 
       if (resp.ok) {
@@ -147,12 +196,68 @@ export default function Home() {
         } else {
           speakText(`Scan complete. Detected ${data.items.length} objects. ${safeguardCount} personal assets kept safe.`);
         }
+
+        // Auto-scroll to results as requested
+        scrollToResults();
       }
     } catch (err) {
       console.error('Scan error:', err);
     } finally {
       setIsLoading(false);
       setIsEscalating(false);
+    }
+  };
+
+  // Handler: Preset Scenario Selection (Updates scene image accordingly)
+  const handlePresetScan = (presetKey: string) => {
+    const presetImg = PRESET_SCENE_IMAGES[presetKey];
+    if (presetImg) {
+      setUploadedImages([presetImg]);
+      setActiveImageIndex(0);
+    }
+    loadScan(presetKey, false);
+  };
+
+  // Handler: Real Photo Upload from Camera / File Picker (Supports Multi-photo)
+  const handleUploadPhotos = async (files: File[], source: 'upload' | 'camera') => {
+    setIsLoading(true);
+    const newImgs: UploadedImage[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const objectUrl = URL.createObjectURL(file);
+      newImgs.push({
+        id: `upload_${Date.now()}_${i}`,
+        url: objectUrl,
+        name: file.name,
+        sizeBytes: file.size,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        source
+      });
+    }
+
+    // Combine with current or replace if only preset was active
+    const isOnlyPreset = uploadedImages.length === 1 && uploadedImages[0].source === 'preset';
+    const combined = isOnlyPreset ? newImgs : [...uploadedImages, ...newImgs];
+
+    setUploadedImages(combined);
+    setActiveImageIndex(isOnlyPreset ? 0 : combined.length - newImgs.length);
+    setActivePreset('custom_upload');
+
+    const filenames = combined.map(img => img.name);
+    await loadScan('custom_upload', false, filenames);
+  };
+
+  // Handler: Remove individual photo
+  const handleRemoveImage = (id: string) => {
+    const filtered = uploadedImages.filter(img => img.id !== id);
+    setUploadedImages(filtered);
+    if (filtered.length === 0) {
+      setScanResult(null);
+      setActivePreset('');
+      setActiveImageIndex(0);
+    } else if (activeImageIndex >= filtered.length) {
+      setActiveImageIndex(filtered.length - 1);
     }
   };
 
@@ -311,6 +416,20 @@ export default function Home() {
     speakText(`Added ${name} to disposal list.`);
   };
 
+  // Delete False AI Detection
+  const handleDeleteItem = (itemId: string) => {
+    if (!scanResult) return;
+    const targetItem = scanResult.items.find(i => i.id === itemId);
+    const updated = scanResult.items.filter(i => i.id !== itemId);
+    setScanResult({
+      ...scanResult,
+      items: updated
+    });
+    if (targetItem) {
+      speakText(`Removed ${targetItem.name} from detection list.`);
+    }
+  };
+
   const handleToggleVoice = () => {
     const nextState = !voiceEnabled;
     setVoiceEnabled(nextState);
@@ -381,41 +500,75 @@ export default function Home() {
 
       {/* 3. Main Body */}
       <main className="main-wrapper" style={{ flex: 1 }}>
-        <ScannerSection
-          onScanPreset={(key) => loadScan(key, false)}
-          isLoading={isLoading || isEscalating}
+        {/* Compact Unified Studio Viewport */}
+        <UnifiedStudio
+          images={uploadedImages}
+          activeIndex={activeImageIndex}
+          onSelectImage={(idx) => setActiveImageIndex(idx)}
+          onRemoveImage={handleRemoveImage}
+          onUploadPhotos={handleUploadPhotos}
+          onScanPreset={handlePresetScan}
           activePreset={activePreset}
+          isAnalyzing={isLoading || isEscalating}
+          modelUsed={scanResult?.model_used || 'Tier-1 (Nova 2 Lite)'}
+          detectedCount={scanResult?.items.length || 0}
+          safeguardCount={scanResult?.items.filter(i => !i.is_marked_for_disposal).length || 0}
           language={language}
         />
 
-        {/* 2-Pass Pipeline Stepper showing exact steps & hard budget */}
-        <AnalysisStepper
-          isAnalyzing={isLoading}
-          isEscalating={isEscalating}
-          modelUsed={scanResult?.model_used || 'Tier-1 (Amazon Nova 2 Lite)'}
-          latencyMs={scanResult?.latency_ms || 280}
-          safeguardCount={scanResult?.items.filter(i => !i.is_marked_for_disposal).length || 1}
-          discardCount={scanResult?.items.filter(i => i.is_marked_for_disposal).length || 2}
-          activeCity={activeProfile.municipality_name}
-          activeNeighborhood={activeProfile.neighborhood}
-          dailySpend={dailySpend}
-          budgetLimit={5.00}
-          language={language}
-        />
-
-        {scanResult && (
-          <TriageDashboard
-            scanResult={scanResult}
-            activeNeighborhood={currentNeighborhood}
-            activeMunicipalityName={activeProfile.municipality_name}
-            language={language}
-            onToggleDisposal={handleToggleDisposal}
-            onUpdateItem={handleUpdateItem}
-            onAddItem={handleAddItem}
-            onEscalateTier2={() => loadScan(activePreset, true)}
+        {/* Sleek Collapsible Telemetry Bar (~38px) - shown when scanning or results exist */}
+        {(scanResult || isLoading || isEscalating) && (
+          <TelemetryBar
+            isAnalyzing={isLoading}
             isEscalating={isEscalating}
+            modelUsed={scanResult?.model_used || 'Tier-1 (Amazon Nova 2 Lite)'}
+            latencyMs={scanResult?.latency_ms || 280}
+            safeguardCount={scanResult?.items.filter(i => !i.is_marked_for_disposal).length || 0}
+            discardCount={scanResult?.items.filter(i => i.is_marked_for_disposal).length || 0}
+            activeCity={activeProfile.municipality_name}
+            activeNeighborhood={activeProfile.neighborhood}
+            dailySpend={dailySpend}
+            budgetLimit={5.00}
+            language={language}
           />
         )}
+
+        {/* Auto-scroll anchor for triage results */}
+        <div ref={triageResultsRef} style={{ scrollMarginTop: '80px' }}>
+          {scanResult ? (
+            <TriageDashboard
+              scanResult={scanResult}
+              activeNeighborhood={currentNeighborhood}
+              activeMunicipalityId={activeProfile.municipality_id}
+              activeMunicipalityName={activeProfile.municipality_name}
+              language={language}
+              onToggleDisposal={handleToggleDisposal}
+              onUpdateItem={handleUpdateItem}
+              onDeleteItem={handleDeleteItem}
+              onAddItem={handleAddItem}
+              onEscalateTier2={() => loadScan(activePreset, true)}
+              isEscalating={isEscalating}
+            />
+          ) : (
+            <div style={{
+              marginTop: '16px',
+              padding: '36px 20px',
+              textAlign: 'center',
+              background: '#FFFFFF',
+              border: '2px dashed #CBD5E1',
+              borderRadius: '16px',
+              color: '#64748B'
+            }}>
+              <div style={{ fontSize: '2.2rem', marginBottom: '8px' }}>📷</div>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0F172A', marginBottom: '4px' }}>
+                No Waste Scan Loaded
+              </h3>
+              <p style={{ fontSize: '0.82rem', color: '#64748B', maxWidth: '440px', margin: '0 auto' }}>
+                Take a room photo with your camera, browse files, or tap any of the 3 quick demo scenarios above to begin sorting analysis.
+              </p>
+            </div>
+          )}
+        </div>
       </main>
 
       {/* 4. Interactive Resident Chatbox */}

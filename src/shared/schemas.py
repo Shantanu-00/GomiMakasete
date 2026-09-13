@@ -87,6 +87,11 @@ class EvaluatedItem(BaseModel):
     disposal_rules: str
     requires_disassembly: bool = False
     disassembly_notes: Optional[str] = None
+    schedule_key: Optional[str] = None
+    pickup_day: Optional[str] = None
+    next_pickup_date: Optional[str] = None
+    bag_rule: Optional[str] = None
+    special_warning: Optional[str] = None
 
 class AgentInvocationRequest(BaseModel):
     action: str = "chat" # "chat", "detect", "evaluate"

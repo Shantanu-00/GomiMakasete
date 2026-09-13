@@ -17,6 +17,11 @@
         "total_streams": 13,
         "kitchen_waste_policy": "strictly_home_composted",
         "reuse_shop_name": "Kuru Kuru Shop",
+        "schedule_keys": [
+            "station_dropoff",
+            "home_compost",
+            "kuru_kuru_shop"
+        ],
         "source_url": "https://zwtk.jp/separate/"
     }
 }

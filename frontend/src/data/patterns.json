@@ -520,6 +520,13 @@
       "small_metal": [
         "1st Friday",
         "3rd Friday"
+      ],
+      "non_combustible": [
+        "1st Friday",
+        "3rd Friday"
+      ],
+      "clothing": [
+        "Wednesday"
       ]
     }
   },
@@ -541,6 +548,13 @@
       "small_metal": [
         "1st Tuesday",
         "3rd Tuesday"
+      ],
+      "non_combustible": [
+        "1st Tuesday",
+        "3rd Tuesday"
+      ],
+      "clothing": [
+        "Wednesday"
       ]
     }
   },
@@ -562,6 +576,13 @@
       "small_metal": [
         "1st Saturday",
         "3rd Saturday"
+      ],
+      "non_combustible": [
+        "1st Saturday",
+        "3rd Saturday"
+      ],
+      "clothing": [
+        "Wednesday"
       ]
     }
   },
@@ -582,6 +603,10 @@
       ],
       "small_metal_sprays": [
         "2nd Wednesday"
+      ],
+      "miscellaneous_paper": [
+        "1st Wednesday",
+        "3rd Wednesday"
       ]
     }
   },
@@ -602,6 +627,10 @@
       ],
       "small_metal_sprays": [
         "3rd Wednesday"
+      ],
+      "miscellaneous_paper": [
+        "2nd Wednesday",
+        "4th Wednesday"
       ]
     }
   },
@@ -622,6 +651,10 @@
       ],
       "small_metal_sprays": [
         "2nd Wednesday"
+      ],
+      "miscellaneous_paper": [
+        "1st Wednesday",
+        "3rd Wednesday"
       ]
     }
   },
