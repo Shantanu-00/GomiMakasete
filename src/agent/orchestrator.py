@@ -143,24 +143,72 @@ class GomiSupervisorOrchestrator:
             except Exception as e:
                 logger.warning(f"Strands execution failed, falling back: {e}")
 
-        # Deterministic conversational response
+        # Rich deterministic conversational response when agent isn't available
         neigh = ctx.get("neighborhood", "愛住町")
         muni = ctx.get("municipality", "tokyo_shinjuku")
         lower_q = prompt.lower()
 
-        if any(w in lower_q for w in ["when", "schedule", "day", "calendar", "tomorrow"]):
+        if any(g in lower_q for g in ["hello", "hi", "hey", "konnichiwa", "who are you", "help"]):
+            reply = (
+                f"Konnichiwa! I am Gomi-chan (ゴミちゃん), your autonomous recycling assistant for {muni}. "
+                f"I can help you sort items, look up collection schedules for {neigh}, "
+                "calculate bulky waste fees, and safely handle hazardous items like spray cans and batteries. "
+                "What item would you like to check today?"
+            )
+        elif any(w in lower_q for w in ["when", "schedule", "day", "calendar", "tomorrow", "time"]):
             sched = lookup_neighborhood_schedule(neigh, ctx.get("banchi"), muni)
             burn = sched["schedules"]["burnable"]
+            recyclable = sched["schedules"]["recyclable"]
+            unburnable = sched["schedules"]["unburnable"]
             reply = (
-                f"In {sched['town']}, burnable garbage is collected on {burn['days']} "
-                f"(Next pickup: {burn['next']['next_date']} before 8:00 AM). "
-                f"Recyclables are on {sched['schedules']['recyclable']['days']}."
+                f"In {sched['town']}, collection days are:\n"
+                f"• Burnable (燃やすごみ): {burn['days']} (Next: {burn['next']['next_date']} before 8:00 AM)\n"
+                f"• Recyclables (資源): {recyclable['days']} (Next: {recyclable['next']['next_date']})\n"
+                f"• Incombustibles (不燃・金属): {unburnable['days']} (Next: {unburnable['next']['next_date']})\n"
+                "Remember: Always put garbage out before 8:00 AM under yellow crow nets. Never put it out the night before!"
+            )
+        elif any(b in lower_q for b in ["mattress", "futon", "sofa", "desk", "chair", "table", "bicycle", "microwave", "bulky", "sodai"]):
+            bulky_res = evaluate_bulky_waste(prompt, municipality=muni)
+            if bulky_res.get("is_sodai_gomi"):
+                fee = bulky_res.get("fee_yen", 400)
+                stickers = bulky_res.get("sticker_breakdown", {})
+                reply = (
+                    f"🛋️ Bulky Waste (粗大ごみ) for {bulky_res.get('item_name', 'item')}:\n"
+                    f"• Standard Fee: ¥{fee}\n"
+                    f"• Required Stickers: Ticket A (¥200) × {stickers.get('ticket_a', 0)}, Ticket B (¥300) × {stickers.get('ticket_b', 0)}\n"
+                    "• Procedure: 1. Apply at the Municipal Bulky Waste Center. 2. Buy stickers at convenience stores. 3. Affix stickers and place outside by 8:00 AM on collection date."
+                )
+            else:
+                reply = (
+                    "In Japan, items exceeding 30 cm on any side are classified as Bulky Waste (粗大ごみ). "
+                    "Apply to the local ward Bulky Waste Reception Center and purchase Ticket A/B stickers at convenience stores."
+                )
+        elif any(h in lower_q for h in ["battery", "lithium", "power bank"]):
+            reply = (
+                "🚨 FIRE HAZARD: Lithium-ion batteries and power banks must NEVER go in curbside bins! "
+                "Under hydraulic pressure in collection trucks, they explode. Drop them in yellow JBRC recycling boxes at Yodobashi Camera or Bic Camera."
+            )
+        elif any(s in lower_q for s in ["spray", "gas can", "cassette"]):
+            reply = (
+                "In Shinjuku & Tokyo, DO NOT puncture spray cans! Exhaust all remaining gas outdoors in a breezy open spot until the hissing stops completely. "
+                "Place in a clear transparent bag labeled 'スプレー缶' on resource day."
+            )
+        elif any(o in lower_q for o in ["oil", "tempura"]):
+            reply = (
+                "Never pour cooking oil down the drain! Solidify it using oil hardener powder (katameru-ten) or soak into paper towels inside a milk carton, "
+                "and dispose with Combustible Waste (燃やすごみ)."
             )
         else:
+            rules = query_municipal_rules(prompt, municipality=muni)
+            cat = rules.get("category", "General Waste")
+            cat_jp = rules.get("category_jp", "")
+            disp = rules.get("disposal_rules", "Dispose according to municipal guidelines.")
+            action = rules.get("preparation_action", "DISPOSE_DIRECT")
             reply = (
-                f"I am GomiMakasete. I can help you sort any household waste for {muni}, "
-                f"calculate bulky waste stickers, and verify your pickup calendar for {neigh}. "
-                "How can I assist you with your recycling today?"
+                f"🔍 Sorting guidance for \"{prompt}\" in {muni}:\n"
+                f"• Category: {cat} ({cat_jp})\n"
+                f"• Action: {action}\n"
+                f"• Rules: {disp}"
             )
 
         memory_store.save_turn(session_id, "assistant", reply)

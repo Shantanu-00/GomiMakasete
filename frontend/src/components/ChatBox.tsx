@@ -13,19 +13,53 @@ import {
   Bot,
   User,
   MinusCircle,
-  HelpCircle
+  HelpCircle,
+  Mic,
+  MicOff
 } from 'lucide-react';
 
 interface ChatBoxProps {
   activeProfile: UserProfile;
+  isOpenControlled?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
-export default function ChatBox({ activeProfile }: ChatBoxProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function ChatBox({ activeProfile, isOpenControlled, onOpenChange }: ChatBoxProps) {
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const isOpen = isOpenControlled !== undefined ? isOpenControlled : internalIsOpen;
+  const setIsOpen = (open: boolean) => {
+    setInternalIsOpen(open);
+    if (onOpenChange) onOpenChange(open);
+  };
+
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [speechError, setSpeechError] = useState<string | null>(null);
+  const [cooldown, setCooldown] = useState(0);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
+
+  // Quick starter questions
+  const quickPrompts = [
+    '🍳 Frying pan (<30cm)?',
+    '🛋️ Mattress / Bulky fee?',
+    '🍕 Greasy pizza box?',
+    '🔋 Lithium power bank?',
+    '🛢️ Used cooking oil?',
+    '⏰ 8 AM collection deadline?',
+    '🧴 PET bottle 3 steps?'
+  ];
+
+  // Cooldown timer
+  useEffect(() => {
+    if (cooldown > 0) {
+      const timer = setTimeout(() => setCooldown(c => c - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [cooldown]);
 
   // Load messages whenever active profile changes
   useEffect(() => {
@@ -41,7 +75,7 @@ export default function ChatBox({ activeProfile }: ChatBoxProps) {
 
   const handleSendMessage = async (textToSend?: string) => {
     const query = (textToSend || input).trim();
-    if (!query || isTyping) return;
+    if (!query || isTyping || cooldown > 0) return;
 
     const userMsg: ChatMessage = {
       id: `msg_${Date.now()}`,
@@ -55,6 +89,7 @@ export default function ChatBox({ activeProfile }: ChatBoxProps) {
     saveChatMessages(activeProfile.id, newMessages);
     if (!textToSend) setInput('');
     setIsTyping(true);
+    setCooldown(3);
 
     try {
       const resp = await fetch('/api/chat', {
@@ -100,12 +135,68 @@ export default function ChatBox({ activeProfile }: ChatBoxProps) {
     saveChatMessages(activeProfile.id, resetMsg);
   };
 
-  const quickPrompts = [
-    '🍕 Oily pizza box?',
-    '🌂 Vinyl umbrella?',
-    '🔋 Lithium battery?',
-    '⏰ Missed 8 AM pickup?'
-  ];
+  const handleToggleSpeechInput = () => {
+    if (isListening) {
+      if (recognitionRef.current) {
+        try { recognitionRef.current.stop(); } catch {}
+      }
+      setIsListening(false);
+      return;
+    }
+
+    if (cooldown > 0) {
+      setSpeechError(`Rate limit: wait ${cooldown}s`);
+      return;
+    }
+
+    if (typeof window === 'undefined') return;
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      setSpeechError('Speech not supported in browser');
+      return;
+    }
+
+    try {
+      const rec = new SpeechRecognition();
+      rec.continuous = false;
+      rec.interimResults = true;
+      rec.lang = activeProfile.language === 'ja' ? 'ja-JP' : 'en-US';
+
+      rec.onstart = () => {
+        setIsListening(true);
+        setSpeechError(null);
+      };
+
+      rec.onresult = (event: any) => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        if (transcript) {
+          setInput(transcript);
+        }
+      };
+
+      rec.onerror = (e: any) => {
+        setIsListening(false);
+        if (e.error === 'not-allowed') {
+          setSpeechError('Mic access denied');
+        } else if (e.error !== 'no-speech') {
+          setSpeechError(`Speech: ${e.error}`);
+        }
+      };
+
+      rec.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current = rec;
+      rec.start();
+    } catch (err: any) {
+      setIsListening(false);
+      setSpeechError('Mic failed to start');
+    }
+  };
 
   return (
     <>
@@ -330,22 +421,49 @@ export default function ChatBox({ activeProfile }: ChatBoxProps) {
               gap: '8px'
             }}
           >
+            {speechError && (
+              <div style={{ position: 'absolute', bottom: '58px', left: '14px', right: '14px', background: '#FEF2F2', border: '1px solid #F87171', borderRadius: '8px', padding: '4px 8px', fontSize: '0.72rem', color: '#991B1B', zIndex: 10 }}>
+                {speechError}
+              </div>
+            )}
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about sorting, rules, days..."
+              placeholder={isListening ? "Listening to your voice... speak now" : "Ask about sorting, rules, days..."}
               disabled={isTyping}
               style={{
                 flex: 1,
-                border: '1.5px solid #CBD5E1',
+                border: isListening ? '1.5px solid #EF4444' : '1.5px solid #CBD5E1',
                 borderRadius: '10px',
                 padding: '8px 12px',
                 fontSize: '0.82rem',
                 outline: 'none',
-                fontFamily: 'inherit'
+                fontFamily: 'inherit',
+                background: isListening ? '#FFF5F5' : '#FFFFFF'
               }}
             />
+            {/* Mic Dictation Button */}
+            <button
+              type="button"
+              onClick={handleToggleSpeechInput}
+              disabled={isTyping}
+              style={{
+                background: isListening ? '#EF4444' : '#F1F5F9',
+                color: isListening ? '#FFFFFF' : '#475569',
+                border: '1.5px solid #0F172A',
+                borderRadius: '10px',
+                padding: '8px 10px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '1.5px 1.5px 0 #0F172A'
+              }}
+              title={isListening ? 'Click to stop listening' : 'Voice dictation (Mic)'}
+            >
+              <Mic className={`w-4 h-4 ${isListening ? 'animate-pulse' : ''}`} />
+            </button>
             <button
               type="submit"
               disabled={!input.trim() || isTyping}

@@ -42,6 +42,12 @@ export const RATE_LIMIT_CONFIGS = {
     windowMs: 5 * 60 * 1000,
     endpointName: 'Resident Chat Q&A'
   },
+  // Ambient Voice Assistant: Max 15 voice queries per 5 minutes per IP
+  VOICE: {
+    maxRequests: 15,
+    windowMs: 5 * 60 * 1000,
+    endpointName: 'Ambient Voice Assistant'
+  },
   // Neighborhood schedule lookup: Max 60 requests per minute per IP
   SCHEDULE_LOOKUP: {
     maxRequests: 60,

@@ -9,6 +9,7 @@ import SplashBuffer from '@/components/SplashBuffer';
 import ProfileModal from '@/components/ProfileModal';
 import HistoryDrawer from '@/components/HistoryDrawer';
 import ChatBox from '@/components/ChatBox';
+import VoiceAssistantModal from '@/components/VoiceAssistantModal';
 import { 
   VisionScanResult, 
   DetectedItem, 
@@ -67,6 +68,8 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEscalating, setIsEscalating] = useState<boolean>(false);
   const [voiceEnabled, setVoiceEnabled] = useState<boolean>(false);
+  const [showVoiceModal, setShowVoiceModal] = useState<boolean>(false);
+  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
   const [scanResult, setScanResult] = useState<VisionScanResult | null>(null);
 
   const [dailySpend, setDailySpend] = useState<number>(0.042);
@@ -431,11 +434,8 @@ export default function Home() {
   };
 
   const handleToggleVoice = () => {
-    const nextState = !voiceEnabled;
-    setVoiceEnabled(nextState);
-    if (nextState) {
-      speakText('Ambient voice assistant enabled. I will announce scan results hands-free.');
-    }
+    setVoiceEnabled(true);
+    setShowVoiceModal(true);
   };
 
   if (!activeProfile) return null;
@@ -567,7 +567,22 @@ export default function Home() {
       </main>
 
       {/* 4. Interactive Resident Chatbox */}
-      <ChatBox activeProfile={activeProfile} />
+      <ChatBox 
+        activeProfile={activeProfile}
+        isOpenControlled={isChatOpen}
+        onOpenChange={setIsChatOpen}
+      />
+
+      {/* 4.5. Ambient Voice Assistant Modal (Amazon Nova Sonic) */}
+      <VoiceAssistantModal
+        isOpen={showVoiceModal}
+        onClose={() => setShowVoiceModal(false)}
+        activeProfile={activeProfile}
+        onOpenChat={() => {
+          setShowVoiceModal(false);
+          setIsChatOpen(true);
+        }}
+      />
 
       {/* 5. Profile Switcher Modal */}
       <ProfileModal

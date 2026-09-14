@@ -10,7 +10,7 @@ const APPLIANCE_RECYCLING_ITEMS = [
   'personal computer', 'pc', 'desktop computer', 'laptop', 'パソコン'
 ];
 
-const SODAI_CATALOG: Record<string, { jp_name: string; fee: number; category: string }> = {
+export const SODAI_CATALOG: Record<string, { jp_name: string; fee: number; category: string }> = {
   microwave: { jp_name: '電子レンジ', fee: 400, category: 'Kitchen Appliance' },
   toaster: { jp_name: 'トースター', fee: 400, category: 'Kitchen Appliance' },
   'rice cooker': { jp_name: '炊飯器', fee: 400, category: 'Kitchen Appliance' },

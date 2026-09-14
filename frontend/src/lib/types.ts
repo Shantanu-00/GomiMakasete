@@ -176,6 +176,7 @@ export interface UserProfile {
   neighborhood: string;
   neighborhood_id?: string;
   banchi?: string;
+  language?: 'en' | 'ja' | 'mix';
   created_at: string;
 }
 
