@@ -137,8 +137,8 @@ export async function runTieredVisionAnalysis(
   // Tier Model Definition
   const isMultiPhoto = uploadedFilenames && uploadedFilenames.length > 1;
   const modelTier = forceTier2
-    ? 'Tier-2 (Claude 3.7 Sonnet / Nova Pro)'
-    : 'Tier-1 (Nova 2 Lite)';
+    ? 'Tier-2 (Amazon Nova Pro)'
+    : 'Tier-1 (Amazon Nova Lite)';
 
   // Scenario Data Generation
   let rawItems: Array<{

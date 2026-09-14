@@ -22,7 +22,7 @@ This project has adopted the [Amazon Open Source Code of Conduct](CODE_OF_CONDUC
 ### 2. Local Setup
 ```bash
 # 1. Clone repository
-git clone https://github.com/your-org/GomiMakasete.git
+git clone https://github.com/Shantanu-00/GomiMakasete.git
 cd GomiMakasete
 
 # 2. Copy environment template

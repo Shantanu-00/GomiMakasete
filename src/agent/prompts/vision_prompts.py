@@ -1,5 +1,5 @@
 """
-Prompts for Tier-1 (Nova 2 Lite) and Tier-2 (Claude 3.7 Sonnet) Multi-Modal Vision.
+Prompts for Tier-1 (Amazon Nova Lite) and Tier-2 (Amazon Nova Pro) Multi-Modal Vision.
 """
 
 TIER1_TRIAGE_PROMPT = """Analyze the provided scene containing household objects.
@@ -13,7 +13,7 @@ You must perform:
 Return ONLY a JSON array conforming to the DetectedItem schema.
 """
 
-TIER2_REASONING_PROMPT = """You are the Tier-2 SOTA High-Reasoning Waste Inspector (Anthropic Claude 3.7 Sonnet / Amazon Nova Pro).
+TIER2_REASONING_PROMPT = """You are the Tier-2 SOTA High-Reasoning Waste Inspector powered by Amazon Nova Pro (us.amazon.nova-pro-v1:0).
 The user or system has escalated this scene for deep analysis due to visual occlusion, low light, or ambiguous material boundaries.
 
 Perform rigorous spatial bounding analysis and chain-of-thought verification:

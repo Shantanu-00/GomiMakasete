@@ -69,7 +69,7 @@ class GomiSupervisorOrchestrator:
                     ],
                     system_prompt=GOMI_SUPERVISOR_SYSTEM_PROMPT
                 )
-                logger.info("Strands Agents SDK initialized with Bedrock Claude Sonnet.")
+                logger.info("Strands Agents SDK initialized with Amazon Nova.")
             except Exception as e:
                 logger.warning(f"Strands Agent init deferred: {e}")
                 self.agent = None

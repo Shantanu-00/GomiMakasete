@@ -24,12 +24,12 @@ def test_budget_guard_can_invoke_and_circuit_breaker(tmp_path, monkeypatch):
     assert guard.get_daily_spend() > 0
 
     # Simulate near limit
-    guard.record_usage("us.anthropic.claude-3-7-sonnet-20250219-v1:0", input_tokens=150000, output_tokens=300000, num_images=10)
+    guard.record_usage("us.amazon.nova-pro-v1:0", input_tokens=1000000, output_tokens=1200000, num_images=10)
     status = guard.get_budget_status()
     assert status["spent_today_usd"] > 4.5
 
     # Trigger circuit breaker with another large request
-    guard.record_usage("us.anthropic.claude-3-7-sonnet-20250219-v1:0", input_tokens=100000, output_tokens=100000, num_images=10)
+    guard.record_usage("us.amazon.nova-pro-v1:0", input_tokens=500000, output_tokens=500000, num_images=10)
     can_run, spent, rem = guard.can_invoke(0.10)
     assert can_run is False
     assert rem == 0.0

@@ -69,7 +69,7 @@ async def ping():
         "service": "GomiMakasete-AgentCore",
         "timestamp": int(time.time()),
         "architecture": "linux/arm64",
-        "model_fleet": "Amazon Nova 2 Lite / Claude 3.7 Sonnet (Sonnet 5)",
+        "model_fleet": "Amazon Nova Fleet (Nova Lite / Nova Pro / Nova Sonic)",
         "budget_limit_daily_usd": 5.00
     }
 

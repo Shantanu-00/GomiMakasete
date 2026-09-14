@@ -19,8 +19,8 @@ Parameters:
 
   BedrockTier2ModelId:
     Type: String
-    Default: us.anthropic.claude-3-7-sonnet-20250219-v1:0
-    Description: Amazon Bedrock Cross-Region Inference Profile ID for Tier-2 Deep Reasoning (Claude Sonnet series / Sonnet 5)
+    Default: us.amazon.nova-pro-v1:0
+    Description: Amazon Bedrock Cross-Region Inference Profile ID for Tier-2 Deep Multimodal Reasoning (Amazon Nova Pro)
 
   DailyBedrockBudgetUsd:
     Type: Number

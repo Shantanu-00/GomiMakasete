@@ -46,7 +46,7 @@ export interface DetectedItem {
   material: string;
   estimated_dim_cm: number;
   confidence: number;
-  model_tier: 'Tier-1 (Nova 2 Lite)' | 'Tier-2 (Claude 3.7 Sonnet / Nova Pro)';
+  model_tier: 'Tier-1 (Amazon Nova Lite)' | 'Tier-2 (Amazon Nova Pro)';
   is_low_confidence: boolean;
   intent_category: IntentCategory;
   is_marked_for_disposal: boolean; // User toggle: true = throwing out, false = keep

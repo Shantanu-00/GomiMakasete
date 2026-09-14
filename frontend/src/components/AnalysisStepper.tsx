@@ -76,7 +76,7 @@ export default function AnalysisStepper({
       stepNumber: 2,
       title: 'Pass 1: Vision Triage & Physical State',
       titleJp: '第1パス: 物体検知 & 破損・油分状態判定',
-      model: isEscalating ? 'Claude 3.7 Sonnet (Sonnet 5)' : 'Amazon Nova 2 Lite',
+      model: isEscalating ? 'Amazon Nova Pro (Tier-2 SOTA)' : 'Amazon Nova Lite (Tier-1)',
       status: currentStep > 2 ? 'passed' : currentStep === 2 ? 'running' : 'waiting',
       detail: 'Detects discrete objects, materials, fracture lines (broken bowl), and grease/oil contamination',
       icon: Eye,

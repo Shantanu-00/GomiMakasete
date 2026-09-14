@@ -45,27 +45,16 @@ MODEL_PRICING = {
         "output_per_1k": 0.0032,
         "image_fixed": 0.0008
     },
-    # Anthropic Claude Sonnet: ~$0.003 / 1K in, ~$0.015 / 1K out, ~$0.0048 / image
-    "anthropic.claude-3-7-sonnet-20250219-v1:0": {
-        "input_per_1k": 0.0030,
-        "output_per_1k": 0.0150,
-        "image_fixed": 0.0048
+    # Amazon Nova Sonic: Voice / Multimodal Speech
+    "amazon.nova-sonic-v1:0": {
+        "input_per_1k": 0.0006,
+        "output_per_1k": 0.0024,
+        "image_fixed": 0.0000
     },
-    "us.anthropic.claude-3-7-sonnet-20250219-v1:0": {
-        "input_per_1k": 0.0030,
-        "output_per_1k": 0.0150,
-        "image_fixed": 0.0048
-    },
-    # Sonnet 5 / Latest Anthropic SOTA aliases
-    "anthropic.claude-sonnet-5-v1:0": {
-        "input_per_1k": 0.0030,
-        "output_per_1k": 0.0150,
-        "image_fixed": 0.0048
-    },
-    "us.anthropic.claude-sonnet-5-v1:0": {
-        "input_per_1k": 0.0030,
-        "output_per_1k": 0.0150,
-        "image_fixed": 0.0048
+    "us.amazon.nova-sonic-v1:0": {
+        "input_per_1k": 0.0006,
+        "output_per_1k": 0.0024,
+        "image_fixed": 0.0000
     }
 }
 

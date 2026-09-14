@@ -192,7 +192,7 @@ export default function Home() {
         }
 
         if (forceTier2) {
-          speakText(`Tier-2 escalation complete. Analyzed with Claude 3.7 Sonnet. ${discardCount} items ready for disposal.`);
+          speakText(`Tier-2 escalation complete. Analyzed with Amazon Nova Pro. ${discardCount} items ready for disposal.`);
         } else {
           speakText(`Scan complete. Detected ${data.items.length} objects. ${safeguardCount} personal assets kept safe.`);
         }

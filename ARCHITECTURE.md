@@ -26,6 +26,8 @@ Japan operates arguably the most intricate domestic recycling and municipal soli
 
 This architecture reflects and elevates the AWS reference diagram standard, cleanly dividing the **Client / Agent Execution Environment** from the **AWS Cloud Services Plane**.
 
+![GomiMakasete Architecture Diagram](GomiMakasete_Architecture.png)
+
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │  CLIENT & LOCAL EXECUTION ENVIRONMENT (Strands Agents SDK Layer)                                                 │
@@ -77,7 +79,7 @@ This architecture reflects and elevates the AWS reference diagram standard, clea
 │   │    - GET  /ping                        │ <─────────────── │  • Physical state (Broken/Greasy/Pressurized) │  │
 │   │    - POST /invocations                 │                  │                                               │  │
 │   │    - GET  /budget                      │                  │  [Tier-2 SOTA Reasoning Escalation]           │  │
-│   │  • Daily Budget Circuit Breaker ($5.00)│                  │  Claude 3.7 Sonnet / Nova Pro                 │  │
+│   │  • Daily Budget Circuit Breaker ($5.00)│                  │  Amazon Nova Pro (us.amazon.nova-pro-v1:0)    │  │
 │   │  • IP-based Rate Limiter (20 req/5min) │                  │  • Spatial bounding & occlusion reasoning     │  │
 │   └────────────────────────────────────────┘                  │                                               │  │
 │                                                               │  [Ambient Voice Assistant]                    │  │
@@ -178,8 +180,9 @@ The Strands Agent is equipped with five specialized, deterministic tools:
 The infrastructure is declared in Infrastructure as Code via **AWS SAM** (`infra/sam/template.yaml`) and **AWS CDK** (`infra/cdk/app.py`), architected for **$0.00/month idle standby cost**:
 
 * **Amazon Bedrock**:
-  * **Tier-1 Vision**: `us.amazon.nova-lite-v1:0` (Amazon Nova 2 Lite) for sub-second, ultra-cost-effective initial object detection and physical state inspection.
-  * **Tier-2 Escalation**: `us.anthropic.claude-3-7-sonnet-20250219-v1:0` / Nova Pro for complex composite separation and occluded scene reasoning.
+  * **Tier-1 Vision**: `us.amazon.nova-lite-v1:0` (Amazon Nova Lite) for sub-second, ultra-cost-effective initial object detection and physical state inspection.
+  * **Tier-2 Escalation**: `us.amazon.nova-pro-v1:0` (Amazon Nova Pro) for complex composite separation and occluded scene reasoning.
+  * **Ambient Voice**: `us.amazon.nova-sonic-v1:0` (Amazon Nova Sonic) for hands-free real-time audio interaction.
   * **Cross-Region Inference Profiles**: Ensures 99.99% invocation availability and resiliency against regional quota saturation.
 * **Amazon Bedrock AgentCore Runtime**:
   * Executes the agent loop conforming to the mandatory container HTTP specification:
@@ -196,7 +199,9 @@ The infrastructure is declared in Infrastructure as Code via **AWS SAM** (`infra
 * **Amazon S3**:
   * `gomimakasete-uploads-{accountId}-{region}`: Private S3 bucket enforcing AES-256 server-side encryption, blocking all public ACLs, and applying a **7-Day Auto-Purge Lifecycle Policy** to eliminate storage cost accumulation.
 * **Amazon Bedrock Knowledge Base & Amazon OpenSearch Serverless**:
-  * Hybrid search vector store storing official municipal disposal charters chunked into semantically indexed vectors with metadata attributes (`municipality_id`, `category`).
+  * > [!NOTE]
+  * > **The system is architected to support Bedrock Knowledge Base with OpenSearch for semantic search, but currently uses a local verified rules engine for zero-cost operation.**
+  * In full cloud deployment, municipal disposal charters are chunked and semantically indexed into an OpenSearch Serverless vector collection with metadata attributes (`municipality_id`, `category`).
 * **AWS Amplify Hosting**:
   * Continuous integration and hosting for the Next.js 15 SSR frontend with automatic edge CDN caching.
 * **AWS IAM & CloudWatch**:
@@ -264,7 +269,7 @@ GomiMakasete/
 TIER1_MODEL_ID = os.getenv("BEDROCK_TIER1_MODEL_ID", "us.amazon.nova-lite-v1:0")
 
 # Tier-2 Model (SOTA deep reasoning escalation)
-TIER2_MODEL_ID = os.getenv("BEDROCK_TIER2_MODEL_ID", "us.anthropic.claude-3-7-sonnet-20250219-v1:0")
+TIER2_MODEL_ID = os.getenv("BEDROCK_TIER2_MODEL_ID", "us.amazon.nova-pro-v1:0")
 ```
 When an image is submitted:
 1. `analyze_scene()` queries `budget_guard.can_invoke()`. If daily spending is near $5.00, it safely trips the circuit breaker to protect the AWS account.
@@ -311,7 +316,7 @@ nth_match = re.search(r"([1-4])(?:・([1-4]))?番目の([月火水木金土日]�
 For towns with split boundaries (e.g., *Nishi-Shinjuku 1-chome* vs *Nishi-Shinjuku 4-chome*), the engine accepts the resident's block number (*banchi*) and resolves the exact morning pickup schedule.
 
 ### 6. Production Hardening: Budget Guard & Security (`src/backend/budget_guard.py` & `security.py`)
-* **Hard $5.00 Daily Budget**: Tracks token consumption per model across Nova Lite, Nova Pro, and Claude Sonnet. If the threshold is reached, requests gracefully fallback to local simulation, ensuring zero runaway bills during public hackathon demonstrations.
+* **Hard $5.00 Daily Budget**: Tracks token consumption per model across Nova Lite, Nova Pro, and Nova Sonic. If the threshold is reached, requests gracefully fallback to local simulation, ensuring zero runaway bills during public hackathon demonstrations.
 * **Rate Limiting**: Sliding window rate limiting enforces a maximum of 20 requests per 5 minutes per client IP.
 * **Payload Size Ceiling**: Rejects payloads exceeding 5 MB to protect serverless memory.
 
@@ -373,7 +378,7 @@ sequenceDiagram
 | ADR ID | Decision Title | Status | Primary Technology | Rationale & Trade-off |
 | :--- | :--- | :--- | :--- | :--- |
 | **ADR-001** | Visual-First with Ambient Voice vs Voice-Only | **ACCEPTED** | Amazon Nova 2 Sonic & Web Audio API | Voice-only creates cognitive overload when listing multi-stream recycling rules. Visual cards provide instant spatial clarity; ambient voice allows hands-free control when hands are soiled. |
-| **ADR-002** | Two-Tiered Cascading Vision Strategy | **ACCEPTED** | Amazon Nova 2 Lite (Tier-1) & Claude 3.7 Sonnet (Tier-2) | Balances sub-second latency and 88% cost reduction for clear scenes with frontier reasoning escalation for ambiguous or occluded images. |
+| **ADR-002** | Two-Tiered Cascading Vision Strategy | **ACCEPTED** | Amazon Nova Lite (Tier-1) & Amazon Nova Pro (Tier-2) | Balances sub-second latency and 88% cost reduction for clear scenes with SOTA reasoning escalation for ambiguous or occluded images. |
 | **ADR-003** | Accidental Non-Waste Safeguard Protection | **ACCEPTED** | Bedrock Multi-Modal Vision + Regex Guard | Prevents resident alarm by sequestering personal valuables (smartphones, wallets, keys) out of the disposal stream by default. |
 | **ADR-004** | Structured Action Decomposition Taxonomy | **ACCEPTED** | Deterministic Preparation Specialist Engine | Replaces dangerous "dumb split" buttons with physically verified instructions (Safe Wrap Hazard, Outdoor Degas, Separate Parts, Rinse). |
 | **ADR-005** | Pay-Per-Request DynamoDB Schedules | **ACCEPTED** | Amazon DynamoDB On-Demand Billing | Provides single-digit millisecond query performance across 178 micro-neighborhoods with **$0.00 standby cost** when no queries are active. |

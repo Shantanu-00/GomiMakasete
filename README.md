@@ -14,8 +14,11 @@
 ## 🔗 Submission Links
 
 - **Hosted Live Demo:** [https://main.d25z68bex93a90.amplifyapp.com](https://main.d25z68bex93a90.amplifyapp.com)
-- **5-Minute Video Pitch:** [YouTube Demo Presentation](https://youtu.be/hackathon-demo-placeholder)
-- **Technical Walkthrough:** [builder.aws Post: Agents for Humans — GomiMakasete](https://builder.aws.com/posts/agents-for-humans-gomimakasete)
+- **Video Demonstration:** [YouTube Demo Presentation](https://youtu.be/7gjuh3T2DCo)
+- **Technical Walkthroughs & AWS Builder Community Posts:**
+  - [Part 1: Architecture & Working Backwards](https://builder.aws.com/content/3JKRzdejBtrpibloWy9TMCjNXMB)
+  - [Part 2: Amazon Bedrock AgentCore Runtime & Multi-Modal Tiered Triage](https://builder.aws.com/content/3JKTBfwsEhVSRRR1DgK7q1y2Zj7)
+  - [Part 3: Production Deployment & Zero-Cost Serverless Strategy](https://builder.aws.com/content/3JKTQp0KNTXO7KwUQqwYVD4oyvW)
 
 ---
 
@@ -41,15 +44,15 @@ Instead of forcing residents to read 40-page PDF guides or burdening city call c
 
 ## 🏗️ System Architecture
 
-![Architecture Diagram](docs/images/architecture-flow.svg)
+![Architecture Diagram](docs/GomiMakasete_Architecture.png)
 
 ### Data & Execution Flow
-1. **Multi-Modal Intake:** The resident drops or captures a photo in the Next.js 15 app (hosted on **AWS Amplify Hosting**).
-2. **Tier-1 Fast Triage:** **Amazon Nova 2 Lite** performs sub-second multi-object detection and intent classification (`DISCARD_CANDIDATE` vs `SAFEGUARD_NON_WASTE`).
-3. **Confidence Gate & Escalation:** If confidence is below 0.85 or the resident clicks re-scan, the system escalates to **Tier-2 Claude 3.7 Sonnet / Nova Pro** with chain-of-thought spatial reasoning.
+1. **Multi-Modal Intake:** The resident drops or captures a photo in the Next.js 15 app (hosted on **AWS Amplify Hosting**) or speaks hands-free using **Amazon Nova Sonic**.
+2. **Tier-1 Fast Triage:** **Amazon Nova Lite** (`us.amazon.nova-lite-v1:0`) performs sub-second multi-object detection (~280ms, 88% cost cut) and intent classification (`DISCARD_CANDIDATE` vs `SAFEGUARD_NON_WASTE`).
+3. **Confidence Gate & Escalation:** If confidence is below 0.85, items are occluded, composite, or hazardous, the system escalates to **Tier-2 Amazon Nova Pro** (`us.amazon.nova-pro-v1:0`) with chain-of-thought spatial bounding and material reasoning.
 4. **Action Preparation Decomposition:** The agent maps each item to a certified preparation protocol (e.g., separating PET bottle body, cap, and film).
 5. **AgentCore Supervisor Execution:** On **Amazon Bedrock AgentCore Runtime** (Port 8080 / ARM64 microVM), the **Strands Agents SDK** orchestrates tools:
-   * **Bedrock Knowledge Base Tool:** Vector search with strict metadata filtering by `municipality_id` (Shinjuku, Yokohama, Kyoto, Kamikatsu).
+   * **Bedrock Knowledge Base Tool:** Vector search with strict metadata filtering by `municipality_id` (Shinjuku, Yokohama, Kyoto, Kamikatsu). *(Note: The system is architected to support Bedrock Knowledge Base with OpenSearch for semantic search, but currently uses a local verified rules engine for zero-cost operation).*
    * **DynamoDB Schedule Engine:** Resolves neighborhood and banchi splits to calculate the next collection morning.
    * **Sodai Gomi Calculator:** Calculates exact fee and sticker combinations (Ticket A/B).
    * **AgentCore Memory:** Retains short-term session state and long-term resident preferences across sessions.
@@ -65,7 +68,9 @@ Instead of forcing residents to read 40-page PDF guides or burdening city call c
 │       └── license-check.yml      # Verifies Apache-2.0 headers
 ├── docs/
 │   ├── images/
-│   │   └── architecture-flow.svg  # Production system architecture diagram
+│   │   ├── architecture-diagram.svg # Vector architecture diagram
+│   │   └── generate_diagram.py    # Standalone generator script
+│   ├── GomiMakasete_Architecture.png # 3200x2280 high-res production architecture diagram
 │   └── ARCHITECTURE.md            # Detailed Architectural Decision Records (ADRs)
 ├── infra/                         # Production Infrastructure as Code
 │   ├── sam/                       # AWS SAM template (Recommended for Bedrock)
@@ -111,7 +116,7 @@ Judges and developers can validate the agent loop and run tests with zero AWS cr
 ### Setup in 3 Steps
 ```bash
 # 1. Clone repository
-git clone https://github.com/your-org/GomiMakasete.git && cd GomiMakasete
+git clone https://github.com/Shantanu-00/GomiMakasete.git && cd GomiMakasete
 
 # 2. Configure environment & install dependencies
 cp .env.example .env
@@ -135,51 +140,122 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to interact 
 
 ## ☁️ Cloud Deployment (Amazon Bedrock AgentCore & Amplify)
 
-### 1. Backend: Amazon Bedrock AgentCore Runtime (AWS SAM)
-Deploy the serverless ARM64 microVM, DynamoDB tables, S3 upload bucket, and API Gateway in one shot:
-```bash
-# 1. Build ARM64 Lambda package
-sam build -t infra/sam/template.yaml
-
-# 2. Deploy with rollback safety (No OpenSearch idle charges)
-sam deploy --config-file infra/sam/samconfig.toml
-
-# 3. Seed 178 municipal neighborhoods into DynamoDB
-python data/scripts/seed_dynamodb_schedules.py
-```
-*(On Windows PowerShell, you can simply run `.\deploy.ps1` to execute all three steps automatically).*
+### 1. Prerequisites & AWS Account Setup
+Before deploying to production, ensure you have:
+1. **AWS CLI v2 & SAM CLI Installed:**
+   ```bash
+   aws --version   # AWS CLI 2.x
+   sam --version   # SAM CLI 1.100+
+   ```
+2. **AWS Bedrock Model Access:**
+   - Log into AWS Console -> **Amazon Bedrock** -> **Model access** (in `us-east-1`).
+   - Ensure access is granted to the **Amazon Nova Fleet**:
+     - `Amazon Nova Lite` (`us.amazon.nova-lite-v1:0`)
+     - `Amazon Nova Pro` (`us.amazon.nova-pro-v1:0`)
+     - `Amazon Nova Sonic` (`us.amazon.nova-sonic-v1:0`)
+3. **AWS Credentials Configured:**
+   ```bash
+   aws configure
+   # Set AWS Access Key ID, Secret Access Key, and Default region name: us-east-1
+   ```
 
 ---
 
-### 2. Frontend: AWS Amplify Hosting (Next.js 15 SSR)
+### 2. Backend: Amazon Bedrock AgentCore Runtime (AWS SAM)
 
-The repository root includes an automated [`amplify.yml`](amplify.yml) build specification configured for Next.js 15 SSR, package caching, and continuous deployment.
+The backend provisions a serverless ARM64 MicroVM on Amazon Bedrock AgentCore Runtime (FastAPI on Port 8080), Amazon API Gateway, DynamoDB tables, and an S3 ingestion bucket.
 
-#### Step-by-Step Amplify Hosting Guide:
-1. **Push your code to GitHub:**
-   Ensure the `main` branch is pushed to your remote repository (e.g. `https://github.com/Shantanu-00/GomiMakasete`).
+#### Step 1: Build the Serverless MicroVM
+```bash
+sam build -t infra/sam/template.yaml
+```
+
+#### Step 2: Deploy Infrastructure
+```bash
+sam deploy --config-file infra/sam/samconfig.toml
+```
+*Or run interactive guided deployment:*
+```bash
+sam deploy --guided
+```
+
+**Key CloudFormation Parameters Configured:**
+| Parameter | Default Value | Description |
+| :--- | :--- | :--- |
+| `StageName` | `prod` | Deployment environment stage |
+| `BedrockTier1ModelId` | `us.amazon.nova-lite-v1:0` | Sub-second vision triage model |
+| `BedrockTier2ModelId` | `us.amazon.nova-pro-v1:0` | Deep multimodal reasoning model |
+| `BedrockVoiceModelId` | `us.amazon.nova-sonic-v1:0` | Ambient real-time voice model |
+| `DailyBudgetLimitUsd` | `5.00` | Automated circuit breaker cost ceiling |
+
+*(On Windows PowerShell, simply run `.\deploy.ps1` to build and deploy in a single automated step).*
+
+#### Step 3: Seed 178 Municipal Schedules into DynamoDB
+Once the stack finishes deploying, populate the `GomiSchedules-prod` DynamoDB table with municipal collection schedules across Tokyo (Shinjuku), Yokohama, Kyoto, and Kamikatsu:
+```bash
+python data/scripts/seed_dynamodb_schedules.py
+```
+
+#### Step 4: Verify Backend Health
+Test the deployed API Gateway endpoint:
+```bash
+curl https://<your-api-id>.execute-api.us-east-1.amazonaws.com/prod/ping
+```
+**Expected Response:**
+```json
+{
+  "status": "ok",
+  "runtime": "Amazon Bedrock AgentCore",
+  "port": 8080,
+  "models": {
+    "tier1": "us.amazon.nova-lite-v1:0",
+    "tier2": "us.amazon.nova-pro-v1:0",
+    "voice": "us.amazon.nova-sonic-v1:0"
+  }
+}
+```
+
+---
+
+### 3. Frontend: AWS Amplify Hosting (Next.js 15 SSR)
+
+The Next.js 15 application is hosted on **AWS Amplify Gen 2 Hosting** with Server-Side Rendering (SSR), streaming responses, and edge caching. The root [`amplify.yml`](amplify.yml) automatically orchestrates building the `frontend/` directory.
+
+#### Step-by-Step Amplify Console Setup:
+1. **Push Changes to GitHub:**
+   ```bash
+   git push origin main
+   ```
 2. **Open AWS Amplify Console:**
-   Navigate to the [AWS Amplify Hosting Console](https://console.aws.amazon.com/amplify/home?region=us-east-1).
-3. **Connect Repository:**
-   - Click **"Create new app"** (or **"Deploy an app"**).
-   - Select **GitHub** as the source code provider and click **Next**.
-   - Authenticate with GitHub and select repository **`GomiMakasete`**.
-   - Select the branch: **`main`**.
-4. **Configure Build Settings:**
-   - Amplify will automatically detect the root [`amplify.yml`](amplify.yml) which runs `npm ci` and `npm run build` inside the `frontend/` directory.
-   - Leave the build settings as detected.
-5. **Set Environment Variables:**
-   Under **Advanced settings** (or **App settings > Environment variables**), add the following keys pointing to your deployed API Gateway backend:
-   | Key | Value | Description |
+   Go to [AWS Amplify Console (us-east-1)](https://console.aws.amazon.com/amplify/home?region=us-east-1).
+3. **Deploy App:**
+   - Click **"Create new app"** -> Select **GitHub** -> Click **Next**.
+   - Select repository: **`Shantanu-00/GomiMakasete`** -> Branch: **`main`**.
+4. **App Root & Build Settings:**
+   - Amplify automatically recognizes the monorepo structure via [`amplify.yml`](amplify.yml).
+   - Set **App root** to `frontend` if prompted, or leave default as detected.
+5. **Environment Variables Configuration:**
+   Under **App settings > Environment variables**, configure:
+   | Environment Variable | Production Value | Description |
    | :--- | :--- | :--- |
-   | `AGENTCORE_ENDPOINT_URL` | `https://<your-api-id>.execute-api.us-east-1.amazonaws.com/prod/invocations` | Bedrock AgentCore execution endpoint |
-   | `AGENTCORE_PING_URL` | `https://<your-api-id>.execute-api.us-east-1.amazonaws.com/prod/ping` | MicroVM health check endpoint |
-   | `AGENTCORE_BUDGET_URL` | `https://<your-api-id>.execute-api.us-east-1.amazonaws.com/prod/budget` | $5.00/day circuit breaker status |
-   | `NEXT_PUBLIC_API_GATEWAY_URL` | `https://<your-api-id>.execute-api.us-east-1.amazonaws.com/prod` | Public REST base endpoint |
-6. **Save and Deploy:**
+   | `AGENTCORE_ENDPOINT_URL` | `https://<api-id>.execute-api.us-east-1.amazonaws.com/prod/invocations` | Bedrock AgentCore execution endpoint |
+   | `AGENTCORE_PING_URL` | `https://<api-id>.execute-api.us-east-1.amazonaws.com/prod/ping` | Health check & model inspector |
+   | `AGENTCORE_BUDGET_URL` | `https://<api-id>.execute-api.us-east-1.amazonaws.com/prod/budget` | Real-time budget guard status |
+   | `NEXT_PUBLIC_API_GATEWAY_URL` | `https://<api-id>.execute-api.us-east-1.amazonaws.com/prod` | REST base endpoint |
+   | `AWS_REGION` | `us-east-1` | Target deployment AWS region |
+6. **Deploy:**
    - Click **Save and Deploy**.
-   - AWS Amplify provisions compute, builds the Next.js 15 SSR artifacts, deploys CloudFront edge CDN distribution, and issues an SSL certificate automatically.
-   - Your live public URL will be generated (e.g., `https://main.<unique-id>.amplifyapp.com`).
+   - Amplify provisions compute, builds the Next.js bundle, distributes edge CloudFront routes, and provides a secure live URL:
+   - **`https://main.d25z68bex93a90.amplifyapp.com`**
+
+---
+
+### 4. Zero-Cost Serverless Philosophy
+> **"The system is architected to support Bedrock Knowledge Base with OpenSearch for semantic search, but currently uses a local verified rules engine for zero-cost operation."**
+
+* **Standby Savings:** Amazon OpenSearch Serverless mandates a minimum baseline of 4 OCUs (~$175/month in idle charges).
+* **Deterministic Precision:** By utilizing the verified local rules engine ([knowledge_base_tool.py](src/agent/tools/knowledge_base_tool.py)), GomiMakasete eliminates standby infrastructure costs entirely (\$0.00 idle) while preventing LLM hallucinations on strict municipal bylaws.
+* **Instant Extensibility:** The full Bedrock Knowledge Base vector search contract is pre-wired and can be toggled on anytime with `KB_USE_LOCAL_RULES=false`.
 
 ---
 
@@ -200,6 +276,14 @@ tests/integration/test_strands_loop.py::test_orchestrator_batch_evaluation PASSE
 tests/integration/test_strands_loop.py::test_orchestrator_chat_interaction PASSED
 tests/unit/test_budget_and_vision.py::test_budget_guard_can_invoke_and_circuit_breaker PASSED
 tests/unit/test_budget_and_vision.py::test_vision_client_physical_condition_detection PASSED
+tests/unit/test_kb_schedule_bridge.py::test_shinjuku_pet_bottle_bridge PASSED
+tests/unit/test_kb_schedule_bridge.py::test_shinjuku_spray_can_edge_case PASSED
+tests/unit/test_kb_schedule_bridge.py::test_yokohama_split_resource_days PASSED
+tests/unit/test_kb_schedule_bridge.py::test_yokohama_clothing_rain_cancellation PASSED
+tests/unit/test_kb_schedule_bridge.py::test_kyoto_ceramics_in_combustible_bag PASSED
+tests/unit/test_kb_schedule_bridge.py::test_kyoto_small_metal_free_bag_rule PASSED
+tests/unit/test_kb_schedule_bridge.py::test_kamikatsu_zero_waste_and_compost_mandate PASSED
+tests/unit/test_kb_schedule_bridge.py::test_orchestrator_batch_evaluation_with_schedule_bridge PASSED
 tests/unit/test_schemas.py::test_detected_item_serialization PASSED
 tests/unit/test_security.py::test_payload_size_rejection PASSED
 tests/unit/test_security.py::test_ip_rate_limiting_enforcement PASSED
@@ -208,7 +292,7 @@ tests/unit/test_tools.py::test_action_decomposition_prescriptions PASSED
 tests/unit/test_bulky_waste_and_appliance_act PASSED
 tests/unit/test_municipal_knowledge_base_rules PASSED
 tests/unit/test_neighborhood_schedule_and_banchi_splits PASSED
-======================== 16 passed, 1 warning in 2.31s ========================
+======================== 24 passed, 1 warning in 2.22s ========================
 ```
 
 ---

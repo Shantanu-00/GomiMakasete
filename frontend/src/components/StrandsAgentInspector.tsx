@@ -67,8 +67,8 @@ export default function StrandsAgentInspector({
     setExpandedTools(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const modelUsed = scanResult?.model_used || (isEscalating ? 'Tier-2 (Claude 3.7 Sonnet)' : 'Tier-1 (Nova 2 Lite)');
-  const latencyMs = scanResult?.latency_ms || (isEscalating ? 820 : 280);
+  const modelUsed = scanResult?.model_used || (isEscalating ? 'Tier-2 (Amazon Nova Pro)' : 'Tier-1 (Amazon Nova Lite)');
+  const latencyMs = scanResult?.latency_ms || (isEscalating ? 720 : 280);
   const discardCount = scanResult?.items.filter(i => i.is_marked_for_disposal).length || 0;
   const safeguardCount = scanResult?.items.filter(i => !i.is_marked_for_disposal).length || 0;
   const spendPct = Math.min(100, Math.round((dailySpend / budgetLimit) * 100));
@@ -77,12 +77,12 @@ export default function StrandsAgentInspector({
     {
       id: 'vision_triage_tool',
       name: 'vision_triage_tool',
-      engine: modelUsed.includes('Claude') ? 'Claude 3.7 Sonnet (Tier-2)' : 'Amazon Nova 2 Lite (Tier-1)',
+      engine: modelUsed.includes('Pro') ? 'Amazon Nova Pro (Tier-2)' : 'Amazon Nova Lite (Tier-1)',
       latencyMs: latencyMs,
       description: 'Multi-modal object detection, edge bounding segmentation, and intent classification.',
       inputs: {
         preset: 'active_scene',
-        mode: modelUsed.includes('Claude') ? 'deep_cot_spatial' : 'subsecond_lite',
+        mode: modelUsed.includes('Pro') ? 'deep_cot_spatial' : 'subsecond_lite',
         max_tokens: 2048
       },
       outputs: {
@@ -546,8 +546,8 @@ export default function StrandsAgentInspector({
                     </div>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.68rem', color: '#94A3B8' }}>
-                      <span>Nova 2 Lite: ~$0.0008 / scan</span>
-                      <span>Claude 3.7 Sonnet: ~$0.012 / scan</span>
+                      <span>Amazon Nova Lite: ~$0.0008 / scan</span>
+                      <span>Amazon Nova Pro: ~$0.0032 / scan</span>
                     </div>
                   </div>
 
@@ -576,7 +576,7 @@ export default function StrandsAgentInspector({
                           <strong style={{ fontSize: '0.78rem', color: '#FFFFFF' }}>Stage 2: Pass 1 Vision Triage</strong>
                         </div>
                         <p style={{ fontSize: '0.7rem', color: '#94A3B8', margin: 0 }}>
-                          Sub-second spatial bounding using <strong>Amazon Nova 2 Lite</strong>. Escalates dynamically to <strong>Claude 3.7 Sonnet</strong> on complex fractures or ambiguous materials.
+                          Sub-second spatial bounding using <strong>Amazon Nova Lite</strong>. Escalates dynamically to <strong>Amazon Nova Pro</strong> on complex fractures or ambiguous materials.
                         </p>
                       </div>
 

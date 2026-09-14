@@ -1,6 +1,6 @@
 """
 Multi-Modal Vision Client for Amazon Bedrock.
-Orchestrates Tier-1 (Amazon Nova 2 Lite) Fast Visual Triage and Tier-2 (Claude Sonnet / Nova Pro)
+Orchestrates Tier-1 (Amazon Nova Lite) Fast Visual Triage and Tier-2 (Amazon Nova Pro)
 Deep Reasoning with automatic Physical Condition Detection and $5.00/day Hard Budget Enforcement.
 """
 import os
@@ -23,11 +23,11 @@ logger = get_logger("vision_client")
 # Bedrock Model Identifiers (Prioritizing AWS Cross-Region Inference Profiles)
 BEDROCK_REGION = os.getenv("AWS_REGION", os.getenv("AWS_DEFAULT_REGION", "us-east-1"))
 
-# Tier-1: Amazon Nova 2 Lite (Fast triage, low latency, ultra-cost-effective)
+# Tier-1: Amazon Nova Lite (Fast triage, low latency, ultra-cost-effective)
 TIER1_MODEL_ID = os.getenv("BEDROCK_TIER1_MODEL_ID", "us.amazon.nova-lite-v1:0")
 
-# Tier-2: Claude Sonnet (SOTA deep reasoning, composite separation, Sonnet 5 / Claude 3.7)
-TIER2_MODEL_ID = os.getenv("BEDROCK_TIER2_MODEL_ID", os.getenv("BEDROCK_SONNET_MODEL_ID", "us.anthropic.claude-3-7-sonnet-20250219-v1:0"))
+# Tier-2: Amazon Nova Pro (Deep multimodal reasoning, composite separation, spatial bounding)
+TIER2_MODEL_ID = os.getenv("BEDROCK_TIER2_MODEL_ID", "us.amazon.nova-pro-v1:0")
 
 # Vision system prompt strictly enforcing physical state detection
 VISION_SYSTEM_PROMPT = """You are an expert computer vision system for Japanese municipal waste sorting (GomiMakasete).

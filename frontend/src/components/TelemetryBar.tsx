@@ -97,7 +97,7 @@ export default function TelemetryBar({
               border: `1px solid ${isEscalating ? '#A855F7' : '#475569'}`
             }}
           >
-            {isEscalating ? 'Claude 3.7 Sonnet (Tier-2)' : modelUsed}
+            {isEscalating ? 'Amazon Nova Pro (Tier-2)' : modelUsed}
           </span>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.72rem', color: '#94A3B8' }}>
