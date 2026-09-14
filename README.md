@@ -172,22 +172,32 @@ Before deploying to production, ensure you have:
 
 ---
 
-### 2. Backend: Amazon Bedrock AgentCore Runtime (AWS SAM)
+### 2. Backend: Amazon Bedrock AgentCore Runtime (AWS SAM or AWS CDK)
 
-The backend provisions a serverless ARM64 MicroVM on Amazon Bedrock AgentCore Runtime (FastAPI on Port 8080), Amazon API Gateway, DynamoDB tables, and an S3 ingestion bucket.
+The backend provisions a serverless ARM64 MicroVM on Amazon Bedrock AgentCore Runtime (FastAPI on Port 8080), Amazon API Gateway, DynamoDB tables, and an S3 ingestion bucket. You can deploy using either **AWS SAM** or **AWS CDK**.
 
-#### Step 1: Build the Serverless MicroVM
+#### Option A: Deploy with AWS SAM (Recommended)
 ```bash
+# 1. Build the serverless ARM64 MicroVM package
 sam build -t infra/sam/template.yaml
-```
 
-#### Step 2: Deploy Infrastructure
-```bash
+# 2. Deploy infrastructure with rollback safety
 sam deploy --config-file infra/sam/samconfig.toml
 ```
 *Or run interactive guided deployment:*
 ```bash
 sam deploy --guided
+```
+
+#### Option B: Deploy with AWS CDK (Python)
+```bash
+# 1. Synthesize CloudFormation stack
+python infra/cdk/app.py
+# or: make cdk-synth
+
+# 2. Deploy using AWS CDK CLI
+cdk deploy --app "python infra/cdk/app.py"
+# or: make cdk-deploy
 ```
 
 **Key CloudFormation Parameters Configured:**
@@ -199,7 +209,7 @@ sam deploy --guided
 | `BedrockVoiceModelId` | `us.amazon.nova-sonic-v1:0` | Ambient real-time voice model |
 | `DailyBudgetLimitUsd` | `5.00` | Automated circuit breaker cost ceiling |
 
-*(On Windows PowerShell, simply run `.\deploy.ps1` to build and deploy in a single automated step).*
+*(On Windows PowerShell, run `.\deploy.ps1 -Engine sam` or `.\deploy.ps1 -Engine cdk` to build, deploy, and seed DynamoDB in a single automated step).*
 
 #### Step 3: Seed 178 Municipal Schedules into DynamoDB
 Once the stack finishes deploying, populate the `GomiSchedules-prod` DynamoDB table with municipal collection schedules across Tokyo (Shinjuku), Yokohama, Kyoto, and Kamikatsu:

@@ -2,7 +2,7 @@
 # GomiMakasete Makefile — AWS Hackathon One-Command Entrypoint
 # ==============================================================================
 
-.PHONY: help install dev test lint clean build-frontend sam-validate sam-build sam-deploy seed-dynamodb
+.PHONY: help install dev test lint clean build-frontend sam-validate sam-build sam-deploy cdk-synth cdk-deploy seed-dynamodb
 
 help:
 	@echo "GomiMakasete Developer Commands:"
@@ -14,6 +14,8 @@ help:
 	@echo "  make sam-validate    Lint and validate AWS SAM infrastructure template"
 	@echo "  make sam-build       Build AWS SAM serverless container template"
 	@echo "  make sam-deploy      Deploy stack to Amazon Bedrock AgentCore with rollback protection"
+	@echo "  make cdk-synth       Synthesize AWS CDK CloudFormation stack"
+	@echo "  make cdk-deploy      Deploy stack using AWS CDK"
 	@echo "  make seed-dynamodb   Batch-seed 178 neighborhoods into DynamoDB schedule table"
 
 install:
@@ -49,6 +51,14 @@ sam-build:
 sam-deploy:
 	@echo "==> Deploying AWS SAM template to Bedrock AgentCore with rollback safety..."
 	sam deploy --config-file infra/sam/samconfig.toml
+
+cdk-synth:
+	@echo "==> Synthesizing AWS CDK stack..."
+	python infra/cdk/app.py
+
+cdk-deploy:
+	@echo "==> Deploying AWS CDK stack..."
+	cdk deploy --app "python infra/cdk/app.py"
 
 seed-dynamodb:
 	@echo "==> Seeding 178 municipal neighborhoods into Amazon DynamoDB..."
