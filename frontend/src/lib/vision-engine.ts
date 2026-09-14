@@ -206,60 +206,36 @@ export async function runTieredVisionAnalysis(
           description: 'Empty beverage can with clean interior and pressed pull-tab.',
           material: 'Aluminum',
           dim_cm: 12,
-          base_confidence: isMultiPhoto ? 0.98 : 0.94
-        },
-        {
-          id: 'upload-item-3',
-          name: 'Personal Smartphone (Carried Device)',
-          description: 'SAFEGUARD: High-value cellular handset placed next to items. Sequestered to Safe Vault.',
-          material: 'Glass / Aluminum / Electronics',
-          dim_cm: 15,
-          base_confidence: 0.99
-        },
-        {
-          id: 'upload-item-4',
-          name: 'Convenience Store Receipt (Paper)',
-          description: 'Small thermal register printout.',
-          material: 'Thermal Paper',
-          dim_cm: 7,
-          base_confidence: forceTier2 ? 0.93 : 0.72 // Demonstrates Tier-2 escalation
+          base_confidence: forceTier2 ? 0.98 : (isMultiPhoto ? 0.96 : 0.82)
         }
       ];
     }
   } else if (presetKey === 'messy_desk') {
-    // Realistic messy desk: empty PET bottle, coffee can, crumpled receipt, AND an Apple iPhone!
+    // Realistic desk items matching messy_desk.jpg: Oi Ocha PET bottle, BOSS coffee can, and Android smartphone (Safeguard)
     rawItems = [
       {
         id: 'item-desk-1',
-        name: 'Green Tea PET Bottle (500ml)',
-        description: 'Commercial beverage bottle with attached screw-cap and printed shrink wrap label.',
+        name: 'Oi Ocha Green Tea PET Bottle (500ml)',
+        description: 'Beverage bottle with attached green screw-cap and printed shrink wrap label.',
         material: 'PET (#1) / Polypropylene Cap',
         dim_cm: 21,
         base_confidence: 0.97
       },
       {
         id: 'item-desk-2',
-        name: 'Apple iPhone 15 Pro',
-        description: 'Active cellular smartphone with titanium chassis and OLED display resting on desk.',
-        material: 'Glass / Titanium / Electronics',
+        name: 'Android Smartphone',
+        description: 'Active cellular smartphone with OLED lockscreen display resting on desk. Sequestered to Safe Vault.',
+        material: 'Glass / Aluminum / Electronics',
         dim_cm: 15,
         base_confidence: 0.99
       },
       {
         id: 'item-desk-3',
         name: 'Aluminum BOSS Coffee Can',
-        description: 'Empty 185g steel/aluminum beverage can with tab pressed.',
+        description: 'Crushed empty 185g Suntory BOSS Black Coffee can with tab pressed.',
         material: 'Aluminum / Steel',
         dim_cm: 11,
-        base_confidence: 0.95
-      },
-      {
-        id: 'item-desk-4',
-        name: 'Crumpled Thermal Convenience Store Receipt',
-        description: 'Small crumpled paper receipt from 7-Eleven.',
-        material: 'Thermal Paper',
-        dim_cm: 6,
-        base_confidence: forceTier2 ? 0.92 : 0.68 // Low confidence on Tier 1, resolved on Tier 2!
+        base_confidence: forceTier2 ? 0.96 : 0.82 // Tier-2 confirms aluminum vs steel classification
       }
     ];
   } else if (presetKey === 'appliance_box') {

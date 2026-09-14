@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Cpu, 
   ChevronDown, 
@@ -13,7 +13,14 @@ import {
   ShieldCheck, 
   Database, 
   Terminal,
-  Activity
+  Activity,
+  X,
+  Zap,
+  DollarSign,
+  AlertTriangle,
+  Eye,
+  Info,
+  ArrowRight
 } from 'lucide-react';
 import { VisionScanResult } from '@/lib/types';
 
@@ -21,31 +28,66 @@ interface StrandsAgentInspectorProps {
   scanResult?: VisionScanResult | null;
   activeMunicipalityId?: string;
   activeNeighborhoodName?: string;
+  activeCity?: string;
+  dailySpend?: number;
+  budgetLimit?: number;
+  isAnalyzing?: boolean;
+  isEscalating?: boolean;
 }
 
 export default function StrandsAgentInspector({
   scanResult,
   activeMunicipalityId = 'tokyo_shinjuku',
-  activeNeighborhoodName = '愛住町 (Aizumicho)'
+  activeNeighborhoodName = '愛住町 (Aizumicho)',
+  activeCity = 'Tokyo - Shinjuku City',
+  dailySpend = 0.042,
+  budgetLimit = 5.00,
+  isAnalyzing = false,
+  isEscalating = false
 }: StrandsAgentInspectorProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedTool, setSelectedTool] = useState<string>('all');
+  const [activeTab, setActiveTab] = useState<'trace' | 'architecture'>('trace');
+  const [expandedTools, setExpandedTools] = useState<Record<string, boolean>>({
+    vision_triage_tool: true,
+    safeguard_tool: true
+  });
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
+  const toggleToolExpand = (id: string) => {
+    setExpandedTools(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const modelUsed = scanResult?.model_used || (isEscalating ? 'Tier-2 (Claude 3.7 Sonnet)' : 'Tier-1 (Nova 2 Lite)');
+  const latencyMs = scanResult?.latency_ms || (isEscalating ? 820 : 280);
+  const discardCount = scanResult?.items.filter(i => i.is_marked_for_disposal).length || 0;
+  const safeguardCount = scanResult?.items.filter(i => !i.is_marked_for_disposal).length || 0;
+  const spendPct = Math.min(100, Math.round((dailySpend / budgetLimit) * 100));
 
   const toolsExecuted = [
     {
       id: 'vision_triage_tool',
       name: 'vision_triage_tool',
-      engine: scanResult?.model_used?.includes('Claude') ? 'Claude 3.7 Sonnet (Tier-2)' : 'Amazon Nova 2 Lite (Tier-1)',
-      latencyMs: scanResult?.latency_ms || 240,
+      engine: modelUsed.includes('Claude') ? 'Claude 3.7 Sonnet (Tier-2)' : 'Amazon Nova 2 Lite (Tier-1)',
+      latencyMs: latencyMs,
       description: 'Multi-modal object detection, edge bounding segmentation, and intent classification.',
       inputs: {
         preset: 'active_scene',
-        mode: scanResult?.model_used?.includes('Claude') ? 'deep_cot_spatial' : 'subsecond_lite',
+        mode: modelUsed.includes('Claude') ? 'deep_cot_spatial' : 'subsecond_lite',
         max_tokens: 2048
       },
       outputs: {
         detected_objects: scanResult?.items.length || 3,
-        overall_confidence: scanResult?.overall_confidence || 0.94,
+        overall_confidence: scanResult?.overall_confidence || 0.96,
         spatial_coordinates_bound: true
       },
       status: 'COMPLETED'
@@ -57,11 +99,11 @@ export default function StrandsAgentInspector({
       latencyMs: 12,
       description: 'Isolates personal property (credentials, phones, keys, cash) into Non-Waste Vault.',
       inputs: {
-        candidate_items: scanResult?.items.map(i => i.name) || ['Smartphone', 'PET bottle'],
+        candidate_items: scanResult?.items.map(i => i.name) || ['Android Smartphone', 'Oi Ocha PET bottle', 'BOSS Coffee Can'],
         sequestration_rule: 'PROHIBIT_VALUABLE_DISPOSAL'
       },
       outputs: {
-        sequestered_count: scanResult?.items.filter(i => !i.is_marked_for_disposal).length || 1,
+        sequestered_count: safeguardCount || 1,
         decision: 'SAFEGUARD_ACTIVATED'
       },
       status: 'COMPLETED'
@@ -74,7 +116,7 @@ export default function StrandsAgentInspector({
       description: 'Vector RAG search filtered strictly by municipal authority bylaws.',
       inputs: {
         municipality_filter: activeMunicipalityId,
-        query: 'PET bottle cap film separation rules & broken ceramic wrapping requirements'
+        query: 'PET bottle cap film separation rules & beverage can sorting'
       },
       outputs: {
         matched_chunks: 4,
@@ -120,202 +162,500 @@ export default function StrandsAgentInspector({
   ];
 
   return (
-    <section 
-      aria-label="Strands Agent Live Telemetry"
-      style={{
-        borderRadius: '16px',
-        border: '2px solid #3B82F6',
-        background: '#0F172A',
-        color: '#F8FAFC',
-        overflow: 'hidden',
-        boxShadow: '0 10px 25px rgba(15, 23, 42, 0.2)',
-        marginBottom: '16px'
-      }}
-    >
-      {/* Top Banner (Always Visible Toggle) */}
+    <>
+      {/* ========================================================= */}
+      {/* 1. NON-INVASIVE FLOATING DOCK ABOVE ASK GOMI-CHAN (BOTTOM-RIGHT) */}
+      {/* ========================================================= */}
       <div 
-        onClick={() => setIsOpen(!isOpen)}
         style={{
-          padding: '12px 18px',
+          position: 'fixed',
+          bottom: '72px',
+          right: '18px',
+          zIndex: 89,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          cursor: 'pointer',
-          background: 'linear-gradient(90deg, #0F172A 0%, #1E293B 100%)',
-          userSelect: 'none'
+          gap: '6px'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '8px',
-            background: '#2563EB',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#FFFFFF'
-          }}>
-            <Cpu className="w-4 h-4" />
-          </div>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <strong style={{ fontSize: '0.9rem', color: '#FFFFFF', letterSpacing: '-0.01em' }}>
-                Strands Agent Core Trace
-              </strong>
-              <span style={{
-                background: '#1E3A8A',
-                color: '#93C5FD',
-                fontSize: '0.65rem',
-                fontWeight: 800,
-                padding: '2px 8px',
-                borderRadius: '9999px',
-                border: '1px solid #3B82F6'
-              }}>
-                SDK v0.4.2 • ARM64 Runtime
-              </span>
-            </div>
-            <p style={{ fontSize: '0.72rem', color: '#94A3B8', margin: 0 }}>
-              Autonomous 5-Tool Execution Chain on Amazon Bedrock AgentCore
-            </p>
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            display: 'flex',
+        <button
+          type="button"
+          onClick={() => {
+            setActiveTab('trace');
+            setIsOpen(true);
+          }}
+          style={{
+            display: 'inline-flex',
             alignItems: 'center',
             gap: '6px',
-            fontSize: '0.74rem',
-            color: '#34D399',
+            background: 'rgba(241, 245, 249, 0.92)',
+            color: '#475569',
+            border: '1px solid #CBD5E1',
+            borderRadius: '9999px',
+            padding: '5px 10px',
+            cursor: 'pointer',
+            fontSize: '0.68rem',
+            fontWeight: 600,
+            backdropFilter: 'blur(6px)',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.06)',
+            transition: 'all 0.15s ease',
+            opacity: 0.85
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.opacity = '1';
+            e.currentTarget.style.borderColor = '#94A3B8';
+            e.currentTarget.style.color = '#0F172A';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.opacity = '0.85';
+            e.currentTarget.style.borderColor = '#CBD5E1';
+            e.currentTarget.style.color = '#475569';
+          }}
+          title="Open Bedrock Agent Trace & Pipeline Architecture"
+        >
+          <Cpu className="w-3 h-3 text-slate-500" />
+          <span>Dev Logs &amp; Architecture</span>
+          <span style={{
+            background: '#E2E8F0',
+            color: '#334155',
+            fontSize: '0.6rem',
+            padding: '1px 4px',
+            borderRadius: '4px',
             fontWeight: 700
           }}>
-            <Activity className="w-3.5 h-3.5 animate-pulse" />
-            <span>5 Tools Synced</span>
-          </div>
-
-          <button
-            type="button"
-            style={{
-              background: 'rgba(255,255,255,0.1)',
-              border: 'none',
-              borderRadius: '6px',
-              padding: '4px 8px',
-              color: '#CBD5E1',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontSize: '0.72rem',
-              cursor: 'pointer'
-            }}
-          >
-            <span>{isOpen ? 'Collapse Trace' : 'View Agent Trace'}</span>
-            {isOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-          </button>
-        </div>
+            5 Tools
+          </span>
+        </button>
       </div>
 
-      {/* Expanded Telemetry Body */}
+      {/* ========================================================= */}
+      {/* 2. SLIDE-OUT LEFT DRAWER FOR JUDGES & DEVELOPERS           */}
+      {/* ========================================================= */}
       {isOpen && (
-        <div style={{ padding: '16px 18px', borderTop: '1px solid rgba(255,255,255,0.1)', background: '#090D16' }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: '12px',
-            fontSize: '0.76rem',
-            color: '#94A3B8'
-          }}>
-            <span>Orchestrator: <code>StrandsSupervisorAgent (Python)</code></span>
-            <span>Bedrock Session: <code>sess_bedrock_0913_auto</code></span>
-          </div>
+        <>
+          {/* Backdrop */}
+          <div
+            onClick={() => setIsOpen(false)}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(15, 23, 42, 0.55)',
+              backdropFilter: 'blur(3px)',
+              zIndex: 9998,
+              transition: 'opacity 0.2s ease'
+            }}
+          />
 
-          {/* Sequential Tool Execution Cards */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {toolsExecuted.map((tool, idx) => (
-              <div 
-                key={tool.id}
-                style={{
-                  background: '#131B2E',
-                  borderRadius: '10px',
-                  border: '1px solid rgba(59, 130, 246, 0.25)',
-                  padding: '12px 14px'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
-                      background: '#1E293B',
-                      color: '#60A5FA',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '0.68rem',
-                      fontWeight: 800
-                    }}>
-                      {idx + 1}
-                    </span>
-                    <strong style={{ fontSize: '0.84rem', color: '#93C5FD', fontFamily: 'monospace' }}>
-                      {tool.name}()
-                    </strong>
-                    <span style={{ fontSize: '0.7rem', color: '#64748B' }}>
-                      via {tool.engine}
-                    </span>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.68rem', color: '#94A3B8' }}>
-                      ⏱️ {tool.latencyMs}ms
-                    </span>
-                    <span style={{
-                      fontSize: '0.65rem',
-                      color: '#34D399',
-                      background: 'rgba(52, 211, 153, 0.1)',
-                      border: '1px solid rgba(52, 211, 153, 0.3)',
-                      padding: '1px 6px',
-                      borderRadius: '4px',
-                      fontWeight: 700
-                    }}>
-                      {tool.status}
-                    </span>
-                  </div>
-                </div>
-
-                <p style={{ fontSize: '0.74rem', color: '#CBD5E1', margin: '0 0 8px 28px' }}>
-                  {tool.description}
-                </p>
-
-                {/* Input & Output Payloads */}
+          {/* Drawer Container */}
+          <aside
+            aria-label="Agent Trace & Architecture Drawer"
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              bottom: 0,
+              width: '480px',
+              maxWidth: '92vw',
+              background: '#0B1120',
+              color: '#F8FAFC',
+              zIndex: 9999,
+              display: 'flex',
+              flexDirection: 'column',
+              boxShadow: '8px 0 32px rgba(0,0,0,0.5)',
+              borderRight: '1.5px solid #1E293B',
+              overflow: 'hidden'
+            }}
+          >
+            {/* Drawer Top Header */}
+            <div style={{
+              padding: '16px 20px',
+              background: 'linear-gradient(180deg, #131B2E 0%, #0B1120 100%)',
+              borderBottom: '1px solid #1E293B',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '12px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <div style={{
-                  marginLeft: '28px',
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                  gap: '8px',
-                  fontSize: '0.68rem',
-                  fontFamily: 'monospace'
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '8px',
+                  background: 'linear-gradient(135deg, #2563EB 0%, #00A86B 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#FFFFFF'
                 }}>
-                  <div style={{ background: '#0B1120', padding: '8px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                    <span style={{ color: '#60A5FA', fontWeight: 800 }}>INPUT:</span>
-                    <pre style={{ margin: '4px 0 0 0', color: '#94A3B8', whiteSpace: 'pre-wrap' }}>
-                      {JSON.stringify(tool.inputs, null, 2)}
-                    </pre>
-                  </div>
-
-                  <div style={{ background: '#0B1120', padding: '8px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                    <span style={{ color: '#34D399', fontWeight: 800 }}>OUTPUT:</span>
-                    <pre style={{ margin: '4px 0 0 0', color: '#94A3B8', whiteSpace: 'pre-wrap' }}>
-                      {JSON.stringify(tool.outputs, null, 2)}
-                    </pre>
-                  </div>
+                  <Cpu className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: '0.94rem', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.01em' }}>
+                    Amazon Bedrock Inspector
+                  </h3>
+                  <span style={{ fontSize: '0.7rem', color: '#94A3B8' }}>
+                    Strands AgentCore SDK v0.4.2 • ARM64 Runtime
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: '8px',
+                  width: '28px',
+                  height: '28px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#94A3B8',
+                  cursor: 'pointer'
+                }}
+                title="Close Drawer (Esc)"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Runtime Mode Notice / Honest Developer Banner */}
+            <div style={{
+              padding: '10px 16px',
+              background: '#0F1A2E',
+              borderBottom: '1px solid #1E293B',
+              fontSize: '0.72rem',
+              color: '#93C5FD',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '8px'
+            }}>
+              <Info className="w-4 h-4 text-sky-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <strong style={{ color: '#38BDF8' }}>Local Simulation Mode: </strong>
+                <span>
+                  Telemetry trace deterministically simulates the 5-tool Bedrock Agent pipeline so judges can inspect the Strands architecture locally without incurring cloud API charges.
+                </span>
+              </div>
+            </div>
+
+            {/* Drawer Tab Switcher */}
+            <div style={{
+              display: 'flex',
+              borderBottom: '1px solid #1E293B',
+              background: '#090D16'
+            }}>
+              <button
+                type="button"
+                onClick={() => setActiveTab('trace')}
+                style={{
+                  flex: 1,
+                  padding: '10px 16px',
+                  background: activeTab === 'trace' ? '#131B2E' : 'transparent',
+                  color: activeTab === 'trace' ? '#38BDF8' : '#94A3B8',
+                  border: 'none',
+                  borderBottom: activeTab === 'trace' ? '2px solid #38BDF8' : '2px solid transparent',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
+              >
+                <Terminal className="w-3.5 h-3.5" />
+                <span>Tool Trace Logs</span>
+                <span style={{
+                  background: '#1E293B',
+                  fontSize: '0.62rem',
+                  padding: '1px 5px',
+                  borderRadius: '9999px',
+                  color: '#CBD5E1'
+                }}>
+                  5
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveTab('architecture')}
+                style={{
+                  flex: 1,
+                  padding: '10px 16px',
+                  background: activeTab === 'architecture' ? '#131B2E' : 'transparent',
+                  color: activeTab === 'architecture' ? '#38BDF8' : '#94A3B8',
+                  border: 'none',
+                  borderBottom: activeTab === 'architecture' ? '2px solid #38BDF8' : '2px solid transparent',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
+              >
+                <Cpu className="w-3.5 h-3.5" />
+                <span>Bedrock Architecture</span>
+              </button>
+            </div>
+
+            {/* Drawer Body Scroll Area */}
+            <div style={{ flex: 1, overflowY: 'auto', padding: '16px' }}>
+              {activeTab === 'trace' ? (
+                /* TAB 1: TOOL TRACE LOGS */
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    fontSize: '0.72rem',
+                    color: '#94A3B8',
+                    paddingBottom: '8px',
+                    borderBottom: '1px dashed #1E293B'
+                  }}>
+                    <span>Orchestrator: <code style={{ color: '#60A5FA' }}>StrandsSupervisorAgent</code></span>
+                    <span>Session: <code style={{ color: '#A7F3D0' }}>sess_auto_0914</code></span>
+                  </div>
+
+                  {toolsExecuted.map((tool, idx) => {
+                    const isExpanded = !!expandedTools[tool.id];
+                    return (
+                      <div
+                        key={tool.id}
+                        style={{
+                          background: '#131B2E',
+                          borderRadius: '10px',
+                          border: '1px solid rgba(59, 130, 246, 0.25)',
+                          overflow: 'hidden'
+                        }}
+                      >
+                        {/* Tool Item Header */}
+                        <div
+                          onClick={() => toggleToolExpand(tool.id)}
+                          style={{
+                            padding: '10px 12px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            cursor: 'pointer',
+                            userSelect: 'none'
+                          }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{
+                              width: '18px',
+                              height: '18px',
+                              borderRadius: '50%',
+                              background: '#1E293B',
+                              color: '#60A5FA',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontSize: '0.65rem',
+                              fontWeight: 800
+                            }}>
+                              {idx + 1}
+                            </span>
+                            <div>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                <strong style={{ fontSize: '0.82rem', color: '#93C5FD', fontFamily: 'monospace' }}>
+                                  {tool.name}()
+                                </strong>
+                              </div>
+                              <span style={{ fontSize: '0.68rem', color: '#64748B' }}>
+                                via {tool.engine}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ fontSize: '0.68rem', color: '#94A3B8' }}>
+                              ⏱️ {tool.latencyMs}ms
+                            </span>
+                            <span style={{
+                              fontSize: '0.62rem',
+                              color: '#34D399',
+                              background: 'rgba(52, 211, 153, 0.1)',
+                              border: '1px solid rgba(52, 211, 153, 0.3)',
+                              padding: '1px 5px',
+                              borderRadius: '4px',
+                              fontWeight: 700
+                            }}>
+                              {tool.status}
+                            </span>
+                            {isExpanded ? <ChevronUp className="w-3.5 h-3.5 text-slate-400" /> : <ChevronDown className="w-3.5 h-3.5 text-slate-400" />}
+                          </div>
+                        </div>
+
+                        {/* Collapsible Tool Payloads */}
+                        {isExpanded && (
+                          <div style={{
+                            padding: '10px 12px',
+                            borderTop: '1px solid rgba(255,255,255,0.06)',
+                            background: '#090D16'
+                          }}>
+                            <p style={{ fontSize: '0.72rem', color: '#CBD5E1', margin: '0 0 8px 0' }}>
+                              {tool.description}
+                            </p>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.66rem', fontFamily: 'monospace' }}>
+                              <div style={{ background: '#0B1120', padding: '6px 8px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                                <span style={{ color: '#60A5FA', fontWeight: 800 }}>INPUT:</span>
+                                <pre style={{ margin: '2px 0 0 0', color: '#94A3B8', whiteSpace: 'pre-wrap' }}>
+                                  {JSON.stringify(tool.inputs, null, 2)}
+                                </pre>
+                              </div>
+
+                              <div style={{ background: '#0B1120', padding: '6px 8px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                                <span style={{ color: '#34D399', fontWeight: 800 }}>OUTPUT:</span>
+                                <pre style={{ margin: '2px 0 0 0', color: '#94A3B8', whiteSpace: 'pre-wrap' }}>
+                                  {JSON.stringify(tool.outputs, null, 2)}
+                                </pre>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                /* TAB 2: BEDROCK ARCHITECTURE & PIPELINE */
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                  {/* Budget & Spend Summary Box */}
+                  <div style={{
+                    background: '#131B2E',
+                    borderRadius: '10px',
+                    border: '1px solid #1E293B',
+                    padding: '14px'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                      <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#FFFFFF', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <DollarSign className="w-4 h-4 text-amber-400" />
+                        Bedrock Hard Budget Guard
+                      </span>
+                      <span style={{ fontSize: '0.74rem', color: '#FCD34D', fontWeight: 800 }}>
+                        ${dailySpend.toFixed(3)} / ${budgetLimit.toFixed(2)}
+                      </span>
+                    </div>
+
+                    <div style={{ width: '100%', height: '6px', background: '#334155', borderRadius: '4px', overflow: 'hidden', marginBottom: '8px' }}>
+                      <div style={{ width: `${spendPct}%`, height: '100%', background: spendPct > 80 ? '#EF4444' : '#10B981', transition: 'width 0.3s ease' }} />
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.68rem', color: '#94A3B8' }}>
+                      <span>Nova 2 Lite: ~$0.0008 / scan</span>
+                      <span>Claude 3.7 Sonnet: ~$0.012 / scan</span>
+                    </div>
+                  </div>
+
+                  {/* Multi-Pass Architecture Pipeline Steps */}
+                  <div>
+                    <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block', marginBottom: '8px' }}>
+                      ⚡ 2-Pass Multi-Modal Inference Stages:
+                    </span>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {/* Stage 1 */}
+                      <div style={{ background: '#131B2E', borderRadius: '8px', padding: '10px 12px', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                          <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                          <strong style={{ fontSize: '0.78rem', color: '#FFFFFF' }}>Stage 1: Edge Guard &amp; Rate Limiter</strong>
+                        </div>
+                        <p style={{ fontSize: '0.7rem', color: '#94A3B8', margin: 0 }}>
+                          Next.js Middleware + Cloudflare WAF. Enforces strict &lt;15MB payloads and token bucket rate limits per IP.
+                        </p>
+                      </div>
+
+                      {/* Stage 2 */}
+                      <div style={{ background: '#131B2E', borderRadius: '8px', padding: '10px 12px', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                          <Eye className="w-4 h-4 text-sky-400" />
+                          <strong style={{ fontSize: '0.78rem', color: '#FFFFFF' }}>Stage 2: Pass 1 Vision Triage</strong>
+                        </div>
+                        <p style={{ fontSize: '0.7rem', color: '#94A3B8', margin: 0 }}>
+                          Sub-second spatial bounding using <strong>Amazon Nova 2 Lite</strong>. Escalates dynamically to <strong>Claude 3.7 Sonnet</strong> on complex fractures or ambiguous materials.
+                        </p>
+                      </div>
+
+                      {/* Stage 3 */}
+                      <div style={{ background: '#131B2E', borderRadius: '8px', padding: '10px 12px', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                          <AlertTriangle className="w-4 h-4 text-amber-400" />
+                          <strong style={{ fontSize: '0.78rem', color: '#FFFFFF' }}>Stage 3: Safeguard Valuation Gate</strong>
+                        </div>
+                        <p style={{ fontSize: '0.7rem', color: '#94A3B8', margin: 0 }}>
+                          Algorithmic protection mechanism that sequesters smartphones, car keys, wallets, and official credentials to the Safe Vault.
+                        </p>
+                      </div>
+
+                      {/* Stage 4 */}
+                      <div style={{ background: '#131B2E', borderRadius: '8px', padding: '10px 12px', border: '1px solid rgba(139, 92, 246, 0.3)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                          <Sparkles className="w-4 h-4 text-purple-400" />
+                          <strong style={{ fontSize: '0.78rem', color: '#FFFFFF' }}>Stage 4: Municipal RAG &amp; Calendar Binding</strong>
+                        </div>
+                        <p style={{ fontSize: '0.7rem', color: '#94A3B8', margin: 0 }}>
+                          Amazon Bedrock Knowledge Base (OpenSearch Serverless) retrieves ward bylaws. DynamoDB table maps exact chōme morning pickup deadlines.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Active Ward Context */}
+                  <div style={{
+                    background: '#090D16',
+                    border: '1px solid #1E293B',
+                    borderRadius: '8px',
+                    padding: '10px 12px',
+                    fontSize: '0.72rem',
+                    color: '#94A3B8'
+                  }}>
+                    <div style={{ color: '#FFFFFF', fontWeight: 700, marginBottom: '4px' }}>
+                      📍 Active Grounding Context
+                    </div>
+                    <div>Municipality: <strong style={{ color: '#60A5FA' }}>{activeCity}</strong></div>
+                    <div>Neighborhood: <strong style={{ color: '#34D399' }}>{activeNeighborhoodName}</strong></div>
+                    <div>Active Model: <strong style={{ color: '#FCD34D' }}>{modelUsed}</strong></div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Drawer Bottom Footer */}
+            <div style={{
+              padding: '12px 16px',
+              borderTop: '1px solid #1E293B',
+              background: '#090D16',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}>
+              <span style={{ fontSize: '0.7rem', color: '#64748B' }}>
+                AWS Bedrock AgentCore Runtime
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                style={{
+                  background: '#1E293B',
+                  border: '1px solid #334155',
+                  borderRadius: '6px',
+                  padding: '4px 10px',
+                  color: '#CBD5E1',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}
+              >
+                Close Drawer
+              </button>
+            </div>
+          </aside>
+        </>
       )}
-    </section>
+    </>
   );
 }

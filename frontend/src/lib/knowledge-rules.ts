@@ -208,9 +208,6 @@ export function findAmbiguityQuestion(itemName: string, material: string): Clari
   if (lower.includes('pan') || lower.includes('pot') || lower.includes('フライパン') || lower.includes('鍋') || lower.includes('wok')) {
     return AMBIGUITY_QUESTION_CATALOG['frying_pan'];
   }
-  if (lower.includes('spray') || lower.includes('aerosol') || lower.includes('gas can') || lower.includes('canister') || lower.includes('スプレー') || lower.includes('カセットボンベ')) {
-    return AMBIGUITY_QUESTION_CATALOG['spray_can'];
-  }
   if (lower.includes('power bank') || lower.includes('battery') || lower.includes('lithium') || lower.includes('バッテリー') || lower.includes('充電器')) {
     return AMBIGUITY_QUESTION_CATALOG['power_bank'];
   }

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from '@/components/Header';
 import UnifiedStudio from '@/components/UnifiedStudio';
-import TelemetryBar from '@/components/TelemetryBar';
+import StrandsAgentInspector from '@/components/StrandsAgentInspector';
 import TriageDashboard from '@/components/TriageDashboard';
 import SplashBuffer from '@/components/SplashBuffer';
 import ProfileModal from '@/components/ProfileModal';
@@ -41,7 +41,7 @@ const PRESET_SCENE_IMAGES: Record<string, UploadedImage> = {
   messy_desk: {
     id: 'preset_desk',
     url: '/presets/messy_desk.jpg',
-    name: 'Desk: PET Bottle & Phone',
+    name: 'Desk: PET Bottle, Can & Phone',
     source: 'preset',
     timestamp: 'Scenario 1'
   },
@@ -516,22 +516,17 @@ export default function Home() {
           language={language}
         />
 
-        {/* Sleek Collapsible Telemetry Bar (~38px) - shown when scanning or results exist */}
-        {(scanResult || isLoading || isEscalating) && (
-          <TelemetryBar
-            isAnalyzing={isLoading}
-            isEscalating={isEscalating}
-            modelUsed={scanResult?.model_used || 'Tier-1 (Amazon Nova 2 Lite)'}
-            latencyMs={scanResult?.latency_ms || 280}
-            safeguardCount={scanResult?.items.filter(i => !i.is_marked_for_disposal).length || 0}
-            discardCount={scanResult?.items.filter(i => i.is_marked_for_disposal).length || 0}
-            activeCity={activeProfile.municipality_name}
-            activeNeighborhood={activeProfile.neighborhood}
-            dailySpend={dailySpend}
-            budgetLimit={5.00}
-            language={language}
-          />
-        )}
+        {/* Non-Invasive Floating Left-Docked Bedrock Agent Inspector & Architecture Drawer */}
+        <StrandsAgentInspector
+          scanResult={scanResult}
+          activeMunicipalityId={activeProfile.municipality_id}
+          activeNeighborhoodName={activeProfile.neighborhood}
+          activeCity={activeProfile.municipality_name}
+          dailySpend={dailySpend}
+          budgetLimit={5.00}
+          isAnalyzing={isLoading}
+          isEscalating={isEscalating}
+        />
 
         {/* Auto-scroll anchor for triage results */}
         <div ref={triageResultsRef} style={{ scrollMarginTop: '80px' }}>

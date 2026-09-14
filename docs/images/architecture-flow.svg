@@ -1,137 +1,422 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" width="1000" height="620">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" width="1200" height="820">
   <defs>
+    <!-- Gradients -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#080c14" />
-      <stop offset="100%" stop-color="#0f172a" />
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#111827" />
     </linearGradient>
-    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="localBoxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151e32" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="awsBoxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111c30" />
+      <stop offset="100%" stop-color="#19253d" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#24344d" />
+    </linearGradient>
+    <linearGradient id="accentOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <linearGradient id="accentGreen" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#10b981" />
       <stop offset="100%" stop-color="#059669" />
     </linearGradient>
-    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="accentPurple" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#8b5cf6" />
-      <stop offset="100%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#6d28d9" />
     </linearGradient>
-    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0ea5e9" />
-      <stop offset="100%" stop-color="#2563eb" />
+    <linearGradient id="accentBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
     </linearGradient>
-    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.5"/>
+    
+    <!-- Filter -->
+    <filter id="boxShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.45" />
     </filter>
+    
+    <!-- Arrow Markers -->
+    <marker id="arrowSolid" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#38bdf8" />
+    </marker>
+    <marker id="arrowSolidGreen" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#10b981" />
+    </marker>
+    <marker id="arrowDashed" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#94a3b8" />
+    </marker>
+    <marker id="arrowDashedOrange" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#f59e0b" />
+    </marker>
   </defs>
 
-  <!-- Background -->
-  <rect width="1000" height="620" rx="16" fill="url(#bgGrad)" stroke="#1e293b" stroke-width="2"/>
+  <!-- Canvas Background -->
+  <rect width="1200" height="820" fill="url(#bgGrad)" />
 
-  <!-- Title Header -->
-  <text x="50" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800" fill="#f8fafc">
-    GomiMakasete (ゴミ任せて) — Cloud Architecture Flow
-  </text>
-  <text x="50" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#94a3b8">
-    Autonomous Multi-Modal Waste Intelligence on Amazon Bedrock AgentCore &amp; Strands Agents SDK
-  </text>
-
-  <!-- LAYER 1: CLIENT & INGESTION -->
-  <g transform="translate(50, 105)" filter="url(#shadow)">
-    <rect width="260" height="470" rx="12" fill="#131b2e" stroke="#1e293b" stroke-width="1.5"/>
-    <rect width="260" height="38" rx="12" fill="#1e293b"/>
-    <text x="20" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#38bdf8">1. RESIDENT INGESTION</text>
-
-    <!-- Sub-box: Next.js 15 UI -->
-    <rect x="20" y="55" width="220" height="110" rx="8" fill="#1a243b" stroke="#334155"/>
-    <text x="35" y="80" font-family="sans-serif" font-size="14" font-weight="700" fill="#fff">Next.js 15 App Router</text>
-    <text x="35" y="100" font-family="sans-serif" font-size="11" fill="#94a3b8">• AWS Amplify Hosting (SSR)</text>
-    <text x="35" y="118" font-family="sans-serif" font-size="11" fill="#94a3b8">• Camera Dropzone &amp; Mobile Web</text>
-    <text x="35" y="136" font-family="sans-serif" font-size="11" fill="#94a3b8">• Dual-Stream 1-Glance Triage</text>
-
-    <!-- Sub-box: Ambient Voice -->
-    <rect x="20" y="180" width="220" height="85" rx="8" fill="#1a243b" stroke="#334155"/>
-    <text x="35" y="205" font-family="sans-serif" font-size="13" font-weight="700" fill="#a78bfa">Ambient Voice Agent</text>
-    <text x="35" y="225" font-family="sans-serif" font-size="11" fill="#94a3b8">• Hands-Free Dirty Hands Support</text>
-    <text x="35" y="243" font-family="sans-serif" font-size="11" fill="#94a3b8">• Amazon Nova 2 Sonic / WebAudio</text>
-
-    <!-- Sub-box: Safeguard Filter -->
-    <rect x="20" y="280" width="220" height="170" rx="8" fill="#1a243b" stroke="#6366f1" stroke-dasharray="4"/>
-    <text x="35" y="305" font-family="sans-serif" font-size="13" font-weight="700" fill="#818cf8">🛡️ Accidental Non-Waste</text>
-    <text x="35" y="325" font-family="sans-serif" font-size="11" fill="#cbd5e1">Smartphones, Keys, Wallets</text>
-    <text x="35" y="350" font-family="sans-serif" font-size="11" fill="#94a3b8">Automatically sequestered away</text>
-    <text x="35" y="368" font-family="sans-serif" font-size="11" fill="#94a3b8">from waste collection list to</text>
-    <text x="35" y="386" font-family="sans-serif" font-size="11" fill="#94a3b8">prevent false disposal.</text>
-    <rect x="35" y="405" width="120" height="24" rx="12" fill="#6366f1" opacity="0.3"/>
-    <text x="48" y="421" font-family="sans-serif" font-size="10" font-weight="700" fill="#a5b4fc">1-Click Override</text>
+  <!-- Top Title Banner -->
+  <g transform="translate(40, 24)">
+    <text font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#f8fafc">
+      GomiMakasete (ゴミ任せて) — Production Architecture Diagram
+    </text>
+    <text y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94a3b8">
+      AWS Hackathon Architecture Reference Model • Strands Agents SDK &amp; Amazon Bedrock AgentCore Runtime
+    </text>
   </g>
 
-  <!-- ARROW 1 -> 2 -->
-  <path d="M 310 240 L 370 240" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrowhead)" stroke-dasharray="6,4"/>
+  <!-- ========================================================================= -->
+  <!-- BOX 1: CLIENT & LOCAL EXECUTION ENVIRONMENT (STRANDS AGENTS)               -->
+  <!-- ========================================================================= -->
+  <g transform="translate(40, 65)" filter="url(#boxShadow)">
+    <!-- Container -->
+    <rect width="1120" height="340" rx="14" fill="url(#localBoxGrad)" stroke="#334155" stroke-width="1.5" />
+    
+    <!-- Header Badge -->
+    <rect x="18" y="14" width="28" height="24" rx="4" fill="#0284c7" />
+    <!-- Laptop / Terminal Icon -->
+    <path d="M 24 23 L 40 23 L 38 31 L 26 31 Z M 22 32 L 42 32" stroke="#ffffff" stroke-width="1.5" fill="none" />
+    <text x="56" y="31" font-family="sans-serif" font-size="14" font-weight="700" fill="#f1f5f9">
+      Local Environment &amp; Client Layer (Strands Agents SDK)
+    </text>
 
-  <!-- LAYER 2: VISION TRIAGE & ESCALATION -->
-  <g transform="translate(370, 105)" filter="url(#shadow)">
-    <rect width="260" height="470" rx="12" fill="#131b2e" stroke="#1e293b" stroke-width="1.5"/>
-    <rect width="260" height="38" rx="12" fill="#1e293b"/>
-    <text x="20" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#34d399">2. TIERED MULTI-MODAL VISION</text>
+    <!-- 1. Customer / Resident -->
+    <g transform="translate(35, 75)">
+      <!-- User Avatar Icon -->
+      <circle cx="45" cy="40" r="22" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
+      <circle cx="45" cy="34" r="9" fill="#94a3b8" />
+      <path d="M 32 54 C 32 46, 58 46, 58 54" stroke="#94a3b8" stroke-width="2" fill="none" />
+      
+      <text x="45" y="80" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#f8fafc">Resident</text>
+      <text x="45" y="96" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">(Customer)</text>
+      
+      <rect x="0" y="112" width="90" height="38" rx="6" fill="#0f172a" stroke="#334155" />
+      <text x="45" y="127" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#cbd5e1">Next.js 15 SSR</text>
+      <text x="45" y="141" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#38bdf8">Amplify Hosting</text>
+    </g>
 
-    <!-- Tier 1: Fast Triage -->
-    <rect x="20" y="55" width="220" height="120" rx="8" fill="#1a243b" stroke="#10b981"/>
-    <text x="35" y="80" font-family="sans-serif" font-size="13" font-weight="700" fill="#34d399">Tier-1: Fast Triage</text>
-    <text x="35" y="100" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Amazon Nova 2 Lite</text>
-    <text x="35" y="118" font-family="sans-serif" font-size="11" fill="#94a3b8">• Latency: ~350ms (Ultra-Low Cost)</text>
-    <text x="35" y="136" font-family="sans-serif" font-size="11" fill="#94a3b8">• Resolves 80% clear scenes</text>
-    <text x="35" y="154" font-family="sans-serif" font-size="11" fill="#94a3b8">• Computes confidence score</text>
+    <!-- User Interaction Arrows -->
+    <!-- Top Arrow: Question / Photo -->
+    <path d="M 135 125 L 230 125" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowSolid)" />
+    <text x="182" y="115" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#38bdf8">User photo / query</text>
 
-    <!-- Confidence Gate -->
-    <path d="M 130 175 L 130 205" stroke="#f59e0b" stroke-width="2"/>
-    <rect x="55" y="205" width="150" height="30" rx="15" fill="#f59e0b" opacity="0.2" stroke="#f59e0b"/>
-    <text x="70" y="224" font-family="sans-serif" font-size="11" font-weight="700" fill="#fbbf24">Confidence &lt; 0.85?</text>
+    <!-- Bottom Arrow: Response -->
+    <path d="M 230 155 L 135 155" stroke="#10b981" stroke-width="2" marker-end="url(#arrowSolidGreen)" />
+    <text x="182" y="172" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#10b981">Agent triage response</text>
 
-    <!-- Tier 2: SOTA Escalation -->
-    <rect x="20" y="255" width="220" height="110" rx="8" fill="#1a243b" stroke="#8b5cf6"/>
-    <text x="35" y="280" font-family="sans-serif" font-size="13" font-weight="700" fill="#c084fc">Tier-2: SOTA Reasoning</text>
-    <text x="35" y="300" font-family="sans-serif" font-size="11" fill="#cbd5e1">• Claude 3.7 Sonnet / Nova Pro</text>
-    <text x="35" y="318" font-family="sans-serif" font-size="11" fill="#94a3b8">• Chain-of-Thought Spatial Bounding</text>
-    <text x="35" y="336" font-family="sans-serif" font-size="11" fill="#94a3b8">• Triggered on occlusion or user edit</text>
+    <!-- 2. Gomi Supervisor Agent -->
+    <g transform="translate(240, 80)">
+      <rect width="180" height="180" rx="10" fill="url(#cardGrad)" stroke="#6366f1" stroke-width="2" />
+      
+      <!-- Agent Tool Icon Badge -->
+      <circle cx="90" cy="50" r="26" fill="#4f46e5" />
+      <!-- Tools Cross Icon -->
+      <path d="M 80 40 L 100 60 M 100 40 L 80 60" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+      <circle cx="90" cy="50" r="5" fill="#f8fafc" />
 
-    <!-- Action Taxonomy -->
-    <rect x="20" y="380" width="220" height="75" rx="8" fill="#1a243b" stroke="#334155"/>
-    <text x="35" y="402" font-family="sans-serif" font-size="12" font-weight="700" fill="#38bdf8">Action Prescription</text>
-    <text x="35" y="420" font-family="sans-serif" font-size="10" fill="#94a3b8">Separate • Rinse • Wrap • Degas • Bundle</text>
-    <text x="35" y="438" font-family="sans-serif" font-size="10" fill="#34d399">Replaces naive "Dumb Split" button</text>
+      <text x="90" y="98" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="800" fill="#f8fafc">Gomi Supervisor</text>
+      <text x="90" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="#a5b4fc">Strands Agents SDK</text>
+      
+      <rect x="18" y="130" width="144" height="34" rx="6" fill="#18181b" stroke="#3f3f46" />
+      <text x="90" y="145" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f59e0b">ReAct Loop</text>
+      <text x="90" y="157" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#a1a1aa">Model ⇄ Tools ⇄ Memory</text>
+    </g>
+
+    <!-- Arrow from Agent to Tools -->
+    <path d="M 420 135 L 485 135" stroke="#f8fafc" stroke-width="1.8" marker-end="url(#arrowDashed)" stroke-dasharray="4,3" />
+    <text x="452" y="125" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="600" fill="#f8fafc">task</text>
+
+    <path d="M 485 155 L 420 155" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#arrowDashed)" stroke-dasharray="4,3" />
+    <text x="452" y="172" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">result</text>
+
+    <!-- 3. Strands Tools Group -->
+    <g transform="translate(490, 48)">
+      <!-- Tool 1 -->
+      <g transform="translate(0, 10)">
+        <rect width="270" height="42" rx="6" fill="#1e293b" stroke="#475569" />
+        <rect x="8" y="8" width="26" height="26" rx="4" fill="#0284c7" />
+        <text x="21" y="25" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#fff">T1</text>
+        <text x="42" y="24" font-family="sans-serif" font-size="11" font-weight="700" fill="#f1f5f9">Tool 1: Municipal Rules RAG</text>
+        <text x="42" y="35" font-family="sans-serif" font-size="9" fill="#94a3b8">check_municipal_waste_rules()</text>
+      </g>
+
+      <!-- Tool 2 -->
+      <g transform="translate(0, 60)">
+        <rect width="270" height="42" rx="6" fill="#1e293b" stroke="#475569" />
+        <rect x="8" y="8" width="26" height="26" rx="4" fill="#059669" />
+        <text x="21" y="25" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#fff">T2</text>
+        <text x="42" y="24" font-family="sans-serif" font-size="11" font-weight="700" fill="#f1f5f9">Tool 2: Neighborhood Schedule</text>
+        <text x="42" y="35" font-family="sans-serif" font-size="9" fill="#94a3b8">lookup_collection_schedule()</text>
+      </g>
+
+      <!-- Tool 3 -->
+      <g transform="translate(0, 110)">
+        <rect width="270" height="42" rx="6" fill="#1e293b" stroke="#475569" />
+        <rect x="8" y="8" width="26" height="26" rx="4" fill="#d97706" />
+        <text x="21" y="25" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#fff">T3</text>
+        <text x="42" y="24" font-family="sans-serif" font-size="11" font-weight="700" fill="#f1f5f9">Tool 3: Bulky Waste (Sodai Gomi)</text>
+        <text x="42" y="35" font-family="sans-serif" font-size="9" fill="#94a3b8">calculate_bulky_waste_fee()</text>
+      </g>
+
+      <!-- Tool 4 -->
+      <g transform="translate(0, 160)">
+        <rect width="270" height="42" rx="6" fill="#1e293b" stroke="#475569" />
+        <rect x="8" y="8" width="26" height="26" rx="4" fill="#7c3aed" />
+        <text x="21" y="25" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#fff">T4</text>
+        <text x="42" y="24" font-family="sans-serif" font-size="11" font-weight="700" fill="#f1f5f9">Tool 4: Action Decomposition</text>
+        <text x="42" y="35" font-family="sans-serif" font-size="9" fill="#94a3b8">prescribe_disposal_preparation()</text>
+      </g>
+
+      <!-- Tool 5 -->
+      <g transform="translate(0, 210)">
+        <rect width="270" height="42" rx="6" fill="#1e293b" stroke="#475569" />
+        <rect x="8" y="8" width="26" height="26" rx="4" fill="#e11d48" />
+        <text x="21" y="25" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#fff">T5</text>
+        <text x="42" y="24" font-family="sans-serif" font-size="11" font-weight="700" fill="#f1f5f9">Tool 5: Accidental Non-Waste Guard</text>
+        <text x="42" y="35" font-family="sans-serif" font-size="9" fill="#94a3b8">evaluate_safeguard_intent()</text>
+      </g>
+    </g>
+
+    <!-- 4. Local Artifacts & Memory -->
+    <g transform="translate(800, 65)">
+      <rect width="290" height="230" rx="10" fill="#0f172a" stroke="#334155" stroke-dasharray="4,4" />
+      <text x="145" y="28" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="700" fill="#cbd5e1">Local Artifacts &amp; Working State</text>
+      
+      <!-- Sub-cards -->
+      <g transform="translate(18, 42)">
+        <rect width="118" height="74" rx="6" fill="#1e293b" stroke="#475569" />
+        <text x="59" y="24" text-anchor="middle" font-family="sans-serif" font-size="18">📸</text>
+        <text x="59" y="44" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#f8fafc">Image Frames</text>
+        <text x="59" y="58" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#94a3b8">JPEG / Base64 bytes</text>
+      </g>
+      
+      <g transform="translate(154, 42)">
+        <rect width="118" height="74" rx="6" fill="#1e293b" stroke="#475569" />
+        <text x="59" y="24" text-anchor="middle" font-family="sans-serif" font-size="18">🎙️</text>
+        <text x="59" y="44" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#f8fafc">Voice Audio</text>
+        <text x="59" y="58" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#94a3b8">Web Audio API PCM</text>
+      </g>
+      
+      <g transform="translate(18, 130)">
+        <rect width="118" height="74" rx="6" fill="#1e293b" stroke="#475569" />
+        <text x="59" y="24" text-anchor="middle" font-family="sans-serif" font-size="18">🧠</text>
+        <text x="59" y="44" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#f8fafc">Session Memory</text>
+        <text x="59" y="58" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#94a3b8">STM / LTM Prefs</text>
+      </g>
+      
+      <g transform="translate(154, 130)">
+        <rect width="118" height="74" rx="6" fill="#1e293b" stroke="#475569" />
+        <text x="59" y="24" text-anchor="middle" font-family="sans-serif" font-size="18">⚡</text>
+        <text x="59" y="44" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#f8fafc">Budget Guard</text>
+        <text x="59" y="58" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f59e0b">$5.00 Hard Breaker</text>
+      </g>
+    </g>
+
+    <!-- Connector: retrieve() block -->
+    <g transform="translate(290, 275)">
+      <rect width="80" height="28" rx="4" fill="#1e293b" stroke="#475569" />
+      <text x="40" y="18" text-anchor="middle" font-family="monospace" font-size="11" font-weight="600" fill="#38bdf8">retrieve()</text>
+    </g>
+    <path d="M 330 260 L 330 275" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowSolid)" />
   </g>
 
-  <!-- ARROW 2 -> 3 -->
-  <path d="M 630 240 L 690 240" stroke="#34d399" stroke-width="2.5" marker-end="url(#arrowhead)" stroke-dasharray="6,4"/>
+  <!-- ========================================================================= -->
+  <!-- CROSS-ENVIRONMENT BUS ARROWS (LOCAL <--> AWS CLOUD)                       -->
+  <!-- ========================================================================= -->
+  <!-- 1. retrieve() down to Bedrock Knowledge Base -->
+  <path d="M 370 380 L 370 470" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowSolid)" />
+  <text x="380" y="425" font-family="sans-serif" font-size="10" font-weight="600" fill="#38bdf8">Bedrock KB query</text>
 
-  <!-- LAYER 3: AGENTCORE RUNTIME & TOOLS -->
-  <g transform="translate(690, 105)" filter="url(#shadow)">
-    <rect width="260" height="470" rx="12" fill="#131b2e" stroke="#1e293b" stroke-width="1.5"/>
-    <rect width="260" height="38" rx="12" fill="#1e293b"/>
-    <text x="20" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#c084fc">3. BEDROCK AGENTCORE &amp; STRANDS</text>
+  <!-- 2. AgentCore HTTP /invocations Contract -->
+  <path d="M 280 470 L 280 380" stroke="#a5b4fc" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrowDashed)" />
+  <text x="230" y="425" font-family="sans-serif" font-size="10" font-weight="600" fill="#a5b4fc">AgentCore context</text>
 
-    <!-- Strands Supervisor Loop -->
-    <rect x="20" y="55" width="220" height="105" rx="8" fill="#1a243b" stroke="#8b5cf6"/>
-    <text x="35" y="80" font-family="sans-serif" font-size="13" font-weight="700" fill="#c084fc">Strands Supervisor</text>
-    <text x="35" y="100" font-family="sans-serif" font-size="11" fill="#cbd5e1">• BedrockAgentCoreApp / ARM64</text>
-    <text x="35" y="118" font-family="sans-serif" font-size="11" fill="#94a3b8">• HTTP Contract: /ping, /invocations</text>
-    <text x="35" y="136" font-family="sans-serif" font-size="11" fill="#94a3b8">• Autonomous ReAct Reasoning Loop</text>
+  <!-- 3. FM Reasoning from Tools to Bedrock Models -->
+  <path d="M 680 330 L 680 470" stroke="#10b981" stroke-width="2" marker-end="url(#arrowSolidGreen)" />
+  <path d="M 700 470 L 700 330" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="4,4" marker-end="url(#arrowDashed)" />
+  <text x="730" y="425" font-family="sans-serif" font-size="10" font-weight="700" fill="#10b981">FM Reasoning &amp; Vision Triage</text>
 
-    <!-- Tools -->
-    <rect x="20" y="175" width="220" height="155" rx="8" fill="#1a243b" stroke="#334155"/>
-    <text x="35" y="198" font-family="sans-serif" font-size="12" font-weight="700" fill="#f59e0b">Strands Verified Tools</text>
+  <!-- ========================================================================= -->
+  <!-- BOX 2: AWS CLOUD INFRASTRUCTURE                                           -->
+  <!-- ========================================================================= -->
+  <g transform="translate(40, 440)" filter="url(#boxShadow)">
+    <!-- Container -->
+    <rect width="1120" height="340" rx="14" fill="url(#awsBoxGrad)" stroke="#1e3a8a" stroke-width="1.5" />
     
-    <text x="35" y="222" font-family="sans-serif" font-size="11" font-weight="600" fill="#fff">1. Bedrock Knowledge Base</text>
-    <text x="50" y="238" font-family="sans-serif" font-size="10" fill="#94a3b8">Metadata Filtered by Municipality</text>
-    
-    <text x="35" y="260" font-family="sans-serif" font-size="11" font-weight="600" fill="#fff">2. DynamoDB Schedule Engine</text>
-    <text x="50" y="276" font-family="sans-serif" font-size="10" fill="#94a3b8">Hyper-local chome/banchi calendar</text>
+    <!-- AWS Cloud Header Badge -->
+    <rect x="18" y="14" width="46" height="24" rx="4" fill="#ff9900" />
+    <text x="41" y="30" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="800" fill="#000000">aws</text>
+    <text x="74" y="31" font-family="sans-serif" font-size="14" font-weight="700" fill="#f8fafc">
+      AWS Cloud Services Infrastructure (Zero-Standby-Cost Serverless Plane)
+    </text>
 
-    <text x="35" y="298" font-family="sans-serif" font-size="11" font-weight="600" fill="#fff">3. Sodai Gomi Fee Calculator</text>
-    <text x="50" y="314" font-family="sans-serif" font-size="10" fill="#94a3b8">Sticker A/B breakdown &amp; bookings</text>
+    <!-- Component 1: Amazon Bedrock AgentCore Runtime -->
+    <g transform="translate(25, 60)">
+      <rect width="210" height="245" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5" />
+      <rect x="12" y="12" width="34" height="34" rx="6" fill="#2563eb" />
+      <text x="29" y="33" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fff">⚙️</text>
+      
+      <text x="56" y="27" font-family="sans-serif" font-size="12" font-weight="800" fill="#f8fafc">Bedrock AgentCore</text>
+      <text x="56" y="40" font-family="sans-serif" font-size="10" fill="#93c5fd">Runtime (ARM64 MicroVM)</text>
+      
+      <g transform="translate(12, 58)">
+        <rect width="186" height="48" rx="6" fill="#0f172a" />
+        <text x="10" y="18" font-family="monospace" font-size="9" fill="#38bdf8">GET  /ping</text>
+        <text x="10" y="32" font-family="monospace" font-size="9" fill="#10b981">POST /invocations</text>
+        <text x="10" y="44" font-family="monospace" font-size="9" fill="#f59e0b">GET  /budget</text>
+      </g>
 
-    <!-- AgentCore Memory -->
-    <rect x="20" y="345" width="220" height="100" rx="8" fill="#1a243b" stroke="#6366f1"/>
-    <text x="35" y="370" font-family="sans-serif" font-size="12" font-weight="700" fill="#818cf8">AgentCore Managed Memory</text>
-    <text x="35" y="390" font-family="sans-serif" font-size="10" fill="#cbd5e1">• Short-Term: Session Transcript History</text>
-    <text x="35" y="408" font-family="sans-serif" font-size="10" fill="#cbd5e1">• Long-Term: Semantic Resident Prefs</text>
-    <text x="35" y="426" font-family="sans-serif" font-size="10" fill="#94a3b8">Remembers ward/banchi &amp; language</text>
+      <g transform="translate(12, 116)">
+        <rect width="186" height="60" rx="6" fill="#0f172a" />
+        <text x="10" y="16" font-family="sans-serif" font-size="10" font-weight="700" fill="#cbd5e1">AWS Lambda &amp; API Gateway</text>
+        <text x="10" y="30" font-family="sans-serif" font-size="9" fill="#94a3b8">• ARM64 Architecture</text>
+        <text x="10" y="42" font-family="sans-serif" font-size="9" fill="#94a3b8">• 20 req/s Throttling Ceiling</text>
+        <text x="10" y="54" font-family="sans-serif" font-size="9" fill="#94a3b8">• Mangum ASGI Adapter</text>
+      </g>
+
+      <g transform="translate(12, 186)">
+        <rect width="186" height="46" rx="6" fill="#0f172a" stroke="#e11d48" stroke-dasharray="3,3" />
+        <text x="10" y="17" font-family="sans-serif" font-size="10" font-weight="700" fill="#fb7185">🛡️ Budget &amp; Rate Guards</text>
+        <text x="10" y="31" font-family="sans-serif" font-size="9" fill="#cbd5e1">Max $5.00/day • 5MB Limit</text>
+      </g>
+    </g>
+
+    <!-- Component 2: Amazon Bedrock Foundation Models Fleet -->
+    <g transform="translate(255, 60)">
+      <rect width="210" height="245" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5" />
+      <rect x="12" y="12" width="34" height="34" rx="6" fill="#059669" />
+      <text x="29" y="33" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fff">🤖</text>
+      
+      <text x="56" y="27" font-family="sans-serif" font-size="12" font-weight="800" fill="#f8fafc">Amazon Bedrock</text>
+      <text x="56" y="40" font-family="sans-serif" font-size="10" fill="#6ee7b7">Foundation Models</text>
+
+      <!-- Sub-model 1 -->
+      <g transform="translate(12, 55)">
+        <rect width="186" height="52" rx="6" fill="#0f172a" />
+        <text x="10" y="16" font-family="sans-serif" font-size="10" font-weight="700" fill="#34d399">Tier-1: Amazon Nova 2 Lite</text>
+        <text x="10" y="30" font-family="sans-serif" font-size="9" fill="#cbd5e1">us.amazon.nova-lite-v1:0</text>
+        <text x="10" y="44" font-family="sans-serif" font-size="9" fill="#94a3b8">~280ms • 88% Cost Reduction</text>
+      </g>
+
+      <!-- Sub-model 2 -->
+      <g transform="translate(12, 115)">
+        <rect width="186" height="52" rx="6" fill="#0f172a" />
+        <text x="10" y="16" font-family="sans-serif" font-size="10" font-weight="700" fill="#a78bfa">Tier-2: Claude 3.7 / Nova Pro</text>
+        <text x="10" y="30" font-family="sans-serif" font-size="9" fill="#cbd5e1">Deep Reasoning &amp; Spatial Bounding</text>
+        <text x="10" y="44" font-family="sans-serif" font-size="9" fill="#94a3b8">Auto-Escalation on Conf &lt; 0.85</text>
+      </g>
+
+      <!-- Sub-model 3 -->
+      <g transform="translate(12, 175)">
+        <rect width="186" height="56" rx="6" fill="#0f172a" />
+        <text x="10" y="16" font-family="sans-serif" font-size="10" font-weight="700" fill="#38bdf8">Ambient: Amazon Nova Sonic</text>
+        <text x="10" y="30" font-family="sans-serif" font-size="9" fill="#cbd5e1">Hands-Free Speech Processing</text>
+        <text x="10" y="44" font-family="sans-serif" font-size="9" fill="#94a3b8">Soiled hands kitchen operation</text>
+      </g>
+    </g>
+
+    <!-- Component 3: Amazon Bedrock Knowledge Base -->
+    <g transform="translate(485, 60)">
+      <rect width="180" height="245" rx="10" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" />
+      <rect x="12" y="12" width="34" height="34" rx="6" fill="#4f46e5" />
+      <text x="29" y="33" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fff">📖</text>
+      
+      <text x="54" y="27" font-family="sans-serif" font-size="11" font-weight="800" fill="#f8fafc">Bedrock KB</text>
+      <text x="54" y="40" font-family="sans-serif" font-size="9" fill="#c7d2fe">Knowledge Base RAG</text>
+
+      <g transform="translate(12, 55)">
+        <rect width="156" height="75" rx="6" fill="#0f172a" />
+        <text x="8" y="16" font-family="sans-serif" font-size="9" font-weight="700" fill="#818cf8">Metadata Filtering:</text>
+        <text x="8" y="30" font-family="monospace" font-size="8" fill="#cbd5e1">municipality_id ==</text>
+        <text x="8" y="44" font-family="monospace" font-size="8" fill="#38bdf8">• tokyo_shinjuku</text>
+        <text x="8" y="56" font-family="monospace" font-size="8" fill="#38bdf8">• kanagawa_yokohama</text>
+        <text x="8" y="68" font-family="monospace" font-size="8" fill="#38bdf8">• tokushima_kamikatsu</text>
+      </g>
+
+      <g transform="translate(12, 140)">
+        <rect width="156" height="85" rx="6" fill="#0f172a" />
+        <text x="8" y="18" font-family="sans-serif" font-size="9" font-weight="700" fill="#f8fafc">Multi-Municipal RAG</text>
+        <text x="8" y="34" font-family="sans-serif" font-size="8" fill="#94a3b8">• 45-Category Zero Waste</text>
+        <text x="8" y="48" font-family="sans-serif" font-size="8" fill="#94a3b8">• Appliance Recycling Act</text>
+        <text x="8" y="62" font-family="sans-serif" font-size="8" fill="#94a3b8">• Aerosol No-Puncture Rule</text>
+        <text x="8" y="76" font-family="sans-serif" font-size="8" fill="#94a3b8">• Knife "キケン" Wrap</text>
+      </g>
+    </g>
+
+    <!-- Arrow from Bedrock KB to OpenSearch Serverless -->
+    <path d="M 665 150 L 700 150" stroke="#f8fafc" stroke-width="1.8" marker-end="url(#arrowDashed)" />
+    <text x="682" y="142" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#94a3b8">Search on</text>
+
+    <path d="M 700 170 L 665 170" stroke="#818cf8" stroke-width="1.8" marker-end="url(#arrowDashed)" stroke-dasharray="3,3" />
+    <text x="682" y="185" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#818cf8">Context</text>
+
+    <!-- Component 4: Amazon OpenSearch Serverless -->
+    <g transform="translate(705, 60)">
+      <rect width="180" height="245" rx="10" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5" />
+      <rect x="12" y="12" width="34" height="34" rx="6" fill="#7c3aed" />
+      <text x="29" y="33" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fff">🔍</text>
+      
+      <text x="54" y="27" font-family="sans-serif" font-size="11" font-weight="800" fill="#f8fafc">OpenSearch</text>
+      <text x="54" y="40" font-family="sans-serif" font-size="9" fill="#ddd6fe">Serverless Vector Index</text>
+
+      <g transform="translate(12, 55)">
+        <rect width="156" height="85" rx="6" fill="#0f172a" />
+        <text x="8" y="18" font-family="sans-serif" font-size="9" font-weight="700" fill="#a78bfa">Vector Index Specs</text>
+        <text x="8" y="34" font-family="sans-serif" font-size="8" fill="#cbd5e1">• Titan Text V2 Embeddings</text>
+        <text x="8" y="48" font-family="sans-serif" font-size="8" fill="#cbd5e1">• 1,536 Dimensionality</text>
+        <text x="8" y="62" font-family="sans-serif" font-size="8" fill="#cbd5e1">• HNSW Cosine Distance</text>
+        <text x="8" y="76" font-family="sans-serif" font-size="8" fill="#94a3b8">• Zero-Compute Standby</text>
+      </g>
+
+      <g transform="translate(12, 150)">
+        <rect width="156" height="75" rx="6" fill="#0f172a" />
+        <text x="8" y="18" font-family="sans-serif" font-size="9" font-weight="700" fill="#f8fafc">Hybrid Search Engine</text>
+        <text x="8" y="34" font-family="sans-serif" font-size="8" fill="#94a3b8">• BM25 Keyword Scoring</text>
+        <text x="8" y="48" font-family="sans-serif" font-size="8" fill="#94a3b8">• Dense Semantic Vectors</text>
+        <text x="8" y="62" font-family="sans-serif" font-size="8" fill="#94a3b8">• Reciprocal Rank Fusion</text>
+      </g>
+    </g>
+
+    <!-- Arrow from OpenSearch to S3 Bucket -->
+    <path d="M 885 150 L 920 150" stroke="#f8fafc" stroke-width="1.8" marker-end="url(#arrowDashed)" />
+    <text x="902" y="142" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#94a3b8">Sync</text>
+
+    <path d="M 920 170 L 885 170" stroke="#38bdf8" stroke-width="1.8" marker-end="url(#arrowDashed)" stroke-dasharray="3,3" />
+    <text x="902" y="185" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#38bdf8">Feeds</text>
+
+    <!-- Component 5: Storage (S3 & DynamoDB) -->
+    <g transform="translate(925, 60)">
+      <rect width="170" height="245" rx="10" fill="#1e293b" stroke="#0ea5e9" stroke-width="1.5" />
+      
+      <!-- S3 Sub-block -->
+      <g transform="translate(10, 10)">
+        <rect width="150" height="105" rx="6" fill="#0f172a" stroke="#0284c7" />
+        <rect x="8" y="8" width="24" height="24" rx="4" fill="#0284c7" />
+        <text x="20" y="25" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#fff">🪣</text>
+        <text x="38" y="22" font-family="sans-serif" font-size="11" font-weight="700" fill="#f8fafc">Amazon S3</text>
+        <text x="38" y="34" font-family="sans-serif" font-size="8" fill="#7dd3fc">Documents &amp; Images</text>
+        
+        <text x="10" y="56" font-family="sans-serif" font-size="8" fill="#cbd5e1">• Municipal Guides (PDF)</text>
+        <text x="10" y="70" font-family="sans-serif" font-size="8" fill="#cbd5e1">• Resident Uploads</text>
+        <text x="10" y="84" font-family="sans-serif" font-size="8" fill="#cbd5e1">• AES-256 Encryption</text>
+        <text x="10" y="98" font-family="sans-serif" font-size="8" fill="#34d399">• 7-Day Auto-Purge</text>
+      </g>
+
+      <!-- DynamoDB Sub-block -->
+      <g transform="translate(10, 125)">
+        <rect width="150" height="110" rx="6" fill="#0f172a" stroke="#3b82f6" />
+        <rect x="8" y="8" width="24" height="24" rx="4" fill="#2563eb" />
+        <text x="20" y="25" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#fff">⚡</text>
+        <text x="38" y="22" font-family="sans-serif" font-size="11" font-weight="700" fill="#f8fafc">DynamoDB</text>
+        <text x="38" y="34" font-family="sans-serif" font-size="8" fill="#93c5fd">Pay-Per-Request Tables</text>
+        
+        <text x="10" y="56" font-family="sans-serif" font-size="8" fill="#cbd5e1">• GomiSchedules-prod</text>
+        <text x="10" y="70" font-family="sans-serif" font-size="8" fill="#94a3b8">  178 Shinjuku Towns</text>
+        <text x="10" y="84" font-family="sans-serif" font-size="8" fill="#cbd5e1">• GomiAgentSessions</text>
+        <text x="10" y="98" font-family="sans-serif" font-size="8" fill="#34d399">  Native TTL Auto-Expiry</text>
+      </g>
+    </g>
   </g>
 </svg>

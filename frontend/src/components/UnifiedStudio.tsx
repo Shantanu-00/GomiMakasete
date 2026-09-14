@@ -229,12 +229,6 @@ export default function UnifiedStudio({
               </div>
             )}
 
-            {/* Tactical Green Reticles */}
-            <div className="hud-corner hud-tl" />
-            <div className="hud-corner hud-tr" />
-            <div className="hud-corner hud-bl" />
-            <div className="hud-corner hud-br" />
-
             {/* Sweeping Laser Line when analyzing */}
             {isAnalyzing && <div className="laser-sweep" />}
 
@@ -466,9 +460,9 @@ export default function UnifiedStudio({
                   overflow: 'hidden',
                   textOverflow: 'ellipsis'
                 }}
-                title="Desk: PET Bottle & Smartphone"
+                title="Desk: PET Bottle, Coffee Can & Android Smartphone"
               >
-                1. 📱 Desk & Keys
+                1. 📱 Desk (Drinks & Phone)
               </button>
 
               <button

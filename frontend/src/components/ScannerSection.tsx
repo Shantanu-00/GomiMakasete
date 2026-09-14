@@ -289,12 +289,12 @@ export default function ScannerSection({
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <span style={{ fontWeight: 800, color: '#0F172A', fontSize: '0.84rem' }}>
-                📸 1. Desk: PET Bottle + iPhone 15
+                📸 1. Desk: PET Bottle + Android Phone
               </span>
               <span className="badge badge-blue" style={{ fontSize: '0.62rem' }}>Safeguard Test</span>
             </div>
             <p style={{ fontSize: '0.74rem', color: '#475569', lineHeight: 1.35 }}>
-              Non-waste protection: Sequester iPhone while sorting PET cap, label, and body.
+              Non-waste protection: Sequester Android Smartphone while sorting PET cap, label, and BOSS coffee can.
             </p>
           </button>
 

@@ -172,10 +172,10 @@ The repository root includes an automated [`amplify.yml`](amplify.yml) build spe
    Under **Advanced settings** (or **App settings > Environment variables**), add the following keys pointing to your deployed API Gateway backend:
    | Key | Value | Description |
    | :--- | :--- | :--- |
-   | `AGENTCORE_ENDPOINT_URL` | `https://r2wfl02fba.execute-api.us-east-1.amazonaws.com/prod/invocations` | Bedrock AgentCore execution endpoint |
-   | `AGENTCORE_PING_URL` | `https://r2wfl02fba.execute-api.us-east-1.amazonaws.com/prod/ping` | MicroVM health check endpoint |
-   | `AGENTCORE_BUDGET_URL` | `https://r2wfl02fba.execute-api.us-east-1.amazonaws.com/prod/budget` | $5.00/day circuit breaker status |
-   | `NEXT_PUBLIC_API_GATEWAY_URL` | `https://r2wfl02fba.execute-api.us-east-1.amazonaws.com/prod` | Public REST base endpoint |
+   | `AGENTCORE_ENDPOINT_URL` | `https://<your-api-id>.execute-api.us-east-1.amazonaws.com/prod/invocations` | Bedrock AgentCore execution endpoint |
+   | `AGENTCORE_PING_URL` | `https://<your-api-id>.execute-api.us-east-1.amazonaws.com/prod/ping` | MicroVM health check endpoint |
+   | `AGENTCORE_BUDGET_URL` | `https://<your-api-id>.execute-api.us-east-1.amazonaws.com/prod/budget` | $5.00/day circuit breaker status |
+   | `NEXT_PUBLIC_API_GATEWAY_URL` | `https://<your-api-id>.execute-api.us-east-1.amazonaws.com/prod` | Public REST base endpoint |
 6. **Save and Deploy:**
    - Click **Save and Deploy**.
    - AWS Amplify provisions compute, builds the Next.js 15 SSR artifacts, deploys CloudFront edge CDN distribution, and issues an SSL certificate automatically.
